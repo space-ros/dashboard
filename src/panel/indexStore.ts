@@ -86,6 +86,7 @@ export class IndexStore {
         { toString: () => 'Locations', store: this.resultTableStoreByLocation },
         { toString: () => 'Rules', store: this.resultTableStoreByRule },
         { toString: () => 'Logs', store: undefined },
+        { toString: () => 'Logs per tool', store: undefined },
     ] as { store: ResultTableStore<string | ReportingDescriptor> | undefined }[]
     selectedTab = observable.box(this.tabs[0], { deep: false })
 

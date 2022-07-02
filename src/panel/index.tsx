@@ -95,6 +95,19 @@ export { DetailsLayouts } from './details.layouts';
                             })}
                         </div>
                     </Tab>
+                    <Tab name={store.tabs[3]} count={logs.length}>
+                        <div className="svLogsPane">
+                            {logs.map((log, i) => {
+                                const {pathname} = new URL(log._uri);
+                                return <div key={i} className="svListItem">
+                                    <div>{pathname.file}</div>
+                                    <div className="ellipsis svSecondary">{decodeFileUri(log._uri)}</div>
+                                    <Icon name="close" title="Close Log"
+                                        onClick={() => vscode.postMessage({ command: 'closeLog', uri: log._uri })} />
+                                </div>;
+                            })}
+                        </div>
+                    </Tab>
                 </TabPanel>
             </div>
             <div className="svResizer">

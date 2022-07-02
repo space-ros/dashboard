@@ -13,7 +13,7 @@ import { Store } from './store';
 import { UriRebaser } from './uriRebaser';
 
 export class Panel {
-    private title = 'SARIF Result'
+    private title = 'Dashboard'
     @observable private panel: WebviewPanel | null = null
 
     constructor(
