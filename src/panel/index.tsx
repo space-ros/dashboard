@@ -82,20 +82,17 @@ export { DetailsLayouts } from './details.layouts';
                                 </>;
                             }} />
                     </Tab>
-                    <Tab name={store.tabs[2]} count={logs.length}>
-                        <div className="svLogsPane">
-                            {logs.map((log, i) => {
-                                const {pathname} = new URL(log._uri);
-                                return <div key={i} className="svListItem">
-                                    <div>{pathname.file}</div>
-                                    <div className="ellipsis svSecondary">{decodeFileUri(log._uri)}</div>
-                                    <Icon name="close" title="Close Log"
-                                        onClick={() => vscode.postMessage({ command: 'closeLog', uri: log._uri })} />
-                                </div>;
-                            })}
-                        </div>
+                    <Tab name={store.tabs[3]} count={store.resultTableStoreByTool.groupsFilteredSorted.length}>
+                        <ResultTable store={store.resultTableStoreByTool} onClearFilters={() => store.clearFilters()}
+                            renderGroup={(title: string) => {
+                                const {pathname} = new URL(title, 'file:');
+                                return <>
+                                    <span>{pathname.file || 'No Location'}</span>
+                                    <span className="ellipsis svSecondary">{pathname.path}</span>
+                                </>;
+                            }} />
                     </Tab>
-                    <Tab name={store.tabs[3]} count={logs.length}>
+                    <Tab name={store.tabs[2]} count={logs.length}>
                         <div className="svLogsPane">
                             {logs.map((log, i) => {
                                 const {pathname} = new URL(log._uri);

@@ -67,6 +67,7 @@ export class IndexStore {
     selection = observable.box<Row | undefined>(undefined)
     resultTableStoreByLocation = new ResultTableStore('File', result => result._relativeUri, this, this, this.selection)
     resultTableStoreByRule     = new ResultTableStore('Rule', result => result._rule,        this, this, this.selection)
+    resultTableStoreByTool     = new ResultTableStore('Tool', result => result._log._uri,        this, this, this.selection)
 
     // Filters
     @observable keywords = ''

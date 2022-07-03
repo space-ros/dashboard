@@ -26,6 +26,7 @@ interface ResultTableProps<G> {
 @observer export class ResultTable<G> extends PureComponent<ResultTableProps<G>> {
     private renderCell = (column: Column<Result>, result: Result) => {
         const customRenderers = {
+            'Tool':     result => <span title={result._uri}>{result._uri?.file ?? '—'}</span>,
             'File':     result => <span title={result._uri}>{result._uri?.file ?? '—'}</span>,
             'Line':     result => <span>{result._region?.startLine ?? '—'}</span>,
             'Message':  result => <span>{renderMessageTextWithEmbeddedLinks(result._message, result, vscode.postMessage)}</span>,
