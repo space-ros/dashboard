@@ -10,6 +10,7 @@ body {
     display: flex;
     flex-direction: column;
     margin-left: 1px; // VS Code Webview splitter eats an extra pixel on the left.
+    background-color: azure;
 }
 
 a {
@@ -57,7 +58,7 @@ mark {
     & > * + * { margin-top: 16px; }
 
     & > div {
-        color: var(--vscode-button-foreground);
+        color: white;
         background: var(--vscode-button-background);
         width: 200px;
         padding: 4px;
@@ -125,7 +126,7 @@ mark {
     // VS Code has 0.7 here but 0.6 in other places.
     // Opacity causing z-order issues with position: sticky, so using manually calced color.
     // Need to solve calc relative to theme.
-    color: rgb(139, 139, 139);
+    color: rgb(255, 255, 255);
 }
 
 .svLogsPane {
@@ -166,4 +167,13 @@ mark {
     & > :last-child {
         margin-bottom: 0;
     }
+}
+
+img {
+    flex: 0 0 auto;
+    padding: 10;
+    display: block;
+    margin: 0 auto;
+    max-height: 40;
+    width: 23%;
 }
