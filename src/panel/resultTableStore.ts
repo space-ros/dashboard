@@ -35,6 +35,7 @@ export class ResultTableStore<G> extends TableStore<Result, G> {
         new Column<Result>('Baseline', 100, result => result.baselineState ?? ''),
         new Column<Result>('Suppression', 100, result => result._suppression ?? ''),
         new Column<Result>('Rule', 220, result => `${result._rule?.name ?? '—'} ${result.ruleId ?? '—'}`),
+        new Column<Result>('Action', 220, result => `${result._rule?.name ?? '—'} ${result.ruleId ?? '—'}`),
     ]
     get columns() {
         return [...this.columnsPermanent, ...this.columnsOptional];
