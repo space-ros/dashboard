@@ -105,6 +105,16 @@ export { DetailsLayouts } from './details.layouts';
                             })}
                         </div>
                     </Tab>
+                    <Tab name={store.tabs[4]} count={store.resultTableStoreByRun.groupsFilteredSorted.length}>
+                        <ResultTable store={store.resultTableStoreByRun} onClearFilters={() => store.clearFilters()}
+                            renderGroup={(title: string) => {
+                                const {pathname} = new URL(title, 'file:');
+                                return <>
+                                    <span>{pathname.file || 'No Location'}</span>
+                                    <span className="ellipsis svSecondary">{pathname.path}</span>
+                                </>;
+                            }} />
+                    </Tab>
                 </TabPanel>
             </div>
             <div className="svResizer">

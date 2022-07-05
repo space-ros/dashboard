@@ -39,8 +39,12 @@
     log._uri = `file:///Users/username/projects/${file}`;
     store.logs.push(log);
 
-    const state_2 = localStorage.getItem('state');
-    const store_2 = new Store(JSON.parse(state_2) ?? defaultState, true);
+    const run_3 = 'samples/cppcheck_2.sarif';
+    const response_3 = await fetch(run_3);
+    const log_3 = await response_3.json();
+    log_3._uri = `file:///Users/username/projects/${file}`;
+    store.logs.push(log_3);
+
     const file_2 = 'samples/clang_tidy.sarif';
     const response_2 = await fetch(file_2);
     const log_2 = await response_2.json();
