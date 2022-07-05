@@ -63,6 +63,16 @@ export { DetailsLayouts } from './details.layouts';
                             onClick={() => vscode.postMessage({ command: 'closeAllLogs' })} />
                         <Icon name="folder-opened" title="Open Log" onClick={() => vscode.postMessage({ command: 'open' })} />
                     </>}>
+                    <Tab name={store.tabs[7]} count={store.resultTableStoreByCommit.groupsFilteredSorted.length}>
+                        <ResultTable store={store.resultTableStoreByCommit} onClearFilters={() => store.clearFilters()}
+                            renderGroup={(title: string) => {
+                                const {pathname} = new URL(title, 'file:');
+                                return <>
+                                    <span>{pathname.file || 'No Location'}</span>
+                                    <span className="ellipsis svSecondary">{pathname.path}</span>
+                                </>;
+                            }} />
+                    </Tab>
                     <Tab name={store.tabs[0]} count={store.resultTableStoreByLocation.groupsFilteredSorted.length}>
                         <ResultTable store={store.resultTableStoreByLocation} onClearFilters={() => store.clearFilters()}
                             renderGroup={(title: string) => {
@@ -92,18 +102,15 @@ export { DetailsLayouts } from './details.layouts';
                                 </>;
                             }} />
                     </Tab>
-                    <Tab name={store.tabs[2]} count={logs.length}>
-                        <div className="svLogsPane">
-                            {logs.map((log, i) => {
-                                const {pathname} = new URL(log._uri);
-                                return <div key={i} className="svListItem">
-                                    <div>{pathname.file}</div>
-                                    <div className="ellipsis svSecondary">{decodeFileUri(log._uri)}</div>
-                                    <Icon name="close" title="Close Log"
-                                        onClick={() => vscode.postMessage({ command: 'closeLog', uri: log._uri })} />
-                                </div>;
-                            })}
-                        </div>
+                    <Tab name={store.tabs[5]} count={store.resultTableStoreByLevel.groupsFilteredSorted.length}>
+                        <ResultTable store={store.resultTableStoreByLevel} onClearFilters={() => store.clearFilters()}
+                            renderGroup={(title: string) => {
+                                const {pathname} = new URL(title, 'file:');
+                                return <>
+                                    <span>{pathname.file || 'No Location'}</span>
+                                    <span className="ellipsis svSecondary">{pathname.path}</span>
+                                </>;
+                            }} />
                     </Tab>
                     <Tab name={store.tabs[4]} count={store.resultTableStoreByRun.groupsFilteredSorted.length}>
                         <ResultTable store={store.resultTableStoreByRun} onClearFilters={() => store.clearFilters()}
@@ -115,6 +122,16 @@ export { DetailsLayouts } from './details.layouts';
                                 </>;
                             }} />
                     </Tab>
+                    {/* <Tab name={store.tabs[6]} count={store.resultTableStoreByBaselineState.groupsFilteredSorted.length}>
+                        <ResultTable store={store.resultTableStoreByBaselineState} onClearFilters={() => store.clearFilters()}
+                            renderGroup={(title: string) => {
+                                const {pathname} = new URL(title, 'file:');
+                                return <>
+                                    <span>{pathname.file || 'No Location'}</span>
+                                    <span className="ellipsis svSecondary">{pathname.path}</span>
+                                </>;
+                            }} />
+                    </Tab> */}
                 </TabPanel>
             </div>
             <div className="svResizer">

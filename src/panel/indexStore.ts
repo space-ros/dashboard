@@ -62,15 +62,19 @@ export class IndexStore {
         return this.logs.map(log => log.runs).flat();
     }
     @computed public get results() {
+        console.log(this.runs)
         return this.runs.map(run => run.results || []).flat();
     }
     selection = observable.box<Row | undefined>(undefined)
     resultTableStoreByLocation = new ResultTableStore('File', result => result._relativeUri, this, this, this.selection)
     resultTableStoreByRule     = new ResultTableStore('Rule', result => result._rule,        this, this, this.selection)
-    resultTableStoreByTool     = new ResultTableStore('Tool', result => result._log._uri,        this, this, this.selection)
-    resultTableStoreByRun     = new ResultTableStore('Run', result => result._run,        this, this, this.selection)
+    resultTableStoreByTool     = new ResultTableStore('Tool', result => result._run.tool.driver.name,        this, this, this.selection)
+    resultTableStoreByLevel     = new ResultTableStore('Level', result => result.level,        this, this, this.selection)
+    resultTableStoreByCommit      = new ResultTableStore('Commit', result => result._log._commit,        this, this, this.selection)
+    resultTableStoreByBaselineState      = new ResultTableStore('Baseline', result => result.baselineState,        this, this, this.selection)
+    resultTableStoreByRun      = new ResultTableStore('Run', result => result._run._index,        this, this, this.selection)
 
-    // Filters
+    // Filtersresultsresults
     @observable keywords = ''
     @observable filtersRow = filtersRow
     @observable filtersColumn = filtersColumn
@@ -88,8 +92,11 @@ export class IndexStore {
         { toString: () => 'Locations', store: this.resultTableStoreByLocation },
         { toString: () => 'Rules', store: this.resultTableStoreByRule },
         { toString: () => 'Logs', store: undefined },
-        { toString: () => 'Logs per tool', store: this.resultTableStoreByTool },
-        { toString: () => 'Logs per Run', store: this.resultTableStoreByRun },
+        { toString: () => 'Tool', store: this.resultTableStoreByTool },
+        { toString: () => 'Run', store: this.resultTableStoreByRun },
+        { toString: () => 'Level', store: this.resultTableStoreByLevel },
+        { toString: () => 'Baseline', store: this.resultTableStoreByBaselineState },
+        { toString: () => 'Commit', store: this.resultTableStoreByCommit },
     ] as { store: ResultTableStore<string | ReportingDescriptor> | undefined }[]
     selectedTab = observable.box(this.tabs[0], { deep: false })
 
