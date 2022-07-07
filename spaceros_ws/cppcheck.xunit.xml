@@ -1,0 +1,1499 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite
+  name="rcpputils.cppcheck"
+  tests="245"
+  errors="0"
+  failures="237"
+  time="5.419"
+  skipped="0"
+>
+  <testcase
+    name="style: misra-c2012-3.1 (include/rcppmath/clamp.hpp:26)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (include/rcppmath/clamp.hpp:60)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (include/rcppmath/rolling_mean_accumulator.hpp:44)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-10.4 (include/rcppmath/rolling_mean_accumulator.hpp:72)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-10.4 (include/rcppmath/rolling_mean_accumulator.hpp:73)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-10.4 (include/rcppmath/rolling_mean_accumulator.hpp:74)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="include/rcpputils/asserts.hpp"
+    classname="rcpputils.cppcheck"/>
+  <testcase
+    name="style: misra-c2012-3.1 (include/rcpputils/endian.hpp:50)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="include/rcpputils/env.hpp"
+    classname="rcpputils.cppcheck"/>
+  <testcase
+    name="style: misra-c2012-3.1 (include/rcpputils/filesystem_helper.hpp:32)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-3.1 (include/rcpputils/filesystem_helper.hpp:68)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-16.3 (include/rcpputils/filesystem_helper.hpp:94)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-16.3 (include/rcpputils/filesystem_helper.hpp:101)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-17.8 (include/rcpputils/filesystem_helper.hpp:335)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-20.5 (include/rcpputils/filesystem_helper.hpp:65)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (include/rcpputils/filesystem_helper.hpp:89)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (include/rcpputils/find_and_replace.hpp:37)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (include/rcpputils/find_and_replace.hpp:38)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (include/rcpputils/find_and_replace.hpp:41)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (include/rcpputils/find_and_replace.hpp:47)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (include/rcpputils/find_and_replace.hpp:57)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (include/rcpputils/find_and_replace.hpp:66)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (include/rcpputils/find_and_replace.hpp:89)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-15.5 (include/rcpputils/find_and_replace.hpp:51)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-15.5 (include/rcpputils/find_and_replace.hpp:54)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-15.5 (include/rcpputils/find_and_replace.hpp:77)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="include/rcpputils/find_library.hpp"
+    classname="rcpputils.cppcheck"/>
+  <testcase
+    name="include/rcpputils/get_env.hpp"
+    classname="rcpputils.cppcheck"/>
+  <testcase
+    name="style: misra-c2012-12.3 (include/rcpputils/join.hpp:41)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (include/rcpputils/join.hpp:42)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (include/rcpputils/join.hpp:47)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-14.4 (include/rcpputils/join.hpp:49)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-3.1 (include/rcpputils/pointer_traits.hpp:65)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-3.1 (include/rcpputils/pointer_traits.hpp:96)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (include/rcpputils/pointer_traits.hpp:48)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (include/rcpputils/pointer_traits.hpp:57)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="include/rcpputils/process.hpp"
+    classname="rcpputils.cppcheck"/>
+  <testcase
+    name="style: misra-c2012-2.7 (include/rcpputils/scope_exit.hpp:28)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-16.3 (include/rcpputils/scope_exit.hpp:34)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-16.3 (include/rcpputils/scope_exit.hpp:37)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-20.7 (include/rcpputils/scope_exit.hpp:65)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-17.8 (include/rcpputils/shared_library.hpp:120)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.1 (include/rcpputils/split.hpp:71)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (include/rcpputils/split.hpp:58)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (include/rcpputils/split.hpp:61)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-14.4 (include/rcpputils/split.hpp:70)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-17.8 (include/rcpputils/split.hpp:65)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-17.8 (include/rcpputils/split.hpp:74)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-17.8 (include/rcpputils/split.hpp:89)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-3.1 (include/rcpputils/thread_safety_annotations.hpp:20)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-3.1 (include/rcpputils/thread_safety_annotations.hpp:36)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-3.1 (include/rcpputils/thread_safety_annotations.hpp:60)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-3.1 (include/rcpputils/thread_safety_annotations.hpp:72)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-3.1 (include/rcpputils/thread_safety_annotations.hpp:84)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-3.1 (include/rcpputils/thread_safety_annotations.hpp:95)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-3.1 (include/rcpputils/thread_safety_annotations.hpp:107)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-3.1 (include/rcpputils/thread_safety_annotations.hpp:119)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-3.1 (include/rcpputils/thread_safety_annotations.hpp:131)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-3.1 (include/rcpputils/thread_safety_annotations.hpp:143)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-3.1 (include/rcpputils/thread_safety_annotations.hpp:155)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-3.1 (include/rcpputils/thread_safety_annotations.hpp:166)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-3.1 (include/rcpputils/thread_safety_annotations.hpp:177)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-3.1 (include/rcpputils/thread_safety_annotations.hpp:188)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-3.1 (include/rcpputils/thread_safety_annotations.hpp:199)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-3.1 (include/rcpputils/thread_safety_annotations.hpp:209)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-3.1 (include/rcpputils/thread_safety_annotations.hpp:219)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-3.1 (include/rcpputils/thread_safety_annotations.hpp:233)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-3.1 (include/rcpputils/thread_safety_annotations.hpp:243)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-3.1 (include/rcpputils/thread_safety_annotations.hpp:254)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-3.1 (include/rcpputils/thread_safety_annotations.hpp:265)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (include/rcpputils/time.hpp:35)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (include/rcpputils/time.hpp:40)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (include/rcpputils/time.hpp:48)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="include/rcpputils/visibility_control.hpp"
+    classname="rcpputils.cppcheck"/>
+  <testcase
+    name="src/asserts.cpp"
+    classname="rcpputils.cppcheck"/>
+  <testcase
+    name="style: misra-c2012-14.4 (src/env.cpp:44)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-3.1 (src/filesystem_helper.cpp:32)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-10.4 (src/filesystem_helper.cpp:150)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.1 (src/filesystem_helper.cpp:151)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.1 (src/filesystem_helper.cpp:214)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.1 (src/filesystem_helper.cpp:302)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.1 (src/filesystem_helper.cpp:368)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.1 (src/filesystem_helper.cpp:380)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.1 (src/filesystem_helper.cpp:385)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.1 (src/filesystem_helper.cpp:439)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-13.4 (src/filesystem_helper.cpp:437)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-14.2 (src/filesystem_helper.cpp:192)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-15.5 (src/filesystem_helper.cpp:98)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-15.5 (src/filesystem_helper.cpp:114)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-15.5 (src/filesystem_helper.cpp:139)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-15.5 (src/filesystem_helper.cpp:169)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-15.5 (src/filesystem_helper.cpp:178)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-15.5 (src/filesystem_helper.cpp:180)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-15.5 (src/filesystem_helper.cpp:182)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-15.5 (src/filesystem_helper.cpp:188)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-15.5 (src/filesystem_helper.cpp:409)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-15.5 (src/filesystem_helper.cpp:443)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-15.5 (src/filesystem_helper.cpp:446)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-15.5 (src/filesystem_helper.cpp:464)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-15.7 (src/filesystem_helper.cpp:447)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-17.7 (src/filesystem_helper.cpp:246)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-17.7 (src/filesystem_helper.cpp:452)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-18.4 (src/filesystem_helper.cpp:311)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-18.8 (src/filesystem_helper.cpp:352)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-10.4 (src/filesystem_helper.cpp:320)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-10.4 (src/filesystem_helper.cpp:415)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-10.4 (src/filesystem_helper.cpp:418)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.1 (src/filesystem_helper.cpp:294)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.1 (src/filesystem_helper.cpp:433)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-14.4 (src/filesystem_helper.cpp:321)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-14.4 (src/filesystem_helper.cpp:393)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-14.4 (src/filesystem_helper.cpp:396)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-15.5 (src/filesystem_helper.cpp:258)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-15.5 (src/filesystem_helper.cpp:394)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-15.5 (src/filesystem_helper.cpp:397)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-18.8 (src/filesystem_helper.cpp:349)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-18.8 (src/filesystem_helper.cpp:292)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-14.4 (src/find_library.cpp:65)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-14.4 (src/find_library.cpp:75)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-15.5 (src/find_library.cpp:66)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-15.5 (src/find_library.cpp:76)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-18.4 (src/find_library.cpp:64)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-14.4 (src/shared_library.cpp:44)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-15.5 (src/shared_library.cpp:93)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-17.7 (test/dummy_shared_library/dummy_shared_library.c:19)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-21.6 (test/dummy_shared_library/dummy_shared_library.h:28)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_accumulator.cpp:30)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_accumulator.cpp:55)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-21.1 (test/test_accumulator.cpp:19)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_asserts.cpp:22)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_asserts.cpp:26)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_asserts.cpp:43)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_asserts.cpp:47)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_asserts.cpp:51)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_asserts.cpp:68)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_asserts.cpp:73)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_asserts.cpp:77)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_asserts.cpp:94)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_asserts.cpp:100)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_clamp.cpp:20)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_clamp.cpp:29)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_clamp.cpp:41)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (test/test_clamp.cpp:30)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-15.5 (test/test_clamp.cpp:32)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_endian.cpp:27)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_endian.cpp:35)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-10.4 (test/test_endian.cpp:24)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_env.cpp:32)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_env.cpp:44)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_filesystem_helper.cpp:51)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_filesystem_helper.cpp:80)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_filesystem_helper.cpp:126)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_filesystem_helper.cpp:162)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_filesystem_helper.cpp:221)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_filesystem_helper.cpp:240)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_filesystem_helper.cpp:249)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_filesystem_helper.cpp:280)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_filesystem_helper.cpp:373)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_filesystem_helper.cpp:380)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_filesystem_helper.cpp:387)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_filesystem_helper.cpp:394)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_filesystem_helper.cpp:401)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_filesystem_helper.cpp:408)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_filesystem_helper.cpp:441)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_filesystem_helper.cpp:449)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_filesystem_helper.cpp:516)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-10.1 (test/test_filesystem_helper.cpp:445)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (test/test_filesystem_helper.cpp:512)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-18.4 (test/test_filesystem_helper.cpp:349)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-18.4 (test/test_filesystem_helper.cpp:363)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_find_and_replace.cpp:20)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_find_and_replace.cpp:72)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_find_and_replace.cpp:80)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (test/test_find_and_replace.cpp:48)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_find_library.cpp:43)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_find_library.cpp:78)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (test/test_find_library.cpp:28)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (test/test_find_library.cpp:31)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (test/test_find_library.cpp:35)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (test/test_find_library.cpp:64)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (test/test_find_library.cpp:61)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_join.cpp:24)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_join.cpp:42)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_join.cpp:60)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_join.cpp:78)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (test/test_join.cpp:46)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="test/test_library.cpp"
+    classname="rcpputils.cppcheck"/>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_pointer_traits.cpp:22)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_pointer_traits.cpp:75)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_pointer_traits.cpp:89)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (test/test_pointer_traits.cpp:104)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (test/test_pointer_traits.cpp:105)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (test/test_pointer_traits.cpp:106)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (test/test_pointer_traits.cpp:107)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (test/test_pointer_traits.cpp:108)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (test/test_pointer_traits.cpp:109)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (test/test_pointer_traits.cpp:110)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (test/test_pointer_traits.cpp:112)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (test/test_pointer_traits.cpp:113)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (test/test_pointer_traits.cpp:114)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (test/test_pointer_traits.cpp:115)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (test/test_pointer_traits.cpp:117)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_process.cpp:21)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_scope_exit.cpp:19)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_scope_exit.cpp:34)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_scope_exit.cpp:49)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-16.3 (test/test_scope_exit.cpp:60)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-17.7 (test/test_scope_exit.cpp:51)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-17.7 (test/test_scope_exit.cpp:54)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-17.7 (test/test_scope_exit.cpp:63)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_shared_library.cpp:33)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_shared_library.cpp:54)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_shared_library.cpp:85)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_split.cpp:26)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_split.cpp:129)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_split.cpp:232)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_split.cpp:244)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_split.cpp:255)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_split.cpp:299)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_split.cpp:311)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-10.4 (test/test_split.cpp:276)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-10.4 (test/test_split.cpp:280)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-10.4 (test/test_split.cpp:282)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (test/test_split.cpp:68)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (test/test_split.cpp:308)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-12.3 (test/test_split.cpp:315)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_thread_safety_annotations.cpp:186)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_thread_safety_annotations.cpp:207)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_thread_safety_annotations.cpp:241)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_thread_safety_annotations.cpp:254)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_thread_safety_annotations.cpp:273)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_thread_safety_annotations.cpp:298)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_thread_safety_annotations.cpp:312)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_thread_safety_annotations.cpp:111)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-3.1 (test/test_thread_safety_annotations.cpp:299)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-10.4 (test/test_thread_safety_annotations.cpp:113)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-15.5 (test/test_thread_safety_annotations.cpp:115)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-15.5 (test/test_thread_safety_annotations.cpp:122)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-17.7 (test/test_thread_safety_annotations.cpp:199)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-17.7 (test/test_thread_safety_annotations.cpp:204)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-17.7 (test/test_thread_safety_annotations.cpp:220)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-17.7 (test/test_thread_safety_annotations.cpp:237)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-17.7 (test/test_thread_safety_annotations.cpp:262)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-2.7 (test/test_time.cpp:19)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <testcase
+    name="style: misra-c2012-13.4 (test/test_time.cpp:23)"
+    classname="rcpputils.cppcheck"
+  >
+      <failure message="misra violation (use --rule-texts=&lt;file&gt; to get proper output)"/>
+  </testcase>
+  <system-out>Checked files:
+* include/rcppmath/clamp.hpp
+* include/rcppmath/rolling_mean_accumulator.hpp
+* include/rcpputils/asserts.hpp
+* include/rcpputils/endian.hpp
+* include/rcpputils/env.hpp
+* include/rcpputils/filesystem_helper.hpp
+* include/rcpputils/find_and_replace.hpp
+* include/rcpputils/find_library.hpp
+* include/rcpputils/get_env.hpp
+* include/rcpputils/join.hpp
+* include/rcpputils/pointer_traits.hpp
+* include/rcpputils/process.hpp
+* include/rcpputils/scope_exit.hpp
+* include/rcpputils/shared_library.hpp
+* include/rcpputils/split.hpp
+* include/rcpputils/thread_safety_annotations.hpp
+* include/rcpputils/time.hpp
+* include/rcpputils/visibility_control.hpp
+* src/asserts.cpp
+* src/env.cpp
+* src/filesystem_helper.cpp
+* src/find_library.cpp
+* src/shared_library.cpp
+* test/dummy_shared_library/dummy_shared_library.c
+* test/dummy_shared_library/dummy_shared_library.h
+* test/test_accumulator.cpp
+* test/test_asserts.cpp
+* test/test_clamp.cpp
+* test/test_endian.cpp
+* test/test_env.cpp
+* test/test_filesystem_helper.cpp
+* test/test_find_and_replace.cpp
+* test/test_find_library.cpp
+* test/test_join.cpp
+* test/test_library.cpp
+* test/test_pointer_traits.cpp
+* test/test_process.cpp
+* test/test_scope_exit.cpp
+* test/test_shared_library.cpp
+* test/test_split.cpp
+* test/test_thread_safety_annotations.cpp
+* test/test_time.cpp</system-out>
+</testsuite>

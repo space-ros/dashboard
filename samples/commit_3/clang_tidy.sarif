@@ -66,13 +66,18 @@
       ],
       "results": [
         {
-          "baselineState": "updated",
           "ruleId": "google-explicit-constructor",
           "level": "warning",
           "kind": "review",
           "message": {
             "text": "  path(const std::string & p);  // NOLINT(runtime/explicit): this is a conversion constructor\n  ^\n"
           },
+          "suppressions": [
+            {
+            "kind": "external",
+            "status": "underReview"
+          }
+        ],
           "locations": [
             {
               "physicalLocation": {
@@ -89,7 +94,6 @@
           ]
         },
         {
-          "baselineState":"unchanged",
           "ruleId": "google-explicit-constructor",
           "level": "warning",
           "kind": "review",

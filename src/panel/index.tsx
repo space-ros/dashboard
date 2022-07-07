@@ -15,6 +15,7 @@ import { IndexStore } from './indexStore';
 import { ResultTable } from './resultTable';
 import { RowItem } from './tableStore';
 import { Checkrow, Icon, Popover, ResizeHandle, Tab, TabPanel } from './widgets';
+import { Chart } from './chart';
 import { decodeFileUri } from '../shared';
 
 export { React };
@@ -24,8 +25,8 @@ export { DetailsLayouts } from './details.layouts';
 
 @observer export class Index extends Component<{ store: IndexStore }> {
     private showFilterPopup = observable.box(false)
-    private detailsPaneHeight = observable.box(300)
-
+    private detailsPaneHeight = observable.box(80)
+    
     render() {
         const {store} = this.props;
         if (!store.logs.length) {
@@ -114,6 +115,17 @@ export { DetailsLayouts } from './details.layouts';
                     </Tab>
                     <Tab name={store.tabs[4]} count={store.resultTableStoreByRun.groupsFilteredSorted.length}>
                         <ResultTable store={store.resultTableStoreByRun} onClearFilters={() => store.clearFilters()}
+                            renderGroup={(title: string) => {
+                                const {pathname} = new URL(title, 'file:');
+                                return <>
+                                    <span>{pathname.file || 'No Location'}</span>
+                                    <span className="ellipsis svSecondary">{pathname.path}</span>
+                                </>;
+                            }} />
+                    </Tab>
+                    <Tab name="Charts">
+                        <Chart store={store.resultTableStoreByRule} count={store.resultTableStoreByRule}
+                            onClearFilters={() => store.clearFilters()}
                             renderGroup={(title: string) => {
                                 const {pathname} = new URL(title, 'file:');
                                 return <>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="3" failures="0" disabled="0" errors="0" time="0.001" timestamp="2022-07-05T13:55:06" name="AllTests">
+  <testsuite name="test_find_and_replace" tests="3" failures="0" disabled="0" errors="0" time="0.001" timestamp="2022-07-05T13:55:06">
+    <testcase name="find_and_replace" status="run" result="completed" time="0" timestamp="2022-07-05T13:55:06" classname="rcpputils.test_find_and_replace" />
+    <testcase name="find_and_replace_wstring" status="run" result="completed" time="0" timestamp="2022-07-05T13:55:06" classname="rcpputils.test_find_and_replace" />
+    <testcase name="find_and_replace_various_input_types" status="run" result="completed" time="0" timestamp="2022-07-05T13:55:06" classname="rcpputils.test_find_and_replace" />
+  </testsuite>
+</testsuites>

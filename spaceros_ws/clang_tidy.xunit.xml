@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite
+  name="rcpputils.clang_tidy"
+  tests="7"
+  errors="0"
+  failures="2"
+  time="9.610"
+>
+  <testcase
+    name="/root/src/spaceros_ws/src/rcpputils/include/rcpputils/filesystem_helper.hpp:89:3"
+    classname="rcpputils.clang_tidy"
+  >
+      <failure message="single-argument constructors must be marked explicit to avoid unintentional implicit conversions [google-explicit-constructor]"><![CDATA[/root/src/spaceros_ws/src/rcpputils/include/rcpputils/filesystem_helper.hpp:89:3]]></failure>
+  </testcase>
+  <testcase
+    name="/root/src/spaceros_ws/src/rcpputils/include/rcpputils/filesystem_helper.hpp:89:3"
+    classname="rcpputils.clang_tidy"
+  >
+      <failure message="single-argument constructors must be marked explicit to avoid unintentional implicit conversions [google-explicit-constructor]"><![CDATA[/root/src/spaceros_ws/src/rcpputils/include/rcpputils/filesystem_helper.hpp:89:3]]></failure>
+  </testcase>
+  <testcase
+    name="/root/src/spaceros_ws/src/rcpputils/src/asserts.cpp"
+    classname="rcpputils.clang_tidy"/>
+  <testcase
+    name="/root/src/spaceros_ws/src/rcpputils/src/env.cpp"
+    classname="rcpputils.clang_tidy"/>
+  <testcase
+    name="/root/src/spaceros_ws/src/rcpputils/src/filesystem_helper.cpp"
+    classname="rcpputils.clang_tidy"/>
+  <testcase
+    name="/root/src/spaceros_ws/src/rcpputils/src/find_library.cpp"
+    classname="rcpputils.clang_tidy"/>
+  <testcase
+    name="/root/src/spaceros_ws/src/rcpputils/src/shared_library.cpp"
+    classname="rcpputils.clang_tidy"/>
+  <system-out>Checked files:
+* include/rcpputils/filesystem_helper.hpp
+* src/asserts.cpp
+* src/env.cpp
+* src/filesystem_helper.cpp
+* src/find_library.cpp
+* src/shared_library.cpp</system-out>
+</testsuite>

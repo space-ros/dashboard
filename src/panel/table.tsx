@@ -43,7 +43,7 @@ interface TableProps<T, G> {
             <div></div>
             {columns.map((col, i) => <Hi key={i} className="svTableCell"
                 style={i === columns.length - 1 ? { gridColumn: 'auto / span 2' } : {}}>
-                {i === 0 && renderIconName && <Icon name={renderIconName(item.item)} />}
+                {i === 0 && renderIconName && col.name !== "Action" && <Icon name={renderIconName(item.item)} />}
                 {renderCell(col, item.item)}
             </Hi>)}
         </div>;
@@ -82,7 +82,8 @@ interface TableProps<T, G> {
                             </Hi>;
                         }
                         if (row instanceof RowItem) {
-                            return <TableItem key={row.key} isSelected={isSelected} item={row} gridTemplateColumns={this.gridTemplateColumns} />;
+                            
+                            return (<TableItem key={row.key} isSelected={isSelected} item={row} gridTemplateColumns={this.gridTemplateColumns} />)
                         }
                         return undefined; // Closed system: No other types expected.
                     })}

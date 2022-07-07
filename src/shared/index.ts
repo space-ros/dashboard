@@ -18,6 +18,7 @@ export type ResultId = [string, number, number]
 declare module 'sarif' {
     interface Log {
         _uri: string;
+        _commit: string;
         _uriUpgraded?: string; // Only present if upgraded.
         _jsonMap?: JsonMap; // Only used by the "extension" side for navigating original SARIF sources. The "panel" side does not need this feature and thus does not use this field.
         _augmented: boolean;
@@ -73,7 +74,6 @@ export function augmentLog(log: Log, rules?: Map<string, ReportingDescriptor>) {
     const fileAndUris = [] as [string, string][];
     log.runs?.forEach((run, runIndex) => { // types.d.ts is wrong, per spec `runs` is allowed to be null.
         run._index = runIndex;
-
         // For `Run`s that lack `tool.driver.rules` we generate a `Rule` object on demand.
         // We intern these objects so they can be conveniently instance comparable elsewhere in the code.
         // If we don't do this, then the same ruleId may generate multiple `Rule` objects.
@@ -235,9 +235,9 @@ export const filtersRow: Record<string, Record<string, Visibility>> = {
 
 export const filtersColumn: Record<string, Record<string, Visibility>> = {
     Columns: {
-        'Baseline': false,
-        'Suppression': false,
-        'Rule': false,
+        'Baseline': 'visible',
+        'Suppression': 'visible',
+        'Rule': 'visible',
     },
 };
 

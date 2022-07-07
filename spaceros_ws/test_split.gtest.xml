@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="7" failures="0" disabled="0" errors="0" time="0.002" timestamp="2022-07-05T13:55:05" name="AllTests">
+  <testsuite name="test_split" tests="7" failures="0" disabled="0" errors="0" time="0.001" timestamp="2022-07-05T13:55:05">
+    <testcase name="split" status="run" result="completed" time="0" timestamp="2022-07-05T13:55:05" classname="rcpputils.test_split" />
+    <testcase name="split_backslash" status="run" result="completed" time="0" timestamp="2022-07-05T13:55:05" classname="rcpputils.test_split" />
+    <testcase name="vector_iterator" status="run" result="completed" time="0" timestamp="2022-07-05T13:55:05" classname="rcpputils.test_split" />
+    <testcase name="list_iterator" status="run" result="completed" time="0" timestamp="2022-07-05T13:55:05" classname="rcpputils.test_split" />
+    <testcase name="set_iterator" status="run" result="completed" time="0" timestamp="2022-07-05T13:55:05" classname="rcpputils.test_split" />
+    <testcase name="custom_iterator" status="run" result="completed" time="0" timestamp="2022-07-05T13:55:05" classname="rcpputils.test_split" />
+    <testcase name="custom_iterator_exception" status="run" result="completed" time="0" timestamp="2022-07-05T13:55:05" classname="rcpputils.test_split" />
+  </testsuite>
+</testsuites>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="7" failures="0" disabled="0" errors="0" time="0.002" timestamp="2022-07-05T13:55:02" name="AllTests">
+  <testsuite name="test_tsa" tests="7" failures="0" disabled="0" errors="0" time="0.001" timestamp="2022-07-05T13:55:02">
+    <testcase name="libcxx_types" status="run" result="completed" time="0" timestamp="2022-07-05T13:55:02" classname="rcpputils.test_tsa" />
+    <testcase name="capability" status="run" result="completed" time="0" timestamp="2022-07-05T13:55:02" classname="rcpputils.test_tsa" />
+    <testcase name="ptr_guard" status="run" result="completed" time="0" timestamp="2022-07-05T13:55:02" classname="rcpputils.test_tsa" />
+    <testcase name="shared_capability" status="run" result="completed" time="0" timestamp="2022-07-05T13:55:02" classname="rcpputils.test_tsa" />
+    <testcase name="return_capability" status="run" result="completed" time="0" timestamp="2022-07-05T13:55:02" classname="rcpputils.test_tsa" />
+    <testcase name="try_acquire" status="run" result="completed" time="0" timestamp="2022-07-05T13:55:02" classname="rcpputils.test_tsa" />
+    <testcase name="acquire_ordering" status="run" result="completed" time="0" timestamp="2022-07-05T13:55:02" classname="rcpputils.test_tsa" />
+  </testsuite>
+</testsuites>

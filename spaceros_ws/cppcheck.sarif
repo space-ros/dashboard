@@ -1,0 +1,5356 @@
+{
+  "version": "2.1.0",
+  "$schema": "http://json.schemastore.org/sarif-2.1.0-rtm.5",
+  "properties": {
+    "comment": "cppcheck output converted to SARIF by ament_cppcheck",
+    "test_name": "rcpputils.cppcheck.sarif",
+    "test_count": 245,
+    "error_count": 237,
+    "execution_time": "5.419",
+    "tests_skipped": 0
+  },
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "cppcheck",
+          "version": "1.90",
+          "informationUri": "https://cppcheck.sourceforge.io/",
+          "rules": [
+            {
+              "id": "misra-c2012-3.1",
+              "shortDescription": {
+                "text": "misra violation (use --rule-texts=<file> to get proper output)"
+              },
+              "helpUri": "https://cppcheck.sourceforge.io/misra.php"
+            },
+            {
+              "id": "misra-c2012-12.3",
+              "shortDescription": {
+                "text": "misra violation (use --rule-texts=<file> to get proper output)"
+              },
+              "helpUri": "https://cppcheck.sourceforge.io/misra.php"
+            },
+            {
+              "id": "misra-c2012-2.7",
+              "shortDescription": {
+                "text": "misra violation (use --rule-texts=<file> to get proper output)"
+              },
+              "helpUri": "https://cppcheck.sourceforge.io/misra.php"
+            },
+            {
+              "id": "misra-c2012-10.4",
+              "shortDescription": {
+                "text": "misra violation (use --rule-texts=<file> to get proper output)"
+              },
+              "helpUri": "https://cppcheck.sourceforge.io/misra.php"
+            },
+            {
+              "id": "misra-c2012-16.3",
+              "shortDescription": {
+                "text": "misra violation (use --rule-texts=<file> to get proper output)"
+              },
+              "helpUri": "https://cppcheck.sourceforge.io/misra.php"
+            },
+            {
+              "id": "misra-c2012-17.8",
+              "shortDescription": {
+                "text": "misra violation (use --rule-texts=<file> to get proper output)"
+              },
+              "helpUri": "https://cppcheck.sourceforge.io/misra.php"
+            },
+            {
+              "id": "misra-c2012-20.5",
+              "shortDescription": {
+                "text": "misra violation (use --rule-texts=<file> to get proper output)"
+              },
+              "helpUri": "https://cppcheck.sourceforge.io/misra.php"
+            },
+            {
+              "id": "misra-c2012-15.5",
+              "shortDescription": {
+                "text": "misra violation (use --rule-texts=<file> to get proper output)"
+              },
+              "helpUri": "https://cppcheck.sourceforge.io/misra.php"
+            },
+            {
+              "id": "misra-c2012-14.4",
+              "shortDescription": {
+                "text": "misra violation (use --rule-texts=<file> to get proper output)"
+              },
+              "helpUri": "https://cppcheck.sourceforge.io/misra.php"
+            },
+            {
+              "id": "misra-c2012-20.7",
+              "shortDescription": {
+                "text": "misra violation (use --rule-texts=<file> to get proper output)"
+              },
+              "helpUri": "https://cppcheck.sourceforge.io/misra.php"
+            },
+            {
+              "id": "misra-c2012-12.1",
+              "shortDescription": {
+                "text": "misra violation (use --rule-texts=<file> to get proper output)"
+              },
+              "helpUri": "https://cppcheck.sourceforge.io/misra.php"
+            },
+            {
+              "id": "misra-c2012-13.4",
+              "shortDescription": {
+                "text": "misra violation (use --rule-texts=<file> to get proper output)"
+              },
+              "helpUri": "https://cppcheck.sourceforge.io/misra.php"
+            },
+            {
+              "id": "misra-c2012-14.2",
+              "shortDescription": {
+                "text": "misra violation (use --rule-texts=<file> to get proper output)"
+              },
+              "helpUri": "https://cppcheck.sourceforge.io/misra.php"
+            },
+            {
+              "id": "misra-c2012-15.7",
+              "shortDescription": {
+                "text": "misra violation (use --rule-texts=<file> to get proper output)"
+              },
+              "helpUri": "https://cppcheck.sourceforge.io/misra.php"
+            },
+            {
+              "id": "misra-c2012-17.7",
+              "shortDescription": {
+                "text": "misra violation (use --rule-texts=<file> to get proper output)"
+              },
+              "helpUri": "https://cppcheck.sourceforge.io/misra.php"
+            },
+            {
+              "id": "misra-c2012-18.4",
+              "shortDescription": {
+                "text": "misra violation (use --rule-texts=<file> to get proper output)"
+              },
+              "helpUri": "https://cppcheck.sourceforge.io/misra.php"
+            },
+            {
+              "id": "misra-c2012-18.8",
+              "shortDescription": {
+                "text": "misra violation (use --rule-texts=<file> to get proper output)"
+              },
+              "helpUri": "https://cppcheck.sourceforge.io/misra.php"
+            },
+            {
+              "id": "misra-c2012-21.6",
+              "shortDescription": {
+                "text": "misra violation (use --rule-texts=<file> to get proper output)"
+              },
+              "helpUri": "https://cppcheck.sourceforge.io/misra.php"
+            },
+            {
+              "id": "misra-c2012-21.1",
+              "shortDescription": {
+                "text": "misra violation (use --rule-texts=<file> to get proper output)"
+              },
+              "helpUri": "https://cppcheck.sourceforge.io/misra.php"
+            },
+            {
+              "id": "misra-c2012-10.1",
+              "shortDescription": {
+                "text": "misra violation (use --rule-texts=<file> to get proper output)"
+              },
+              "helpUri": "https://cppcheck.sourceforge.io/misra.php"
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "include/rcppmath/clamp.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "include/rcppmath/rolling_mean_accumulator.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "include/rcpputils/asserts.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "include/rcpputils/endian.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "include/rcpputils/env.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "include/rcpputils/filesystem_helper.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "include/rcpputils/find_and_replace.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "include/rcpputils/find_library.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "include/rcpputils/get_env.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "include/rcpputils/join.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "include/rcpputils/pointer_traits.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "include/rcpputils/process.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "include/rcpputils/scope_exit.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "include/rcpputils/shared_library.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "include/rcpputils/split.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "include/rcpputils/thread_safety_annotations.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "include/rcpputils/time.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "include/rcpputils/visibility_control.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/asserts.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/env.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/filesystem_helper.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/find_library.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "src/shared_library.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "test/dummy_shared_library/dummy_shared_library.c"
+          }
+        },
+        {
+          "location": {
+            "uri": "test/dummy_shared_library/dummy_shared_library.h"
+          }
+        },
+        {
+          "location": {
+            "uri": "test/test_accumulator.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "test/test_asserts.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "test/test_clamp.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "test/test_endian.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "test/test_env.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "test/test_filesystem_helper.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "test/test_find_and_replace.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "test/test_find_library.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "test/test_join.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "test/test_library.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "test/test_pointer_traits.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "test/test_process.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "test/test_scope_exit.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "test/test_shared_library.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "test/test_split.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "test/test_thread_safety_annotations.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "test/test_time.cpp"
+          }
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "misra-c2012-3.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcppmath/clamp.hpp",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 26
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcppmath/clamp.hpp",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 60
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcppmath/rolling_mean_accumulator.hpp",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 44
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-10.4",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcppmath/rolling_mean_accumulator.hpp",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 72
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-10.4",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcppmath/rolling_mean_accumulator.hpp",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 73
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-10.4",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcppmath/rolling_mean_accumulator.hpp",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 74
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-3.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/endian.hpp",
+                  "index": 3
+                },
+                "region": {
+                  "startLine": 50
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-3.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/filesystem_helper.hpp",
+                  "index": 5
+                },
+                "region": {
+                  "startLine": 32
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-3.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/filesystem_helper.hpp",
+                  "index": 5
+                },
+                "region": {
+                  "startLine": 68
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-16.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/filesystem_helper.hpp",
+                  "index": 5
+                },
+                "region": {
+                  "startLine": 94
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-16.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/filesystem_helper.hpp",
+                  "index": 5
+                },
+                "region": {
+                  "startLine": 101
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-17.8",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/filesystem_helper.hpp",
+                  "index": 5
+                },
+                "region": {
+                  "startLine": 335
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-20.5",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/filesystem_helper.hpp",
+                  "index": 5
+                },
+                "region": {
+                  "startLine": 65
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/filesystem_helper.hpp",
+                  "index": 5
+                },
+                "region": {
+                  "startLine": 89
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/find_and_replace.hpp",
+                  "index": 6
+                },
+                "region": {
+                  "startLine": 37
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/find_and_replace.hpp",
+                  "index": 6
+                },
+                "region": {
+                  "startLine": 38
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/find_and_replace.hpp",
+                  "index": 6
+                },
+                "region": {
+                  "startLine": 41
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/find_and_replace.hpp",
+                  "index": 6
+                },
+                "region": {
+                  "startLine": 47
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/find_and_replace.hpp",
+                  "index": 6
+                },
+                "region": {
+                  "startLine": 57
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/find_and_replace.hpp",
+                  "index": 6
+                },
+                "region": {
+                  "startLine": 66
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/find_and_replace.hpp",
+                  "index": 6
+                },
+                "region": {
+                  "startLine": 89
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-15.5",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/find_and_replace.hpp",
+                  "index": 6
+                },
+                "region": {
+                  "startLine": 51
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-15.5",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/find_and_replace.hpp",
+                  "index": 6
+                },
+                "region": {
+                  "startLine": 54
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-15.5",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/find_and_replace.hpp",
+                  "index": 6
+                },
+                "region": {
+                  "startLine": 77
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/join.hpp",
+                  "index": 9
+                },
+                "region": {
+                  "startLine": 41
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/join.hpp",
+                  "index": 9
+                },
+                "region": {
+                  "startLine": 42
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/join.hpp",
+                  "index": 9
+                },
+                "region": {
+                  "startLine": 47
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-14.4",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/join.hpp",
+                  "index": 9
+                },
+                "region": {
+                  "startLine": 49
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-3.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/pointer_traits.hpp",
+                  "index": 10
+                },
+                "region": {
+                  "startLine": 65
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-3.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/pointer_traits.hpp",
+                  "index": 10
+                },
+                "region": {
+                  "startLine": 96
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/pointer_traits.hpp",
+                  "index": 10
+                },
+                "region": {
+                  "startLine": 48
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/pointer_traits.hpp",
+                  "index": 10
+                },
+                "region": {
+                  "startLine": 57
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/scope_exit.hpp",
+                  "index": 12
+                },
+                "region": {
+                  "startLine": 28
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-16.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/scope_exit.hpp",
+                  "index": 12
+                },
+                "region": {
+                  "startLine": 34
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-16.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/scope_exit.hpp",
+                  "index": 12
+                },
+                "region": {
+                  "startLine": 37
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-20.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/scope_exit.hpp",
+                  "index": 12
+                },
+                "region": {
+                  "startLine": 65
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-17.8",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/shared_library.hpp",
+                  "index": 13
+                },
+                "region": {
+                  "startLine": 120
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/split.hpp",
+                  "index": 14
+                },
+                "region": {
+                  "startLine": 71
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/split.hpp",
+                  "index": 14
+                },
+                "region": {
+                  "startLine": 58
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/split.hpp",
+                  "index": 14
+                },
+                "region": {
+                  "startLine": 61
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-14.4",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/split.hpp",
+                  "index": 14
+                },
+                "region": {
+                  "startLine": 70
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-17.8",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/split.hpp",
+                  "index": 14
+                },
+                "region": {
+                  "startLine": 65
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-17.8",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/split.hpp",
+                  "index": 14
+                },
+                "region": {
+                  "startLine": 74
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-17.8",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/split.hpp",
+                  "index": 14
+                },
+                "region": {
+                  "startLine": 89
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-3.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/thread_safety_annotations.hpp",
+                  "index": 15
+                },
+                "region": {
+                  "startLine": 20
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-3.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/thread_safety_annotations.hpp",
+                  "index": 15
+                },
+                "region": {
+                  "startLine": 36
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-3.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/thread_safety_annotations.hpp",
+                  "index": 15
+                },
+                "region": {
+                  "startLine": 60
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-3.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/thread_safety_annotations.hpp",
+                  "index": 15
+                },
+                "region": {
+                  "startLine": 72
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-3.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/thread_safety_annotations.hpp",
+                  "index": 15
+                },
+                "region": {
+                  "startLine": 84
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-3.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/thread_safety_annotations.hpp",
+                  "index": 15
+                },
+                "region": {
+                  "startLine": 95
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-3.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/thread_safety_annotations.hpp",
+                  "index": 15
+                },
+                "region": {
+                  "startLine": 107
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-3.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/thread_safety_annotations.hpp",
+                  "index": 15
+                },
+                "region": {
+                  "startLine": 119
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-3.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/thread_safety_annotations.hpp",
+                  "index": 15
+                },
+                "region": {
+                  "startLine": 131
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-3.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/thread_safety_annotations.hpp",
+                  "index": 15
+                },
+                "region": {
+                  "startLine": 143
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-3.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/thread_safety_annotations.hpp",
+                  "index": 15
+                },
+                "region": {
+                  "startLine": 155
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-3.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/thread_safety_annotations.hpp",
+                  "index": 15
+                },
+                "region": {
+                  "startLine": 166
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-3.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/thread_safety_annotations.hpp",
+                  "index": 15
+                },
+                "region": {
+                  "startLine": 177
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-3.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/thread_safety_annotations.hpp",
+                  "index": 15
+                },
+                "region": {
+                  "startLine": 188
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-3.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/thread_safety_annotations.hpp",
+                  "index": 15
+                },
+                "region": {
+                  "startLine": 199
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-3.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/thread_safety_annotations.hpp",
+                  "index": 15
+                },
+                "region": {
+                  "startLine": 209
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-3.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/thread_safety_annotations.hpp",
+                  "index": 15
+                },
+                "region": {
+                  "startLine": 219
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-3.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/thread_safety_annotations.hpp",
+                  "index": 15
+                },
+                "region": {
+                  "startLine": 233
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-3.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/thread_safety_annotations.hpp",
+                  "index": 15
+                },
+                "region": {
+                  "startLine": 243
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-3.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/thread_safety_annotations.hpp",
+                  "index": 15
+                },
+                "region": {
+                  "startLine": 254
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-3.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/thread_safety_annotations.hpp",
+                  "index": 15
+                },
+                "region": {
+                  "startLine": 265
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/time.hpp",
+                  "index": 16
+                },
+                "region": {
+                  "startLine": 35
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/time.hpp",
+                  "index": 16
+                },
+                "region": {
+                  "startLine": 40
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "include/rcpputils/time.hpp",
+                  "index": 16
+                },
+                "region": {
+                  "startLine": 48
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-14.4",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/env.cpp",
+                  "index": 19
+                },
+                "region": {
+                  "startLine": 44
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-3.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 32
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-10.4",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 150
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 151
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 214
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 302
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 368
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 380
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 385
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 439
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-13.4",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 437
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-14.2",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 192
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-15.5",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 98
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-15.5",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 114
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-15.5",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 139
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-15.5",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 169
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-15.5",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 178
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-15.5",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 180
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-15.5",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 182
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-15.5",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 188
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-15.5",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 409
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-15.5",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 443
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-15.5",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 446
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-15.5",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 464
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-15.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 447
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-17.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 246
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-17.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 452
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-18.4",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 311
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-18.8",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 352
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-10.4",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 320
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-10.4",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 415
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-10.4",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 418
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 294
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 433
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-14.4",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 321
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-14.4",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 393
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-14.4",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 396
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-15.5",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 258
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-15.5",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 394
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-15.5",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 397
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-18.8",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 349
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-18.8",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/filesystem_helper.cpp",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 292
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-14.4",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/find_library.cpp",
+                  "index": 21
+                },
+                "region": {
+                  "startLine": 65
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-14.4",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/find_library.cpp",
+                  "index": 21
+                },
+                "region": {
+                  "startLine": 75
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-15.5",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/find_library.cpp",
+                  "index": 21
+                },
+                "region": {
+                  "startLine": 66
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-15.5",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/find_library.cpp",
+                  "index": 21
+                },
+                "region": {
+                  "startLine": 76
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-18.4",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/find_library.cpp",
+                  "index": 21
+                },
+                "region": {
+                  "startLine": 64
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-14.4",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/shared_library.cpp",
+                  "index": 22
+                },
+                "region": {
+                  "startLine": 44
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-15.5",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/shared_library.cpp",
+                  "index": 22
+                },
+                "region": {
+                  "startLine": 93
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-17.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/dummy_shared_library/dummy_shared_library.c",
+                  "index": 23
+                },
+                "region": {
+                  "startLine": 19
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-21.6",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/dummy_shared_library/dummy_shared_library.h",
+                  "index": 24
+                },
+                "region": {
+                  "startLine": 28
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_accumulator.cpp",
+                  "index": 25
+                },
+                "region": {
+                  "startLine": 30
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_accumulator.cpp",
+                  "index": 25
+                },
+                "region": {
+                  "startLine": 55
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-21.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_accumulator.cpp",
+                  "index": 25
+                },
+                "region": {
+                  "startLine": 19
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_asserts.cpp",
+                  "index": 26
+                },
+                "region": {
+                  "startLine": 22
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_asserts.cpp",
+                  "index": 26
+                },
+                "region": {
+                  "startLine": 26
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_asserts.cpp",
+                  "index": 26
+                },
+                "region": {
+                  "startLine": 43
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_asserts.cpp",
+                  "index": 26
+                },
+                "region": {
+                  "startLine": 47
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_asserts.cpp",
+                  "index": 26
+                },
+                "region": {
+                  "startLine": 51
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_asserts.cpp",
+                  "index": 26
+                },
+                "region": {
+                  "startLine": 68
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_asserts.cpp",
+                  "index": 26
+                },
+                "region": {
+                  "startLine": 73
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_asserts.cpp",
+                  "index": 26
+                },
+                "region": {
+                  "startLine": 77
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_asserts.cpp",
+                  "index": 26
+                },
+                "region": {
+                  "startLine": 94
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_asserts.cpp",
+                  "index": 26
+                },
+                "region": {
+                  "startLine": 100
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_clamp.cpp",
+                  "index": 27
+                },
+                "region": {
+                  "startLine": 20
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_clamp.cpp",
+                  "index": 27
+                },
+                "region": {
+                  "startLine": 29
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_clamp.cpp",
+                  "index": 27
+                },
+                "region": {
+                  "startLine": 41
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_clamp.cpp",
+                  "index": 27
+                },
+                "region": {
+                  "startLine": 30
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-15.5",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_clamp.cpp",
+                  "index": 27
+                },
+                "region": {
+                  "startLine": 32
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_endian.cpp",
+                  "index": 28
+                },
+                "region": {
+                  "startLine": 27
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_endian.cpp",
+                  "index": 28
+                },
+                "region": {
+                  "startLine": 35
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-10.4",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_endian.cpp",
+                  "index": 28
+                },
+                "region": {
+                  "startLine": 24
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_env.cpp",
+                  "index": 29
+                },
+                "region": {
+                  "startLine": 32
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_env.cpp",
+                  "index": 29
+                },
+                "region": {
+                  "startLine": 44
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_filesystem_helper.cpp",
+                  "index": 30
+                },
+                "region": {
+                  "startLine": 51
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_filesystem_helper.cpp",
+                  "index": 30
+                },
+                "region": {
+                  "startLine": 80
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_filesystem_helper.cpp",
+                  "index": 30
+                },
+                "region": {
+                  "startLine": 126
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_filesystem_helper.cpp",
+                  "index": 30
+                },
+                "region": {
+                  "startLine": 162
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_filesystem_helper.cpp",
+                  "index": 30
+                },
+                "region": {
+                  "startLine": 221
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_filesystem_helper.cpp",
+                  "index": 30
+                },
+                "region": {
+                  "startLine": 240
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_filesystem_helper.cpp",
+                  "index": 30
+                },
+                "region": {
+                  "startLine": 249
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_filesystem_helper.cpp",
+                  "index": 30
+                },
+                "region": {
+                  "startLine": 280
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_filesystem_helper.cpp",
+                  "index": 30
+                },
+                "region": {
+                  "startLine": 373
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_filesystem_helper.cpp",
+                  "index": 30
+                },
+                "region": {
+                  "startLine": 380
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_filesystem_helper.cpp",
+                  "index": 30
+                },
+                "region": {
+                  "startLine": 387
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_filesystem_helper.cpp",
+                  "index": 30
+                },
+                "region": {
+                  "startLine": 394
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_filesystem_helper.cpp",
+                  "index": 30
+                },
+                "region": {
+                  "startLine": 401
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_filesystem_helper.cpp",
+                  "index": 30
+                },
+                "region": {
+                  "startLine": 408
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_filesystem_helper.cpp",
+                  "index": 30
+                },
+                "region": {
+                  "startLine": 441
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_filesystem_helper.cpp",
+                  "index": 30
+                },
+                "region": {
+                  "startLine": 449
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_filesystem_helper.cpp",
+                  "index": 30
+                },
+                "region": {
+                  "startLine": 516
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-10.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_filesystem_helper.cpp",
+                  "index": 30
+                },
+                "region": {
+                  "startLine": 445
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_filesystem_helper.cpp",
+                  "index": 30
+                },
+                "region": {
+                  "startLine": 512
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-18.4",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_filesystem_helper.cpp",
+                  "index": 30
+                },
+                "region": {
+                  "startLine": 349
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-18.4",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_filesystem_helper.cpp",
+                  "index": 30
+                },
+                "region": {
+                  "startLine": 363
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_find_and_replace.cpp",
+                  "index": 31
+                },
+                "region": {
+                  "startLine": 20
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_find_and_replace.cpp",
+                  "index": 31
+                },
+                "region": {
+                  "startLine": 72
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_find_and_replace.cpp",
+                  "index": 31
+                },
+                "region": {
+                  "startLine": 80
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_find_and_replace.cpp",
+                  "index": 31
+                },
+                "region": {
+                  "startLine": 48
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_find_library.cpp",
+                  "index": 32
+                },
+                "region": {
+                  "startLine": 43
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_find_library.cpp",
+                  "index": 32
+                },
+                "region": {
+                  "startLine": 78
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_find_library.cpp",
+                  "index": 32
+                },
+                "region": {
+                  "startLine": 28
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_find_library.cpp",
+                  "index": 32
+                },
+                "region": {
+                  "startLine": 31
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_find_library.cpp",
+                  "index": 32
+                },
+                "region": {
+                  "startLine": 35
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_find_library.cpp",
+                  "index": 32
+                },
+                "region": {
+                  "startLine": 64
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_find_library.cpp",
+                  "index": 32
+                },
+                "region": {
+                  "startLine": 61
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_join.cpp",
+                  "index": 33
+                },
+                "region": {
+                  "startLine": 24
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_join.cpp",
+                  "index": 33
+                },
+                "region": {
+                  "startLine": 42
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_join.cpp",
+                  "index": 33
+                },
+                "region": {
+                  "startLine": 60
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_join.cpp",
+                  "index": 33
+                },
+                "region": {
+                  "startLine": 78
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_join.cpp",
+                  "index": 33
+                },
+                "region": {
+                  "startLine": 46
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_pointer_traits.cpp",
+                  "index": 35
+                },
+                "region": {
+                  "startLine": 22
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_pointer_traits.cpp",
+                  "index": 35
+                },
+                "region": {
+                  "startLine": 75
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_pointer_traits.cpp",
+                  "index": 35
+                },
+                "region": {
+                  "startLine": 89
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_pointer_traits.cpp",
+                  "index": 35
+                },
+                "region": {
+                  "startLine": 104
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_pointer_traits.cpp",
+                  "index": 35
+                },
+                "region": {
+                  "startLine": 105
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_pointer_traits.cpp",
+                  "index": 35
+                },
+                "region": {
+                  "startLine": 106
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_pointer_traits.cpp",
+                  "index": 35
+                },
+                "region": {
+                  "startLine": 107
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_pointer_traits.cpp",
+                  "index": 35
+                },
+                "region": {
+                  "startLine": 108
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_pointer_traits.cpp",
+                  "index": 35
+                },
+                "region": {
+                  "startLine": 109
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_pointer_traits.cpp",
+                  "index": 35
+                },
+                "region": {
+                  "startLine": 110
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_pointer_traits.cpp",
+                  "index": 35
+                },
+                "region": {
+                  "startLine": 112
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_pointer_traits.cpp",
+                  "index": 35
+                },
+                "region": {
+                  "startLine": 113
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_pointer_traits.cpp",
+                  "index": 35
+                },
+                "region": {
+                  "startLine": 114
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_pointer_traits.cpp",
+                  "index": 35
+                },
+                "region": {
+                  "startLine": 115
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_pointer_traits.cpp",
+                  "index": 35
+                },
+                "region": {
+                  "startLine": 117
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_process.cpp",
+                  "index": 36
+                },
+                "region": {
+                  "startLine": 21
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_scope_exit.cpp",
+                  "index": 37
+                },
+                "region": {
+                  "startLine": 19
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_scope_exit.cpp",
+                  "index": 37
+                },
+                "region": {
+                  "startLine": 34
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_scope_exit.cpp",
+                  "index": 37
+                },
+                "region": {
+                  "startLine": 49
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-16.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_scope_exit.cpp",
+                  "index": 37
+                },
+                "region": {
+                  "startLine": 60
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-17.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_scope_exit.cpp",
+                  "index": 37
+                },
+                "region": {
+                  "startLine": 51
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-17.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_scope_exit.cpp",
+                  "index": 37
+                },
+                "region": {
+                  "startLine": 54
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-17.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_scope_exit.cpp",
+                  "index": 37
+                },
+                "region": {
+                  "startLine": 63
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_shared_library.cpp",
+                  "index": 38
+                },
+                "region": {
+                  "startLine": 33
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_shared_library.cpp",
+                  "index": 38
+                },
+                "region": {
+                  "startLine": 54
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_shared_library.cpp",
+                  "index": 38
+                },
+                "region": {
+                  "startLine": 85
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_split.cpp",
+                  "index": 39
+                },
+                "region": {
+                  "startLine": 26
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_split.cpp",
+                  "index": 39
+                },
+                "region": {
+                  "startLine": 129
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_split.cpp",
+                  "index": 39
+                },
+                "region": {
+                  "startLine": 232
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_split.cpp",
+                  "index": 39
+                },
+                "region": {
+                  "startLine": 244
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_split.cpp",
+                  "index": 39
+                },
+                "region": {
+                  "startLine": 255
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_split.cpp",
+                  "index": 39
+                },
+                "region": {
+                  "startLine": 299
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_split.cpp",
+                  "index": 39
+                },
+                "region": {
+                  "startLine": 311
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-10.4",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_split.cpp",
+                  "index": 39
+                },
+                "region": {
+                  "startLine": 276
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-10.4",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_split.cpp",
+                  "index": 39
+                },
+                "region": {
+                  "startLine": 280
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-10.4",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_split.cpp",
+                  "index": 39
+                },
+                "region": {
+                  "startLine": 282
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_split.cpp",
+                  "index": 39
+                },
+                "region": {
+                  "startLine": 68
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_split.cpp",
+                  "index": 39
+                },
+                "region": {
+                  "startLine": 308
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-12.3",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_split.cpp",
+                  "index": 39
+                },
+                "region": {
+                  "startLine": 315
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_thread_safety_annotations.cpp",
+                  "index": 40
+                },
+                "region": {
+                  "startLine": 186
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_thread_safety_annotations.cpp",
+                  "index": 40
+                },
+                "region": {
+                  "startLine": 207
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_thread_safety_annotations.cpp",
+                  "index": 40
+                },
+                "region": {
+                  "startLine": 241
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_thread_safety_annotations.cpp",
+                  "index": 40
+                },
+                "region": {
+                  "startLine": 254
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_thread_safety_annotations.cpp",
+                  "index": 40
+                },
+                "region": {
+                  "startLine": 273
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_thread_safety_annotations.cpp",
+                  "index": 40
+                },
+                "region": {
+                  "startLine": 298
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_thread_safety_annotations.cpp",
+                  "index": 40
+                },
+                "region": {
+                  "startLine": 312
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_thread_safety_annotations.cpp",
+                  "index": 40
+                },
+                "region": {
+                  "startLine": 111
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-3.1",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_thread_safety_annotations.cpp",
+                  "index": 40
+                },
+                "region": {
+                  "startLine": 299
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-10.4",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_thread_safety_annotations.cpp",
+                  "index": 40
+                },
+                "region": {
+                  "startLine": 113
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-15.5",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_thread_safety_annotations.cpp",
+                  "index": 40
+                },
+                "region": {
+                  "startLine": 115
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-15.5",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_thread_safety_annotations.cpp",
+                  "index": 40
+                },
+                "region": {
+                  "startLine": 122
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-17.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_thread_safety_annotations.cpp",
+                  "index": 40
+                },
+                "region": {
+                  "startLine": 199
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-17.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_thread_safety_annotations.cpp",
+                  "index": 40
+                },
+                "region": {
+                  "startLine": 204
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-17.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_thread_safety_annotations.cpp",
+                  "index": 40
+                },
+                "region": {
+                  "startLine": 220
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-17.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_thread_safety_annotations.cpp",
+                  "index": 40
+                },
+                "region": {
+                  "startLine": 237
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-17.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_thread_safety_annotations.cpp",
+                  "index": 40
+                },
+                "region": {
+                  "startLine": 262
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-2.7",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_time.cpp",
+                  "index": 41
+                },
+                "region": {
+                  "startLine": 19
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "misra-c2012-13.4",
+          "level": "warning",
+          "kind": "review",
+          "message": {
+            "text": "misra violation (use --rule-texts=<file> to get proper output)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/test_time.cpp",
+                  "index": 41
+                },
+                "region": {
+                  "startLine": 23
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

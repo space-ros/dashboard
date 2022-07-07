@@ -6,6 +6,7 @@
   },
   "runs": [
     {
+      "baselineGuid": "d541006e-582d-4600-a603-64925b7f7f35",
       "tool": {
         "driver": {
           "name": "clang-tidy",
@@ -69,6 +70,12 @@
           "message": {
             "text": "  path(const std::string & p);  // NOLINT(runtime/explicit): this is a conversion constructor\n  ^\n"
           },
+          "suppressions": [
+            {
+            "kind": "external",
+            "status": "underReview"
+          }
+        ],
           "locations": [
             {
               "physicalLocation": {

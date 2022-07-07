@@ -169,6 +169,20 @@ mark {
     }
 }
 
+.svg {
+    svg {
+        rect {
+            fill: orange;
+        }
+  
+        text {
+            fill: white;
+            font: 10px sans-serif;
+            text-anchor: end;
+        }
+    }
+  }
+  
 img {
     flex: 0 0 auto;
     padding: 10;
