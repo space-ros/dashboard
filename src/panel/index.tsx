@@ -26,6 +26,7 @@ export { DetailsLayouts } from './details.layouts';
 @observer export class Index extends Component<{ store: IndexStore }> {
     private showFilterPopup = observable.box(false)
     private detailsPaneHeight = observable.box(80)
+    private chartsMode = observable.box(false);
     
     render() {
         const {store} = this.props;
@@ -38,11 +39,12 @@ export { DetailsLayouts } from './details.layouts';
         }
 
         const {logs, keywords} = store;
-        const {showFilterPopup, detailsPaneHeight} = this;
+        const {showFilterPopup, detailsPaneHeight, chartsMode} = this;
         const activeTableStore = store.selectedTab.get().store;
         const allCollapsed = activeTableStore?.groupsFilteredSorted.every(group => !group.expanded) ?? false;
         const selectedRow = store.selection.get();
-        const selected = selectedRow instanceof RowItem && selectedRow.item;
+        const selected = selectedRow instanceof RowItem && selectedRow.item; 
+        
         return <FilterKeywordContext.Provider value={keywords ?? ''}>
             <div className="svListPane">
                 <TabPanel selection={store.selectedTab}
@@ -54,77 +56,45 @@ export { DetailsLayouts } from './details.layouts';
                                 onKeyDown={e => { if (e.key === 'Escape') { store.keywords = ''; } } }/>
                             <Icon name="filter" title="Filter Options" onMouseDown={e => e.stopPropagation()} onClick={() => showFilterPopup.set(!showFilterPopup.get())} />
                         </div>
-                        <Icon name={allCollapsed ? 'expand-all' : 'collapse-all'}
-                            title={allCollapsed ? 'Expand All' : 'Collapse All'}
-                            visible={!!activeTableStore}
-                            onClick={() => activeTableStore?.groupsFilteredSorted.forEach(group => group.expanded = allCollapsed) } />
-                        <Icon name="close-all"
-                            title="Close All Logs"
-                            visible={!activeTableStore}
-                            onClick={() => vscode.postMessage({ command: 'closeAllLogs' })} />
-                        <Icon name="folder-opened" title="Open Log" onClick={() => vscode.postMessage({ command: 'open' })} />
+
+                        <label className="switch">
+                        <div>
+                            <input type="checkbox" 
+                            onChange={function(e){
+                                chartsMode.set(e.target.checked);
+                            }}
+                            ></input>                            
+                            <span className="slider round"></span>
+                        </div>
+                        </label>
                     </>}>
-                    <Tab name={store.tabs[7]} count={store.resultTableStoreByCommit.groupsFilteredSorted.length}>
-                        <ResultTable store={store.resultTableStoreByCommit} onClearFilters={() => store.clearFilters()}
+                    {/* <Tab name={store.tabs[7]} count={store.resultTableStoreByCommit.groupsFilteredSorted.length}>
+                        {chartsMode.get() ? 
+                            <>
+                                <Chart store={store.resultTableStoreByCommit} count={store.resultTableStoreByCommit}
+                                onClearFilters={() => store.clearFilters()}
+                                renderGroup={(title: string) => {
+                                    const {pathname} = new URL(title, 'file:');
+                                    return <>
+                                        <span>{pathname.file || 'No Location'}</span>
+                                        <span className="ellipsis svSecondary">{pathname.path}</span>
+                                    </>;
+                                }} />
+                            </>
+                        : (<ResultTable store={store.resultTableStoreByCommit} onClearFilters={() => store.clearFilters()}
                             renderGroup={(title: string) => {
                                 const {pathname} = new URL(title, 'file:');
                                 return <>
                                     <span>{pathname.file || 'No Location'}</span>
                                     <span className="ellipsis svSecondary">{pathname.path}</span>
                                 </>;
-                            }} />
-                    </Tab>
+                            }} />)
+                        }
+                    </Tab> */}
                     <Tab name={store.tabs[0]} count={store.resultTableStoreByLocation.groupsFilteredSorted.length}>
-                        <ResultTable store={store.resultTableStoreByLocation} onClearFilters={() => store.clearFilters()}
-                            renderGroup={(title: string) => {
-                                const {pathname} = new URL(title, 'file:');
-                                return <>
-                                    <span>{pathname.file || 'No Location'}</span>
-                                    <span className="ellipsis svSecondary">{pathname.path}</span>
-                                </>;
-                            }} />
-                    </Tab>
-                    <Tab name={store.tabs[1]} count={store.resultTableStoreByRule.groupsFilteredSorted.length}>
-                        <ResultTable store={store.resultTableStoreByRule} onClearFilters={() => store.clearFilters()}
-                            renderGroup={(rule: ReportingDescriptor | undefined) => {
-                                return <>
-                                    <span>{rule?.name ?? '—'}</span>
-                                    <span className="ellipsis svSecondary">{rule?.id ?? '—'}</span>
-                                </>;
-                            }} />
-                    </Tab>
-                    <Tab name={store.tabs[3]} count={store.resultTableStoreByTool.groupsFilteredSorted.length}>
-                        <ResultTable store={store.resultTableStoreByTool} onClearFilters={() => store.clearFilters()}
-                            renderGroup={(title: string) => {
-                                const {pathname} = new URL(title, 'file:');
-                                return <>
-                                    <span>{pathname.file || 'No Location'}</span>
-                                    <span className="ellipsis svSecondary">{pathname.path}</span>
-                                </>;
-                            }} />
-                    </Tab>
-                    <Tab name={store.tabs[5]} count={store.resultTableStoreByLevel.groupsFilteredSorted.length}>
-                        <ResultTable store={store.resultTableStoreByLevel} onClearFilters={() => store.clearFilters()}
-                            renderGroup={(title: string) => {
-                                const {pathname} = new URL(title, 'file:');
-                                return <>
-                                    <span>{pathname.file || 'No Location'}</span>
-                                    <span className="ellipsis svSecondary">{pathname.path}</span>
-                                </>;
-                            }} />
-                    </Tab>
-                    <Tab name={store.tabs[4]} count={store.resultTableStoreByRun.groupsFilteredSorted.length}>
-                        <ResultTable store={store.resultTableStoreByRun} onClearFilters={() => store.clearFilters()}
-                            renderGroup={(title: string) => {
-                                const {pathname} = new URL(title, 'file:');
-                                return <>
-                                    <span>{pathname.file || 'No Location'}</span>
-                                    <span className="ellipsis svSecondary">{pathname.path}</span>
-                                </>;
-                            }} />
-                    </Tab>
-                    <Tab name="Charts">
-                        <Chart store={store.resultTableStoreByRule} count={store.resultTableStoreByRule}
+                    {chartsMode.get() ? 
+                        <>
+                            <Chart store={store.resultTableStoreByLocation} count={store.resultTableStoreByLocation}
                             onClearFilters={() => store.clearFilters()}
                             renderGroup={(title: string) => {
                                 const {pathname} = new URL(title, 'file:');
@@ -133,9 +103,22 @@ export { DetailsLayouts } from './details.layouts';
                                     <span className="ellipsis svSecondary">{pathname.path}</span>
                                 </>;
                             }} />
+                        </>
+                        :(<ResultTable store={store.resultTableStoreByLocation} onClearFilters={() => store.clearFilters()}
+                            renderGroup={(title: string) => {
+                                const {pathname} = new URL(title, 'file:');
+                                return <>
+                                    <span>{pathname.file || 'No Location'}</span>
+                                    <span className="ellipsis svSecondary">{pathname.path}</span>
+                                </>;
+                            }} />)
+                        }
                     </Tab>
-                    {/* <Tab name={store.tabs[6]} count={store.resultTableStoreByBaselineState.groupsFilteredSorted.length}>
-                        <ResultTable store={store.resultTableStoreByBaselineState} onClearFilters={() => store.clearFilters()}
+                    <Tab name={store.tabs[1]} count={store.resultTableStoreByRule.groupsFilteredSorted.length}>
+                        {chartsMode.get() ? 
+                        <>
+                            <Chart store={store.resultTableStoreByRule} count={store.resultTableStoreByRule}
+                            onClearFilters={() => store.clearFilters()}
                             renderGroup={(title: string) => {
                                 const {pathname} = new URL(title, 'file:');
                                 return <>
@@ -143,7 +126,85 @@ export { DetailsLayouts } from './details.layouts';
                                     <span className="ellipsis svSecondary">{pathname.path}</span>
                                 </>;
                             }} />
-                    </Tab> */}
+                        </>
+                        :(<ResultTable store={store.resultTableStoreByRule} onClearFilters={() => store.clearFilters()}
+                        renderGroup={(rule: ReportingDescriptor | undefined) => {
+                            return <>
+                                <span>{rule?.name ?? '—'}</span>
+                                <span className="ellipsis svSecondary">{rule?.id ?? '—'}</span>
+                            </>;
+                        }} />)
+                        }
+                    </Tab>
+                    <Tab name={store.tabs[3]} count={store.resultTableStoreByTool.groupsFilteredSorted.length}>
+                    {chartsMode.get() ? 
+                        <>
+                            <Chart store={store.resultTableStoreByTool} count={store.resultTableStoreByTool}
+                            onClearFilters={() => store.clearFilters()}
+                            renderGroup={(title: string) => {
+                                const {pathname} = new URL(title, 'file:');
+                                return <>
+                                    <span>{pathname.file || 'No Location'}</span>
+                                    <span className="ellipsis svSecondary">{pathname.path}</span>
+                                </>;
+                            }} />
+                        </>
+                        :(<ResultTable store={store.resultTableStoreByTool} onClearFilters={() => store.clearFilters()}
+                            renderGroup={(title: string) => {
+                                const {pathname} = new URL(title, 'file:');
+                                return <>
+                                    <span>{pathname.file || 'No Location'}</span>
+                                    <span className="ellipsis svSecondary">{pathname.path}</span>
+                                </>;
+                            }} />)
+                        }
+                    </Tab>
+                    <Tab name={store.tabs[5]} count={store.resultTableStoreByLevel.groupsFilteredSorted.length}>
+                    {chartsMode.get() ? 
+                        <>
+                            <Chart store={store.resultTableStoreByLevel} count={store.resultTableStoreByLevel}
+                            onClearFilters={() => store.clearFilters()}
+                            renderGroup={(title: string) => {
+                                const {pathname} = new URL(title, 'file:');
+                                return <>
+                                    <span>{pathname.file || 'No Location'}</span>
+                                    <span className="ellipsis svSecondary">{pathname.path}</span>
+                                </>;
+                            }} />
+                        </>
+                        :(<ResultTable store={store.resultTableStoreByLevel} onClearFilters={() => store.clearFilters()}
+                            renderGroup={(title: string) => {
+                                const {pathname} = new URL(title, 'file:');
+                                return <>
+                                    <span>{pathname.file || 'No Location'}</span>
+                                    <span className="ellipsis svSecondary">{pathname.path}</span>
+                                </>;
+                            }} />)
+                        }
+                    </Tab>
+                    <Tab name={store.tabs[4]} count={store.resultTableStoreByRun.groupsFilteredSorted.length}>
+                    {chartsMode.get() ? 
+                        <>
+                            <Chart store={store.resultTableStoreByRun} count={store.resultTableStoreByRun}
+                            onClearFilters={() => store.clearFilters()}
+                            renderGroup={(title: string) => {
+                                const {pathname} = new URL(title, 'file:');
+                                return <>
+                                    <span>{pathname.file || 'No Location'}</span>
+                                    <span className="ellipsis svSecondary">{pathname.path}</span>
+                                </>;
+                            }} />
+                        </>
+                        :(<ResultTable store={store.resultTableStoreByRun} onClearFilters={() => store.clearFilters()}
+                            renderGroup={(title: string) => {
+                                const {pathname} = new URL(title, 'file:');
+                                return <>
+                                    <span>{pathname.file || 'No Location'}</span>
+                                    <span className="ellipsis svSecondary">{pathname.path}</span>
+                                </>;
+                            }} />)
+                        }
+                    </Tab>
                 </TabPanel>
             </div>
             <div className="svResizer">

@@ -13,24 +13,29 @@ import * as d3 from 'd3';
 
 interface ChartProps<G> {
     store: ResultTableStore<G>;
-    onClearFilters: () => void;
-    renderGroup: (group: G) => ReactNode;
 }
 @observer export class Chart<G> extends PureComponent<ChartProps<G>> {
     private ref!: SVGSVGElement;
     private PieChart = () => {
         const { store } = this.props;
         const {rows} = store;
-        let names: string[] = d3.map(rows, d => d.title.id);
+        let names: string[];
+        if (typeof(rows[0].title) == 'object'){
+            console.log(typeof(rows[0].title))
+            names = d3.map(rows, d => d.title.id);
+        }else{
+            names = d3.map(rows, d => d.title);
+        }
         let values: number[] = d3.map(rows, d => d.items.length);
 
-        // Apply Cut off of 10
-        names = names.slice(0, 9);
-        names.push('Others');
-
-        const remainValues = values.slice(10, values.length).reduce((a,b) => a+b, 0);
-        values = values.slice(0, 9);
-        values.push(remainValues);
+        if (names.length > 10){
+            names = names.slice(0, 9);
+            names.push('Others');
+    
+            const remainValues = values.slice(10, values.length).reduce((a,b) => a+b, 0);
+            values = values.slice(0, 9);
+            values.push(remainValues);
+        }
 
         const I = d3.range(names.length).filter(i => !isNaN(values[i]));
         const width = 620; // outer width, in pixels
@@ -102,10 +107,9 @@ interface ChartProps<G> {
           // activate   
         this.PieChart();
       }
-
         render() {
             return (<div className="svg">
-            <svg className="container" ref={(ref: SVGSVGElement) => this.ref = ref} width='100' height='100'></svg>
+            <svg className="container" ref={(ref: SVGSVGElement) => this.ref = ref}></svg>
             </div>);
   }
 
