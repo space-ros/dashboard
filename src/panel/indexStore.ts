@@ -96,7 +96,8 @@ export class IndexStore {
         { toString: () => 'Run', store: this.resultTableStoreByRun },
         { toString: () => 'Level', store: this.resultTableStoreByLevel },
         { toString: () => 'Baseline', store: this.resultTableStoreByBaselineState },
-        { toString: () => 'Commit', store: this.resultTableStoreByCommit },
+        { toString: () => 'Burn down chart', store: this.resultTableStoreByLocation },
+        { toString: () => 'Trends (WIP)', store: this.resultTableStoreByLocation },
     ] as { store: ResultTableStore<string | ReportingDescriptor> | undefined }[]
     selectedTab = observable.box(this.tabs[0], { deep: false })
 

@@ -16,6 +16,7 @@ import { ResultTable } from './resultTable';
 import { RowItem } from './tableStore';
 import { Checkrow, Icon, Popover, ResizeHandle, Tab, TabPanel } from './widgets';
 import { Chart } from './chart';
+import { BurnDownChart } from './burnDownChart';
 import { decodeFileUri } from '../shared';
 
 export { React };
@@ -50,12 +51,6 @@ export { DetailsLayouts } from './details.layouts';
                 <TabPanel selection={store.selectedTab}
                     extras={<>
                         <div className="flexFill"></div>
-                        <div className="svFilterCombo">
-                            <input type="text" placeholder="Filter results" value={store.keywords}
-                                onChange={e => store.keywords = e.target.value}
-                                onKeyDown={e => { if (e.key === 'Escape') { store.keywords = ''; } } }/>
-                            <Icon name="filter" title="Filter Options" onMouseDown={e => e.stopPropagation()} onClick={() => showFilterPopup.set(!showFilterPopup.get())} />
-                        </div>
 
                         <label className="switch">
                         <div>
@@ -67,30 +62,13 @@ export { DetailsLayouts } from './details.layouts';
                             <span className="slider round"></span>
                         </div>
                         </label>
+                        <div className="svFilterCombo">
+                            <input type="text" placeholder="Filter results" value={store.keywords}
+                                onChange={e => store.keywords = e.target.value}
+                                onKeyDown={e => { if (e.key === 'Escape') { store.keywords = ''; } } }/>
+                            <Icon name="filter" title="Filter Options" onMouseDown={e => e.stopPropagation()} onClick={() => showFilterPopup.set(!showFilterPopup.get())} />
+                        </div>
                     </>}>
-                    {/* <Tab name={store.tabs[7]} count={store.resultTableStoreByCommit.groupsFilteredSorted.length}>
-                        {chartsMode.get() ? 
-                            <>
-                                <Chart store={store.resultTableStoreByCommit} count={store.resultTableStoreByCommit}
-                                onClearFilters={() => store.clearFilters()}
-                                renderGroup={(title: string) => {
-                                    const {pathname} = new URL(title, 'file:');
-                                    return <>
-                                        <span>{pathname.file || 'No Location'}</span>
-                                        <span className="ellipsis svSecondary">{pathname.path}</span>
-                                    </>;
-                                }} />
-                            </>
-                        : (<ResultTable store={store.resultTableStoreByCommit} onClearFilters={() => store.clearFilters()}
-                            renderGroup={(title: string) => {
-                                const {pathname} = new URL(title, 'file:');
-                                return <>
-                                    <span>{pathname.file || 'No Location'}</span>
-                                    <span className="ellipsis svSecondary">{pathname.path}</span>
-                                </>;
-                            }} />)
-                        }
-                    </Tab> */}
                     <Tab name={store.tabs[0]} count={store.resultTableStoreByLocation.groupsFilteredSorted.length}>
                     {chartsMode.get() ? 
                         <>
@@ -182,7 +160,7 @@ export { DetailsLayouts } from './details.layouts';
                             }} />)
                         }
                     </Tab>
-                    <Tab name={store.tabs[4]} count={store.resultTableStoreByRun.groupsFilteredSorted.length}>
+                    {/* <Tab name={store.tabs[4]} count={store.resultTableStoreByRun.groupsFilteredSorted.length}>
                     {chartsMode.get() ? 
                         <>
                             <Chart store={store.resultTableStoreByRun} count={store.resultTableStoreByRun}
@@ -204,6 +182,24 @@ export { DetailsLayouts } from './details.layouts';
                                 </>;
                             }} />)
                         }
+                    </Tab> */}
+                    <Tab name={store.tabs[7]}>
+                        {/* {chartsMode.get() ?  */}
+                            <>
+                                <BurnDownChart originalStore={store} store={store.resultTableStoreByRule}  />
+                            </>
+                        {/* : (<ResultTable store={store.resultTableStoreByRule} onClearFilters={() => store.clearFilters()}
+                            renderGroup={(title: string) => {
+                                const {pathname} = new URL(title, 'file:');
+                                return <>
+                                    <span>{pathname.file || 'No Location'}</span>
+                                    <span className="ellipsis svSecondary">{pathname.path}</span>
+                                </>;
+                            }} />) */}
+                        {/* } */}
+                    </Tab>
+                    <Tab name={store.tabs[8]}>
+                        <BurnDownChart originalStore={store} store={store.resultTableStoreByRule}  />
                     </Tab>
                 </TabPanel>
             </div>

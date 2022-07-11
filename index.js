@@ -38,6 +38,7 @@
     // }
     const state = localStorage.getItem('state');
     const store = new Store(JSON.parse(state) ?? defaultState, true);
+
     const file = 'samples/commit_1/cppcheck.sarif';
     const response = await fetch(file);
     const log = await response.json();
@@ -45,19 +46,26 @@
     log._commit = 'commit_1';
     store.logs.push(log);
 
-    const run_3 = 'samples/commit_2/clang_tidy.sarif';
-    const response_3 = await fetch(run_3);
-    const log_3 = await response_3.json();
-    log_3._uri = `/home/m/repos/dashboard/${run_3}`;
-    log_3._commit = 'commit_2';
-    store.logs.push(log_3);
-
-    const file_2 = 'samples/commit_1/clang_tidy.sarif';
+    const file_2 = 'samples/commit_2/clang_tidy.sarif';
     const response_2 = await fetch(file_2);
     const log_2 = await response_2.json();
     log_2._uri = `file:///home/m/repos/dashboard/${file_2}`;
     log_2._commit = 'commit_1';
     store.logs.push(log_2);
+
+    async function loadfiles(params)  {
+        const array = ['copyright.sarif', 'cpplint.sarif', 'uncrustify.sarif'];
+        for (let index = 0; index < array.length; index++) {
+            const file_4 = 'samples/commit_1/'+ array[index];
+            const response_4 = await fetch(file_4);
+            const log_4 = await response_4.json();
+            log_4._uri = `/home/m/repos/dashboard/samples/commit_1/${array[index]}`;
+            log_4._commit = 'commit_1';
+            store.logs.push(log_4);
+        }
+    }
+    await loadfiles()
+
 
     document.body.classList.add('pageIndex') // Alternatively 'pageDetailsLayouts'.
 

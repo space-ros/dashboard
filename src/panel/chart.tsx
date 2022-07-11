@@ -53,7 +53,7 @@ interface ChartProps<G> {
         colors = d3.quantize(t => d3.interpolateSpectral(t * 0.8 + 0.1), names.length);
  
         // Construct scales.
-        const color = d3.scaleOrdinal(names, colors); 
+        const color = d3.scaleOrdinal(names, colors);
  
         // Compute titles.
         const title = (i:number) => `${names[i]}\n${values[i]}`;
