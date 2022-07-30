@@ -8,8 +8,6 @@ import { Result } from 'sarif';
 import { renderMessageTextWithEmbeddedLinks } from './widgets';
 import { ResultTableStore } from './resultTableStore';
 import { IndexStore } from './indexStore';
-import { Table } from './table';
-import { Column } from './tableStore';
 import * as d3 from 'd3';
 
 interface BurnDownChartProps<G> {
@@ -63,7 +61,6 @@ interface BurnDownChartProps<G> {
       // let Y: number[] = d3.map(rows, d => d.items.length);
       // Y is Sum of Tasks Estimates
       // X is Timeline
-
 
       const I = d3.range(X.length);
       const defined = (d, i) => !isNaN(X[i]) && !isNaN(Y[i]);

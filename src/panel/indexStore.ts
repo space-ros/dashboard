@@ -57,22 +57,33 @@ export class IndexStore {
     }
 
     // Results
+    @observable.shallow public baselineLogs = [] as Log[]
     @observable.shallow public logs = [] as Log[]
     @computed private get runs() {
         return this.logs.map(log => log.runs).flat();
     }
+    // The results of the newest build
     @computed public get results() {
-        console.log(this.runs)
         return this.runs.map(run => run.results || []).flat();
     }
+
+    // Results of the baseline builds
+    @computed private get baselineRuns() {
+        return this.baselineLogs.map(log => log.runs).flat();
+    }
+    // The results of the newest build
+    @computed public get baselineResults() {
+        return this.baselineRuns.map(run => run.results || []).flat();
+    }
+
     selection = observable.box<Row | undefined>(undefined)
     resultTableStoreByLocation = new ResultTableStore('File', result => result._relativeUri, this, this, this.selection)
     resultTableStoreByRule     = new ResultTableStore('Rule', result => result._rule,        this, this, this.selection)
     resultTableStoreByTool     = new ResultTableStore('Tool', result => result._run.tool.driver.name,        this, this, this.selection)
     resultTableStoreByLevel     = new ResultTableStore('Level', result => result.level,        this, this, this.selection)
     resultTableStoreByCommit      = new ResultTableStore('Commit', result => result._log._commit,        this, this, this.selection)
-    resultTableStoreByBaselineState      = new ResultTableStore('Baseline', result => result.baselineState,        this, this, this.selection)
     resultTableStoreByRun      = new ResultTableStore('Run', result => result._run._index,        this, this, this.selection)
+    resultTableStoreByBaselineState      = new ResultTableStore('Baseline', result => result.baselineState,        this, this, this.selection, this)
 
     // Filtersresultsresults
     @observable keywords = ''

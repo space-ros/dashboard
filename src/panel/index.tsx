@@ -186,7 +186,7 @@ export { DetailsLayouts } from './details.layouts';
                     <Tab name={store.tabs[7]}>
                         {/* {chartsMode.get() ?  */}
                             <>
-                                <BurnDownChart originalStore={store} store={store.resultTableStoreByRule}  />
+                                <BurnDownChart originalStore={store} store={store.resultTableStoreByBaselineState}  />
                             </>
                         {/* : (<ResultTable store={store.resultTableStoreByRule} onClearFilters={() => store.clearFilters()}
                             renderGroup={(title: string) => {

@@ -16,7 +16,8 @@ export class ResultTableStore<G> extends TableStore<Result, G> {
             filtersRow: Record<string, Record<string, Visibility>>;
             filtersColumn: Record<string, Record<string, Visibility>>;
         },
-        readonly selection: IObservableValue<Row | undefined>) {
+        readonly selection: IObservableValue<Row | undefined>,
+        baslineResults: { baselineResults: ReadonlyArray<Result>} = {baselineResults:[]}) {
         super(
             groupBy,
             resultsSource,
