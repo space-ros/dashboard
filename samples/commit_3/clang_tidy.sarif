@@ -6,9 +6,7 @@
   },
   "runs": [
     {
-      "automationDetails": {
-        "guid": "d541006e-582d-4600-a603-64925b7f7f35"
-      },
+      "baselineGuid": "d541006e-582d-4600-a603-64925b7f7f35",
       "tool": {
         "driver": {
           "name": "clang-tidy",

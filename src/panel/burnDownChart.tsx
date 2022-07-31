@@ -9,9 +9,10 @@ import { renderMessageTextWithEmbeddedLinks } from './widgets';
 import { ResultTableStore } from './resultTableStore';
 import { IndexStore } from './indexStore';
 import * as d3 from 'd3';
+import { Row, RowGroup } from './tableStore';
 
 interface BurnDownChartProps<G> {
-    originalStore: IndexStore;
+    baselineStores: [IndexStore];
     store: ResultTableStore<G>;
 }
 @observer export class BurnDownChart<G> extends PureComponent<BurnDownChartProps<G>> {
@@ -20,15 +21,20 @@ interface BurnDownChartProps<G> {
     private pointsPerIssue : number = 2;
     
     private LineChart = () => {
-      const { store, originalStore } = this.props;
+      const { store, baselineStores } = this.props;
       const {rows} = store;
-      console.log(originalStore);
-      console.log(store);
-      console.log(rows);
+      const currentIssuesCount = rows.reduce((accumulator, row) => {
+        return accumulator + row.items.length;
+      }, 0);
+      const baselineIssuesCount : Array<number> = new Array<number>();
+      baselineStores.forEach(store => {
+        baselineIssuesCount.push(store.resultTableStoreByRule.rows.reduce((accumulator, row) => {
+            return accumulator + row.items.length;
+          }, 0));
+      });
+      const issues = baselineIssuesCount.concat(currentIssuesCount);
 
-      const title : string = "Three Months Burn Down"; // given d in data, returns the title text
       const curve = d3.curveLinear; // method of interpolation between points
-      // const defined, // for gaps in data
       const marginTop = 40; // top margin, in pixels
       const marginRight = 30; // right margin, in pixels
       const marginBottom = 30; // bottom margin, in pixels
@@ -39,24 +45,18 @@ interface BurnDownChartProps<G> {
       const xRange = [marginLeft, width - marginRight]; // [left, right]
       const yType = d3.scaleLinear; // type of y-scale
       const yRange = [height - marginBottom, marginTop]; // [bottom, top]
-      // const yFormat, // a format specifier string for the y-axis
       const yLabel = "Sum of Tasks Estimates (days)"; // a label for the y-axis
-      // zDomain, // array of z-values
       const strokeLinecap= "round"; // stroke line cap of line
       const strokeLinejoin = "round"; // stroke line join of line
       const strokeWidth = 1.5; // stroke width of line
       const strokeOpacity = 1; // stroke opacity of line
-      const mixBlendMode = "multiply"; // blend mode of lines
-      const voronoi = false; // show a Voronoi overlay? (for debugging)
-      
 
       // Timeline
       let X: number[] = [1, 15, 30, 45, 60, 75, 90];
 
       // Issues per build
-      const issuesPerBuild : number[] = [90, 80, 59, 55, 42, 23, 8];
-      const pointsPerBuild : number[] = issuesPerBuild.map(a => a*this.pointsPerIssue);
-      let idealY : number[] = issuesPerBuild.map(a => a-this.pointsPerFrotnight);
+      const pointsPerBuild : number[] = issues.map(a => a*this.pointsPerIssue);
+      let idealY : number[] = issues.map(a => a-this.pointsPerFrotnight);
       let Y = pointsPerBuild;
       // let Y: number[] = d3.map(rows, d => d.items.length);
       // Y is Sum of Tasks Estimates

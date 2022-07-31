@@ -10,14 +10,9 @@ import '../shared/extension';
 export class Store {
     static globalState: Memento
 
-    @observable.shallow baselineLogs = [] as Log[]
     @observable.shallow logs = [] as Log[]
     @computed get results() {
         const runs = this.logs.map(log => log.runs).flat();
-        return runs.map(run => run.results).filter(run => run).flat() as Result[];
-    }
-    @computed get baselineResults() {
-        const runs = this.baselineLogs.map(log => log.runs).flat();
         return runs.map(run => run.results).filter(run => run).flat() as Result[];
     }
     @computed get distinctArtifactNames() {

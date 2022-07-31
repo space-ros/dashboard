@@ -34,37 +34,31 @@
 
     const state = localStorage.getItem('state');
     const store = new Store(JSON.parse(state) ?? defaultState, true);
+    const baselineStore = new Store(JSON.parse(state) ?? defaultState, true);
     const array = ['cpplint.sarif', 'cppcheck.sarif', 'clang_tidy.sarif'];
+    const baselines = 4;
+    let baselineStores = [];
+    const baselineFolder = "samples/commit_";
 
-    async function loadLogs()  {
+    for (let index = 1; index < baselines; index++) {
+        const baselineStore = new Store(JSON.parse(state) ?? defaultState, true);
+        await loadLogs(baselineStore, baselineFolder+index.toString()+"/"); // too add other params
+        baselineStores.push(baselineStore);
+    }
+    async function loadLogs(store, basePath)  {
         for (let index = 0; index < array.length; index++) {
-            const file = 'samples/commit_1/'+ array[index];
+            const file = basePath + array[index];
             const response = await fetch(file);
             const log = await response.json();
-            log._uri = `/home/m/repos/dashboard/samples/commit_1/${array[index]}`;
-            log._commit = 'commit_1';
+            // log_4._uri = `/home/m/repos/dashboard/samples/commit_2/${array[index]}`;
+            // log_4._commit = 'commit_2';
             store.logs.push(log);
         }
     }
-
-    async function loadBaslineLogs()  {
-        for (let index = 0; index < array.length; index++) {
-            const file_4 = 'samples/commit_2/'+ array[index];
-            const response_4 = await fetch(file_4);
-            const log_4 = await response_4.json();
-            log_4._uri = `/home/m/repos/dashboard/samples/commit_2/${array[index]}`;
-            log_4._commit = 'commit_2';
-            store.baselineLogs.push(log_4);
-        }
-    }
-
-    await loadLogs()
-    await loadBaslineLogs()
-
+    await loadLogs(store, baselineFolder + "1/");
     document.body.classList.add('pageIndex') // Alternatively 'pageDetailsLayouts'.
-
     ReactDOM.render(
-        React.createElement(Index, {store}), // Alternatively 'DetailsLayouts'.
+        React.createElement(Index, {store, baselineStores}), // Alternatively 'DetailsLayouts'.
         document.getElementById('root'),
     );
 })();

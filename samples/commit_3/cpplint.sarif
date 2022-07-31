@@ -1,0 +1,235 @@
+{
+  "version": "2.1.0",
+  "$schema": "http://json.schemastore.org/sarif-2.1.0-rtm.5",
+  "properties": {
+    "comment": "cpplint output converted to SARIF by ament_cpplint",
+    "test_name": "rcpputils.cpplint",
+    "test_count": 42,
+    "error_count": 0,
+    "execution_time": "1.835"
+  },
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "cpplint",
+          "informationUri": "https://github.com/cpplint/cpplint",
+          "rules": []
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/include/rcppmath/clamp.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/include/rcppmath/rolling_mean_accumulator.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/include/rcpputils/asserts.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/include/rcpputils/endian.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/include/rcpputils/env.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/include/rcpputils/filesystem_helper.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/include/rcpputils/find_and_replace.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/include/rcpputils/find_library.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/include/rcpputils/get_env.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/include/rcpputils/join.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/include/rcpputils/pointer_traits.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/include/rcpputils/process.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/include/rcpputils/scope_exit.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/include/rcpputils/shared_library.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/include/rcpputils/split.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/include/rcpputils/thread_safety_annotations.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/include/rcpputils/time.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/include/rcpputils/visibility_control.hpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/src/asserts.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/src/env.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/src/filesystem_helper.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/src/find_library.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/src/shared_library.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/test/test_accumulator.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/test/test_asserts.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/test/test_clamp.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/test/test_endian.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/test/test_env.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/test/test_filesystem_helper.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/test/test_find_and_replace.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/test/test_find_library.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/test/test_join.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/test/test_library.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/test/test_pointer_traits.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/test/test_process.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/test/test_scope_exit.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/test/test_shared_library.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/test/test_split.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/test/test_thread_safety_annotations.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/test/test_time.cpp"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/test/dummy_shared_library/dummy_shared_library.c"
+          }
+        },
+        {
+          "location": {
+            "uri": "/root/src/spaceros_ws/src/rcpputils/test/dummy_shared_library/dummy_shared_library.h"
+          }
+        }
+      ],
+      "results": []
+    }
+  ]
+}

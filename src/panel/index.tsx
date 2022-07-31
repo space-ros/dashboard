@@ -24,13 +24,16 @@ export * as ReactDOM from 'react-dom';
 export { IndexStore as Store } from './indexStore';
 export { DetailsLayouts } from './details.layouts';
 
-@observer export class Index extends Component<{ store: IndexStore }> {
+@observer export class Index extends Component<{ store: IndexStore, baselineStores: [IndexStore] }> {
     private showFilterPopup = observable.box(false)
     private detailsPaneHeight = observable.box(80)
     private chartsMode = observable.box(false);
     
     render() {
         const {store} = this.props;
+        const { baselineStores } = this.props;
+        console.log(store);
+        console.log(baselineStores);
         if (!store.logs.length) {
             return <div className="svZeroData">
                 <div onClick={() => vscode.postMessage({ command: 'open' })}>
@@ -160,46 +163,10 @@ export { DetailsLayouts } from './details.layouts';
                             }} />)
                         }
                     </Tab>
-                    {/* <Tab name={store.tabs[4]} count={store.resultTableStoreByRun.groupsFilteredSorted.length}>
-                    {chartsMode.get() ? 
-                        <>
-                            <Chart store={store.resultTableStoreByRun} count={store.resultTableStoreByRun}
-                            onClearFilters={() => store.clearFilters()}
-                            renderGroup={(title: string) => {
-                                const {pathname} = new URL(title, 'file:');
-                                return <>
-                                    <span>{pathname.file || 'No Location'}</span>
-                                    <span className="ellipsis svSecondary">{pathname.path}</span>
-                                </>;
-                            }} />
-                        </>
-                        :(<ResultTable store={store.resultTableStoreByRun} onClearFilters={() => store.clearFilters()}
-                            renderGroup={(title: string) => {
-                                const {pathname} = new URL(title, 'file:');
-                                return <>
-                                    <span>{pathname.file || 'No Location'}</span>
-                                    <span className="ellipsis svSecondary">{pathname.path}</span>
-                                </>;
-                            }} />)
-                        }
-                    </Tab> */}
-                    <Tab name={store.tabs[7]}>
-                        {/* {chartsMode.get() ?  */}
+                    <Tab name={store.tabs[6]}>
                             <>
-                                <BurnDownChart originalStore={store} store={store.resultTableStoreByBaselineState}  />
+                                <BurnDownChart baselineStores={baselineStores} store={store.resultTableStoreByRule}  />
                             </>
-                        {/* : (<ResultTable store={store.resultTableStoreByRule} onClearFilters={() => store.clearFilters()}
-                            renderGroup={(title: string) => {
-                                const {pathname} = new URL(title, 'file:');
-                                return <>
-                                    <span>{pathname.file || 'No Location'}</span>
-                                    <span className="ellipsis svSecondary">{pathname.path}</span>
-                                </>;
-                            }} />) */}
-                        {/* } */}
-                    </Tab>
-                    <Tab name={store.tabs[8]}>
-                        <BurnDownChart originalStore={store} store={store.resultTableStoreByRule}  />
                     </Tab>
                 </TabPanel>
             </div>
