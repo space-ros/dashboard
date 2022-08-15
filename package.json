@@ -1,17 +1,17 @@
 {
-    "name": "sarif-viewer",
-    "displayName": "Sarif Viewer",
+    "name": "spaceros-dashboard",
+    "displayName": "SpaceRos Dashboard",
     "description": "Adds support for viewing SARIF logs",
-    "author": "Microsoft Corporation",
+    "author": "Open Robotics",
     "license": "MIT",
-    "version": "3.1.2",
-    "publisher": "MS-SarifVSCode",
+    "version": "3.1.3",
+    "publisher": "openrobotics",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Microsoft/sarif-vscode-extension.git"
+        "url": "https://github.com/space-ros/visualize_sarif"
     },
     "bugs": {
-        "url": "https://github.com/Microsoft/sarif-vscode-extension/issues"
+        "url": "https://github.com/space-ros/visualize_sarif/issues"
     },
     "icon": "icon.png",
     "categories": [
@@ -70,7 +70,7 @@
             {
                 "command": "sarif.showPanel",
                 "category": "SARIF",
-                "title": "Show Panel"
+                "title": "Show Panel, spaceros dashboard panel"
             },
             {
                 "command": "sarif.clearState",
