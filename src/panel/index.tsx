@@ -17,13 +17,24 @@ import { RowItem } from './tableStore';
 import { Checkrow, Icon, Popover, ResizeHandle, Tab, TabPanel } from './widgets';
 import { Chart } from './chart';
 import { BurnDownChart } from './burnDownChart';
-import { decodeFileUri } from '../shared';
+
+import Button from '@mui/material/Button';
+// import Avatar from '@mui/material/Avatar';
+// import List from '@mui/material/List';
+// import ListItem from '@mui/material/ListItem';
+// import ListItemAvatar from '@mui/material/ListItemAvatar';
+// import ListItemText from '@mui/material/ListItemText';
+// import DialogTitle from '@mui/material/DialogTitle';
+// import Dialog from '@mui/material/Dialog';
+// import PersonIcon from '@mui/icons-material/Person';
+// import AddIcon from '@mui/icons-material/Add';
+// import Typography from '@mui/material/Typography';
+// import { blue } from '@mui/material/colors';
 
 export { React };
 export * as ReactDOM from 'react-dom';
 export { IndexStore as Store } from './indexStore';
 export { DetailsLayouts } from './details.layouts';
-
 @observer export class Index extends Component<{ store: IndexStore, baselineStores: [IndexStore] }> {
     private showFilterPopup = observable.box(false)
     private detailsPaneHeight = observable.box(80)
@@ -55,13 +66,16 @@ export { DetailsLayouts } from './details.layouts';
                     extras={<>
                         <div className="flexFill"></div>
 
+                        <div>
+                            <input type="button" placeholder="Add a query" onClick={() => vscode.postMessage({ command: 'open' })} value={'Add a query'}></input>
+                        <Button ></Button>
+                        </div>
                         <label className="switch">
                         <div>
                             <input type="checkbox" 
                             onChange={function(e){
                                 chartsMode.set(e.target.checked);
-                            }}
-                            ></input>                            
+                            }}></input>                            
                             <span className="slider round"></span>
                         </div>
                         </label>

@@ -50,8 +50,7 @@
             const file = basePath + array[index];
             const response = await fetch(file);
             const log = await response.json();
-            // log_4._uri = `/home/m/repos/dashboard/samples/commit_2/${array[index]}`;
-            // log_4._commit = 'commit_2';
+            log._uri = `/home/m/repos/dashboard/samples/commit_2/${array[index]}`;
             store.logs.push(log);
         }
     }
