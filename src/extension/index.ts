@@ -7,6 +7,7 @@ import { mapDistinct } from '../shared';
 import '../shared/extension';
 import { activateDecorations } from './index.activateDecorations';
 import { loadLogs } from './loadLogs';
+import { unpackArchive } from './loadArchive';
 import { Panel } from './panel';
 import platformUriNormalize from './platformUriNormalize';
 import { regionToSelection } from './regionToSelection';

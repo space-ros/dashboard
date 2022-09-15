@@ -135,6 +135,7 @@
         "@emotion/react": "^11.10.4",
         "@emotion/styled": "^11.10.4",
         "@mui/material": "^5.10.3",
+        "@nodelib/fs.walk": "^1.2.8",
         "@types/d3": "^7.4.0",
         "d3": "^7.6.1",
         "follow-redirects": "1.14.8",
