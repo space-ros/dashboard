@@ -15,15 +15,14 @@ import './index.scss';
 import { postSelectArtifact, postSelectLog } from './indexStore';
 import { List, Tab, TabPanel, renderMessageTextWithEmbeddedLinks } from './widgets';
 import Button from '@mui/material/Button';
+import {JSONPath} from 'jsonpath-plus';
 
 type TabName = 'Info' | 'Analysis Steps';
 
 function AddQuery(result:Result) {
-    console.log(result._log);
-    console.log(result._message);   
-    console.log(result._id);   
-    console.log(result._uri);
-    console.log(result);
+    const searchresult = JSONPath({path: '$._run.results[?(@.ruleId === @root.ruleId)]', json: result });
+    // Save query to file
+    console.log(searchresult);
 }
 
 interface DetailsProps { result: Result, height: IObservableValue<number> }
@@ -63,7 +62,7 @@ interface DetailsProps { result: Result, height: IObservableValue<number> }
                                 ? <ReactMarkdown className="svMarkDown" source={result._markdown} escapeHtml={false} />
                                 : renderMessageTextWithEmbeddedLinks(result._message, result, vscode.postMessage)}</div>
                         <div className="svDetailsGrid">
-                            <span>Actions</span>			<Button onClick={AddQuery(result)}>Add Query</Button>
+                            <span>Actions</span>			<Button onClick={AddQuery(result)}>Add Query (same rule)</Button>
                             <span>Rule Id</span>			{helpUri ? <a href={helpUri} target="_blank" rel="noopener noreferrer">{result.ruleId}</a> : <span>{result.ruleId}</span>}
                             <span>Rule Name</span>			<span>{result._rule?.name ?? '—'}</span>
                             <span>Rule Description</span>	<span>{renderRuleDesc(result)}</span>
