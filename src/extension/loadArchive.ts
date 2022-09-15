@@ -1,12 +1,21 @@
 /// <reference path="jsonSourceMap.d.ts" />
-import { readFileSync } from 'fs'
-import { mkdtemp, stat } from 'fs/promises'
+import { mkdtempSync, readFileSync, statSync } from 'fs';
+import { execSync, chdir, cwd } from 'process';
+import * as os from 'os';
 import { Uri, window, workspace } from 'vscode';
 
 export async function unpackArchive(uri: Uri) {
 
-    const archive_stats = await stat(uri);
-    if (archive_stats.isFile()) {
-        throw new Error('uri is not a file.');
+    if (uri.scheme !== 'file') {
+        throw new Error('Archive must be a local file:// url.');
     }
+    const path = uri.path;
+
+    const archive_stats = statSync(path);
+    if (archive_stats.isFile()) {
+        throw new Error(`${path} is not a file.`);
+    }
+    const tmpdir = mkdtempSync(`${os.tmpdir()}/build-results-`);
+    execSync(`tar -C ${tmpdir} -xf ${path}`);
+    return tmpdir;
 }
