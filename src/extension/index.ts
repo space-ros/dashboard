@@ -16,6 +16,7 @@ import { Store } from './store';
 import * as Telemetry from './telemetry';
 import { update, updateChannelConfigSection } from './update';
 import { UriRebaser } from './uriRebaser';
+import { unpackArchive } from './loadArchive';
 
 export async function activate(context: ExtensionContext) {
     // Borrowed from: https://github.com/Microsoft/vscode-languageserver-node/blob/db0f0f8c06b89923f96a8a5aebc8a4b5bb3018ad/client/src/main.ts#L217
@@ -47,9 +48,9 @@ export async function activate(context: ExtensionContext) {
     const urisNonSarif = await workspace.findFiles('**', '.sarif', 10000); // Ignore folders?
     const fileAndUris = urisNonSarif.map(uri => [platformUriNormalize(uri.path).file, uri.toString(true /* skipEncoding */)]) as [string, string][];
     const baser = new UriRebaser(mapDistinct(fileAndUris), store);
-
+    const uris = unpackArchive(Uri.parse("/home/mh/Downloads/build_results_2022-09-14t234913z.tar.bz2"));
     // Panel
-    const panel = new Panel(context, baser, store);
+    const panel = new Panel(context, baser, uris, store);
     disposables.push(commands.registerCommand('sarif.showPanel', () => panel.show()));
 
     // General Activation
@@ -71,6 +72,17 @@ export async function activate(context: ExtensionContext) {
     // API
     const api = {
         async openLogs(logs: Uri[], _options: unknown, cancellationToken?: CancellationToken) {
+            const uris = unpackArchive(Uri.parse("/home/mh/Downloads/build_results_2022-09-14t234913z.tar.bz2"));
+            console.log("trying");
+            console.log(uris);
+            for (const uri in uris){
+                const response = await fetch(uri);
+                if (response.ok) {
+                    const log = await response.json();
+                    log._uri = `/home/steven/osrf/space-ros/dashboard/samples/commit_2/${array[index]}`;
+                    store.logs.push(log);
+                }
+            }
             store.logs.push(...await loadLogs(logs, cancellationToken));
             if (cancellationToken?.isCancellationRequested) return;
             if (store.results.length) panel.show();
@@ -93,7 +105,9 @@ export async function activate(context: ExtensionContext) {
 
     // During development, use the following line to auto-load a log.
     // api.openLogs([Uri.parse('/path/to/log.sarif')], {});
-
+    for (const uri in uris){
+        api.openLogs([Uri.parse(uri)], {});
+    }
     return api;
 }
 

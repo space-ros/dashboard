@@ -19,13 +19,17 @@ export class Panel {
     constructor(
         readonly context: Pick<ExtensionContext, 'extensionPath' | 'subscriptions'>,
         readonly basing: UriRebaser,
+        readonly uris: Promise<string>,
         readonly store: Pick<Store, 'logs' | 'results'>) {
         observe(store.logs, change => {
+            console.log(this.uris);
             const {type, removed, added} = change as unknown as IArraySplice<Log>;
             if (type !== 'splice') throw new Error('Only splice allowed on store.logs.');
             this.spliceLogs(removed, added);
         });
         autorun(() => {
+            console.log(this.uris);
+
             const count = store.results.length;
             if (!this.panel) return;
             this.panel.title = `${count} ${this.title}${count === 1 ? '' : 's'}`;
@@ -33,6 +37,7 @@ export class Panel {
     }
 
     public async show() {
+        console.log(this.uris);
         if (this.panel) {
             if (!this.panel.active) this.panel.reveal(undefined, true);
             return;
