@@ -17,6 +17,7 @@ import { RowItem } from './tableStore';
 import { Checkrow, Icon, Popover, ResizeHandle, Tab, TabPanel } from './widgets';
 import { Chart } from './chart';
 import { BurnDownChart } from './burnDownChart';
+// import { readdirSync } from 'fs';
 
 import Button from '@mui/material/Button';
 // import Avatar from '@mui/material/Avatar';
@@ -35,10 +36,12 @@ export { React };
 export * as ReactDOM from 'react-dom';
 export { IndexStore as Store } from './indexStore';
 export { DetailsLayouts } from './details.layouts';
+
 @observer export class Index extends Component<{ store: IndexStore, baselineStores: [IndexStore] }> {
     private showFilterPopup = observable.box(false)
     private detailsPaneHeight = observable.box(80)
     private chartsMode = observable.box(false);
+
     
     render() {
         const {store} = this.props;
@@ -52,14 +55,17 @@ export { DetailsLayouts } from './details.layouts';
                 </div>
             </div>;
         }
-
+        // fetchColconOutput("build_results_2022-09-14T234913Z");
         const {logs, keywords} = store;
         const {showFilterPopup, detailsPaneHeight, chartsMode} = this;
         const activeTableStore = store.selectedTab.get().store;
         const allCollapsed = activeTableStore?.groupsFilteredSorted.every(group => !group.expanded) ?? false;
         const selectedRow = store.selection.get();
         const selected = selectedRow instanceof RowItem && selectedRow.item; 
-        
+        let orange = vscode.window.createOutputChannel("Orange");
+        //Write to output.
+        orange.appendLine("I am a banana.");
+        orange.show();
         return <FilterKeywordContext.Provider value={keywords ?? ''}>
             <div className="svListPane">
                 <TabPanel selection={store.selectedTab}

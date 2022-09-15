@@ -34,7 +34,6 @@
 
     const state = localStorage.getItem('state');
     const store = new Store(JSON.parse(state) ?? defaultState, true);
-    const baselineStore = new Store(JSON.parse(state) ?? defaultState, true);
     const array = ['cpplint.sarif', 'cppcheck.sarif', 'clang_tidy.sarif'];
     const baselines = 4;
     let baselineStores = [];

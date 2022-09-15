@@ -25,12 +25,29 @@ export class Panel {
             if (type !== 'splice') throw new Error('Only splice allowed on store.logs.');
             this.spliceLogs(removed, added);
         });
+        // this.listDir(store);
+        //Create output channel
+        let orange = vscode.window.createOutputChannel("Orange");
+        //Write to output.
+        orange.appendLine("I am a banana.");
         autorun(() => {
             const count = store.results.length;
             if (!this.panel) return;
             this.panel.title = `${count} ${this.title}${count === 1 ? '' : 's'}`;
+            fs.readdirSync("build_results_2022-09-14T234913Z").forEach(file => {
+                console.log(file);
+              });
         });
     }
+    public async listDir(store:Store) {
+        try {
+            const rep = await fetch('build_results_2022-09-14T234913Z');
+            const log = await rep.json();
+            store.logs.push(log);
+        } catch (err) {
+          console.error('Error occurred while reading directory!', err);
+        }
+      }
 
     public async show() {
         if (this.panel) {
@@ -186,5 +203,11 @@ export class Panel {
 
     private async spliceLogs(removed: Log[], added: Log[]) {
         await this.panel?.webview.postMessage(this.createSpliceLogsMessage(removed, added));
+    }
+}
+
+export class FS {
+    constructor(){
+        return fs;
     }
 }
