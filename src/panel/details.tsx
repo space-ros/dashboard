@@ -14,8 +14,17 @@ import './details.scss';
 import './index.scss';
 import { postSelectArtifact, postSelectLog } from './indexStore';
 import { List, Tab, TabPanel, renderMessageTextWithEmbeddedLinks } from './widgets';
+import Button from '@mui/material/Button';
 
 type TabName = 'Info' | 'Analysis Steps';
+
+function AddQuery(result:Result) {
+    console.log(result._log);
+    console.log(result._message);   
+    console.log(result._id);   
+    console.log(result._uri);
+    console.log(result);
+}
 
 interface DetailsProps { result: Result, height: IObservableValue<number> }
 @observer export class Details extends Component<DetailsProps> {
@@ -54,6 +63,7 @@ interface DetailsProps { result: Result, height: IObservableValue<number> }
                                 ? <ReactMarkdown className="svMarkDown" source={result._markdown} escapeHtml={false} />
                                 : renderMessageTextWithEmbeddedLinks(result._message, result, vscode.postMessage)}</div>
                         <div className="svDetailsGrid">
+                            <span>Actions</span>			<Button onClick={AddQuery(result)}>Add Query</Button>
                             <span>Rule Id</span>			{helpUri ? <a href={helpUri} target="_blank" rel="noopener noreferrer">{result.ruleId}</a> : <span>{result.ruleId}</span>}
                             <span>Rule Name</span>			<span>{result._rule?.name ?? '—'}</span>
                             <span>Rule Description</span>	<span>{renderRuleDesc(result)}</span>

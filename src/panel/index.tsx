@@ -65,10 +65,11 @@ export { DetailsLayouts } from './details.layouts';
                 <TabPanel selection={store.selectedTab}
                     extras={<>
                         <div className="flexFill"></div>
-
-                        <div>
-                            <input type="button" placeholder="Add a query" onClick={() => vscode.postMessage({ command: 'open' })} value={'Add a query'}></input>
-                        <Button ></Button>
+                        <div className="svFilterCombo">
+                            <input type="text" placeholder="Filter results" value={store.keywords}
+                                onChange={e => store.keywords = e.target.value}
+                                onKeyDown={e => { if (e.key === 'Escape') { store.keywords = ''; } } }/>
+                            <Icon name="filter" title="Filter Options" onMouseDown={e => e.stopPropagation()} onClick={() => showFilterPopup.set(!showFilterPopup.get())} />
                         </div>
                         <label className="switch">
                         <div>
@@ -79,12 +80,6 @@ export { DetailsLayouts } from './details.layouts';
                             <span className="slider round"></span>
                         </div>
                         </label>
-                        <div className="svFilterCombo">
-                            <input type="text" placeholder="Filter results" value={store.keywords}
-                                onChange={e => store.keywords = e.target.value}
-                                onKeyDown={e => { if (e.key === 'Escape') { store.keywords = ''; } } }/>
-                            <Icon name="filter" title="Filter Options" onMouseDown={e => e.stopPropagation()} onClick={() => showFilterPopup.set(!showFilterPopup.get())} />
-                        </div>
                     </>}>
                     <Tab name={store.tabs[0]} count={store.resultTableStoreByLocation.groupsFilteredSorted.length}>
                     {chartsMode.get() ? 
