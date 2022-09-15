@@ -19,13 +19,25 @@ import {JSONPath} from 'jsonpath-plus';
 
 type TabName = 'Info' | 'Analysis Steps';
 
-function AddQuery(result:Result) {
+async function addQuery(result:Result) {
     const searchresult = JSONPath({path: '$._run.results[?(@.ruleId === @root.ruleId)]', json: result });
-    // Save query to file
-    console.log(searchresult);
+    const ruleId = JSONPath({path:'$.ruleId', json: result });
+    // Save query to local storage
+    const oldQueries = localStorage.getItem('queries');
+    let oldQueriesParsed = null;
+    if (oldQueries){
+        const a = JSON.parse(localStorage.getItem("queries") || "") 
+        console.log(a);
+        oldQueriesParsed = await JSON.parse(oldQueries);
+        console.log(oldQueriesParsed.concat(ruleId));
+        localStorage.setItem('queries', JSON.stringify(oldQueriesParsed.concat(ruleId)));
+    }
+    else{
+        localStorage.setItem('queries', JSON.stringify(ruleId))
+    }
 }
 
-interface DetailsProps { result: Result, height: IObservableValue<number> }
+interface DetailsProps { result: Result, height: IObservableValue<number>}
 @observer export class Details extends Component<DetailsProps> {
     private selectedTab = observable.box<TabName>('Info')
     @computed private get threadFlowLocations(): ThreadFlowLocation[] {
@@ -62,7 +74,7 @@ interface DetailsProps { result: Result, height: IObservableValue<number> }
                                 ? <ReactMarkdown className="svMarkDown" source={result._markdown} escapeHtml={false} />
                                 : renderMessageTextWithEmbeddedLinks(result._message, result, vscode.postMessage)}</div>
                         <div className="svDetailsGrid">
-                            <span>Actions</span>			<Button onClick={AddQuery(result)}>Add Query (same rule)</Button>
+                            <span>Actions</span>			<span><><Button onClick={ e => {addQuery(result)}}>Add Query (same rule)</Button></></span>
                             <span>Rule Id</span>			{helpUri ? <a href={helpUri} target="_blank" rel="noopener noreferrer">{result.ruleId}</a> : <span>{result.ruleId}</span>}
                             <span>Rule Name</span>			<span>{result._rule?.name ?? '—'}</span>
                             <span>Rule Description</span>	<span>{renderRuleDesc(result)}</span>

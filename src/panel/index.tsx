@@ -17,18 +17,98 @@ import { RowItem } from './tableStore';
 import { Checkrow, Icon, Popover, ResizeHandle, Tab, TabPanel } from './widgets';
 import { Chart } from './chart';
 import { BurnDownChart } from './burnDownChart';
-
 import Button from '@mui/material/Button';
+
+import Avatar from '@mui/material/Avatar';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import ListItemText from '@mui/material/ListItemText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Dialog from '@mui/material/Dialog';
+import Typography from '@mui/material/Typography';
+import { blue } from '@mui/material/colors';
+import { StepIcon } from '@mui/material';
 
 export { React };
 export * as ReactDOM from 'react-dom';
 export { IndexStore as Store } from './indexStore';
 export { DetailsLayouts } from './details.layouts';
+
+const emails = ['username@gmail.com', 'user02@gmail.com'];
+
+localStorage.setItem('queries', "");
+
+export interface SimpleDialogProps {
+  open: boolean;
+  selectedValue: string;
+  onClose: (value: string) => void;
+}
+
+function SimpleDialog(props: SimpleDialogProps) {
+  const { onClose, selectedValue, open } = props;
+
+  const handleClose = () => {
+    onClose(selectedValue);
+  };
+
+  const handleListItemClick = (value: string) => {
+    onClose(value);
+  };
+
+  const queries = JSON.parse(localStorage.getItem("queries") || "") 
+
+  return (
+    <Dialog onClose={handleClose} open={open}>
+      <DialogTitle>Select a query to annotate</DialogTitle>
+      <List sx={{ pt: 0 }}>
+      {queries.map((email) => (
+          <ListItem button onClick={() => handleListItemClick(email)} key={email}>
+            <ListItemAvatar>
+              <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary={email} />
+          </ListItem>
+        ))}
+      </List>
+    </Dialog>
+  );
+}
+
+export default function SimpleDialogDemo() {
+  const [open, setOpen] = React.useState(true);
+//   const [selectedQuery, setSelectedQuery] = React.useState(queries[0]);
+  const [selectedValue, setSelectedValue] = React.useState(emails[1]);
+
+  const handleClose = (value: string) => {
+    setOpen(false);
+    setSelectedValue(value);
+  };
+
+  return (
+    <div>
+      <Typography variant="subtitle1" component="div">
+        Selected: {selectedValue}
+      </Typography>
+      <br />
+      <SimpleDialog
+        selectedValue={selectedValue}
+        open={open}
+        onClose={handleClose}
+      />
+    </div>
+  );
+}
+
+
 @observer export class Index extends Component<{ store: IndexStore, baselineStores: [IndexStore] }> {
     private showFilterPopup = observable.box(false)
-    private detailsPaneHeight = observable.box(80)
+    private detailsPaneHeight = observable.box(120)
     private chartsMode = observable.box(false);
-    
+    private annotationDialog = observable.box(false);
+    public queries = observable.box([]);
+
     render() {
         const {store} = this.props;
         const { baselineStores } = this.props;
@@ -43,12 +123,12 @@ export { DetailsLayouts } from './details.layouts';
         }
 
         const {logs, keywords} = store;
-        const {showFilterPopup, detailsPaneHeight, chartsMode} = this;
+        const {showFilterPopup, detailsPaneHeight, chartsMode, annotationDialog} = this;
         const activeTableStore = store.selectedTab.get().store;
         const allCollapsed = activeTableStore?.groupsFilteredSorted.every(group => !group.expanded) ?? false;
         const selectedRow = store.selection.get();
         const selected = selectedRow instanceof RowItem && selectedRow.item; 
-        
+
         return <FilterKeywordContext.Provider value={keywords ?? ''}>
             <div className="svListPane">
                 <TabPanel selection={store.selectedTab}
@@ -69,6 +149,7 @@ export { DetailsLayouts } from './details.layouts';
                             <span className="slider round"></span>
                         </div>
                         </label>
+                        <Button onClick={function(e){annotationDialog.set(true);}}>Annotate</Button>
                     </>}>
                     <Tab name={store.tabs[0]} count={store.resultTableStoreByLocation.groupsFilteredSorted.length}>
                     {chartsMode.get() ? 
@@ -92,6 +173,11 @@ export { DetailsLayouts } from './details.layouts';
                                 </>;
                             }} />)
                         }
+                    {annotationDialog.get() ?
+                        <>
+                            <SimpleDialogDemo/>
+                        </>    
+                    :(null)}
                     </Tab>
                     <Tab name={store.tabs[1]} count={store.resultTableStoreByRule.groupsFilteredSorted.length}>
                         {chartsMode.get() ? 
