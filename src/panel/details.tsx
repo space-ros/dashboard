@@ -22,6 +22,12 @@ type TabName = 'Info' | 'Analysis Steps';
 async function addQuery(result:Result) {
     const searchresult = JSONPath({path: '$._run.results[?(@.ruleId === @root.ruleId)]', json: result });
     const ruleId = JSONPath({path:'$.ruleId', json: result });
+    const relativeUri = JSONPath({path:'$._relativeUri', json: result });
+
+    console.log(result);
+    // Also add source location to the dialog as well
+    // Add number of queried issues if possible
+
     // Save query to local storage
     const oldQueries = localStorage.getItem('queries');
     let oldQueriesParsed = null;

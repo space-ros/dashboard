@@ -1,0 +1,12 @@
+[
+    {
+        "rules": [
+            "misra-c2012-3.1",
+            "misra-c2012-2.7"
+        ],
+        "locations": [
+            "*"
+        ],
+        "link": "https://github.com/space-ros/dashboard/issues/8"
+    }
+]

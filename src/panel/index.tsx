@@ -18,12 +18,18 @@ import { Checkrow, Icon, Popover, ResizeHandle, Tab, TabPanel } from './widgets'
 import { Chart } from './chart';
 import { BurnDownChart } from './burnDownChart';
 import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 import Avatar from '@mui/material/Avatar';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
+import TextField from '@mui/material/TextField'; 
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import Typography from '@mui/material/Typography';
@@ -58,21 +64,60 @@ function SimpleDialog(props: SimpleDialogProps) {
 
   const queries = JSON.parse(localStorage.getItem("queries") || "") 
 
+//   return (
+//     <div>
+//         <Dialog onClose={handleClose} open={open}>
+//         <DialogTitle>Select a query to annotate</DialogTitle>
+//         <List sx={{ pt: 0 }}>
+//         {queries.map((email) => (
+//             <ListItem button onClick={() => handleListItemClick(email)} key={email}>
+//                 <ListItemAvatar>
+//                 <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
+//                 </Avatar>
+//                 </ListItemAvatar>
+//                 <ListItemText primary={email} />
+//                 <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+//             </ListItem>
+//             ))}
+//         </List>
+//         </Dialog>
+//     </div>
+//   );
   return (
-    <Dialog onClose={handleClose} open={open}>
-      <DialogTitle>Select a query to annotate</DialogTitle>
-      <List sx={{ pt: 0 }}>
-      {queries.map((email) => (
-          <ListItem button onClick={() => handleListItemClick(email)} key={email}>
-            <ListItemAvatar>
-              <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary={email} />
-          </ListItem>
-        ))}
-      </List>
-    </Dialog>
+    <div>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Annotation</DialogTitle>
+         <List sx={{ pt: 0 }}>
+         {queries.map((email) => (
+             <ListItem button onClick={() => handleListItemClick(email)} key={email}>
+                <ListItemAvatar>
+                <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
+                 </Avatar>
+                 </ListItemAvatar>
+                 <ListItemText primary={email} />
+            </ListItem>
+             ))}
+         </List>
+        <DialogContent>
+          <DialogContentText>
+            Issue link
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="link"
+            type="email"
+            fullWidth
+            variant="standard"
+          />
+        </DialogContent>
+
+        <DialogActions>
+          <Button onClick={handleClose}>Annotate XX issues</Button>
+        </DialogActions>
+      </Dialog>
+    </div>
   );
 }
 
@@ -88,10 +133,6 @@ export default function SimpleDialogDemo() {
 
   return (
     <div>
-      <Typography variant="subtitle1" component="div">
-        Selected: {selectedValue}
-      </Typography>
-      <br />
       <SimpleDialog
         selectedValue={selectedValue}
         open={open}
