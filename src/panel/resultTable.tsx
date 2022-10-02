@@ -9,7 +9,7 @@ import { renderMessageTextWithEmbeddedLinks } from './widgets';
 import { ResultTableStore } from './resultTableStore';
 import { Table } from './table';
 import { Column } from './tableStore';
-
+import { Button } from '@mui/material';
 const levelToIcon = {
     error: 'error',
     warning: 'warning',
@@ -34,6 +34,7 @@ interface ResultTableProps<G> {
                 <span>{result._rule?.name ?? '—'}</span>
                 <span className="svSecondary">{result.ruleId}</span>
             </>,
+            'Action':    result => <><span><Button></Button></span></>
         } as Record<string, (result: Result) => ReactNode>;
         const defaultRenderer = (result: Result) => {
             const capitalize = (str: string) => `${str[0].toUpperCase()}${str.slice(1)}`;
