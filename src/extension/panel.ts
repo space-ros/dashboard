@@ -31,9 +31,6 @@ export class Panel {
             const count = store.results.length;
             if (!this.panel) return;
             this.panel.title = `${count} ${this.title}${count === 1 ? '' : 's'}`;
-            fs.readdirSync("build_results_2022-09-14T234913Z").forEach(file => {
-                console.log(file);
-              });
         });
     }
 
@@ -103,8 +100,6 @@ export class Panel {
                         defaultUri: workspace.workspaceFolders?.[0]?.uri,
                         filters: { 'SARIF files': ['sarif', 'json'] },
                     });
-                    console.log('Open');
-                    // const uris = processedSarifContents(Uri.parse("/home/mh/Downloads/build_results_2022-09-14t234913z.tar.bz2"));
                     if (!uris) return;
                     store.logs.push(...await loadLogs(uris));
                     break;
