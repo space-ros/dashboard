@@ -13,13 +13,17 @@ import * as Telemetry from './telemetry';
 const driverlessRules = new Map<string, ReportingDescriptor>();
 
 export async function loadLogs(uris: Uri[], token?: { isCancellationRequested: boolean }) {
+    console.log(uris);
     const logs = uris
         .map(uri => {
             if (token?.isCancellationRequested) return undefined;
             try {
+                console.log("maping uris");
                 const file = readFileSync(uri.fsPath, 'utf8')  // Assume scheme file.
                     .replace(/^\uFEFF/, ''); // Trim BOM.
+                console.log("before json parsing");
                 const log = JSON.parse(file) as Log;
+                console.log("after json parsing");
                 log._uri = uri.toString();
                 return log;
             } catch (error) {

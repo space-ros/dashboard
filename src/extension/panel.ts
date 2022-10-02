@@ -11,6 +11,7 @@ import { loadLogs } from './loadLogs';
 import { regionToSelection } from './regionToSelection';
 import { Store } from './store';
 import { UriRebaser } from './uriRebaser';
+import { processedSarifContents } from './loadArchive';
 
 export class Panel {
     private title = 'Dashboard'
@@ -25,11 +26,7 @@ export class Panel {
             if (type !== 'splice') throw new Error('Only splice allowed on store.logs.');
             this.spliceLogs(removed, added);
         });
-        // this.listDir(store);
-        //Create output channel
-        let orange = vscode.window.createOutputChannel("Orange");
-        //Write to output.
-        orange.appendLine("I am a banana.");
+       
         autorun(() => {
             const count = store.results.length;
             if (!this.panel) return;
@@ -39,15 +36,6 @@ export class Panel {
               });
         });
     }
-    public async listDir(store:Store) {
-        try {
-            const rep = await fetch('build_results_2022-09-14T234913Z');
-            const log = await rep.json();
-            store.logs.push(log);
-        } catch (err) {
-          console.error('Error occurred while reading directory!', err);
-        }
-      }
 
     public async show() {
         if (this.panel) {
@@ -115,6 +103,8 @@ export class Panel {
                         defaultUri: workspace.workspaceFolders?.[0]?.uri,
                         filters: { 'SARIF files': ['sarif', 'json'] },
                     });
+                    console.log('Open');
+                    // const uris = processedSarifContents(Uri.parse("/home/mh/Downloads/build_results_2022-09-14t234913z.tar.bz2"));
                     if (!uris) return;
                     store.logs.push(...await loadLogs(uris));
                     break;

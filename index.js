@@ -48,9 +48,11 @@
         for (let index = 0; index < array.length; index++) {
             const file = basePath + array[index];
             const response = await fetch(file);
-            const log = await response.json();
-            log._uri = `/home/m/repos/dashboard/samples/commit_2/${array[index]}`;
-            store.logs.push(log);
+            if (response.ok) {
+                const log = await response.json();
+                log._uri = `/home/steven/osrf/space-ros/dashboard/samples/commit_2/${array[index]}`;
+                store.logs.push(log);
+            }
         }
     }
     await loadLogs(store, baselineFolder + "1/");

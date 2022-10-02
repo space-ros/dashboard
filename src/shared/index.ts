@@ -243,6 +243,7 @@ export const filtersColumn: Record<string, Record<string, Visibility>> = {
         'Baseline': 'visible',
         'Suppression': 'visible',
         'Rule': 'visible',
+        'Action': 'visible',
     },
 };
 
