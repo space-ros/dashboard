@@ -26,7 +26,6 @@ export async function processedSarifContents(uri: Uri) {
     const unpacked_path = await unpackArchive(uri);
     const processed_sarif_uris: Uri[] = [];
     
-    console.log("before  trying to async parse uri");
     walkSync(path.join(unpacked_path, 'processed')).forEach((file) => {
         if (path.extname(file.name) === '.sarif') {
             processed_sarif_uris.push(Uri.parse(file.path));

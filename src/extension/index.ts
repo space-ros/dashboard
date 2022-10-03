@@ -91,7 +91,7 @@ export async function activate(context: ExtensionContext) {
     };
 
     // During development, use the following line to auto-load a log.
-    const uris = await processedSarifContents(Uri.parse("/home/m/repos/dashboard/samples/build_results_2022-09-14T234913Z.tar.bz2"));
+    const uris = await processedSarifContents(Uri.parse("/home/spaceros-user/src/spaceros/log/build_results_archives/latest_build_results.tar.bz2"));
     api.openLogs(uris, {});
     return api;
 }
