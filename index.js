@@ -53,6 +53,10 @@
                 log._uri = `/home/steven/osrf/space-ros/dashboard/samples/commit_2/${array[index]}`;
                 store.logs.push(log);
             }
+            const log = await response.json();
+            log._uri = file;
+            // log_4._commit = 'commit_2';
+            store.logs.push(log);
         }
     }
     await loadLogs(store, baselineFolder + "1/");
