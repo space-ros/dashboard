@@ -15,7 +15,8 @@ import { Store } from './store';
 import * as Telemetry from './telemetry';
 import { update, updateChannelConfigSection } from './update';
 import { UriRebaser } from './uriRebaser';
-import { processedSarifContents, unpackArchive } from './loadArchive';
+import { processedSarifContents, SarifContents, unpackArchive } from './loadArchive';
+import { walkSync } from '@nodelib/fs.walk';
 
 export async function activate(context: ExtensionContext) {
     // Borrowed from: https://github.com/Microsoft/vscode-languageserver-node/blob/db0f0f8c06b89923f96a8a5aebc8a4b5bb3018ad/client/src/main.ts#L217
@@ -90,8 +91,9 @@ export async function activate(context: ExtensionContext) {
         },
     };
 
-    // During development, use the following line to auto-load a log.
-    const uris = await processedSarifContents(Uri.parse("/home/spaceros-user/src/spaceros/log/build_results_archives/latest_build_results.tar.bz2"));
+    // TODO: to uncomment when process-sarif is integrated.
+    const uris = await processedSarifContents(Uri.parse("/home/mh/Downloads/latest_build_results.tar.bz2"));
+    // const uris = await SarifContents("/home/spaceros-user/src/spaceros/build");
     api.openLogs(uris, {});
     return api;
 }

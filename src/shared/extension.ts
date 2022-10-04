@@ -70,10 +70,6 @@ Object.defineProperty(String.prototype, 'file', {
         return this.substring(this.lastIndexOf('/') + 1, this.length);
     }
 });
-let orange = vscode.window.createOutputChannel("Orange");
-//Write to output.
-orange.appendLine("I am a banana.");
-orange.show();
 !String.prototype.hasOwnProperty('path') &&
 Object.defineProperty(String.prototype, 'path', {
     get: function() {

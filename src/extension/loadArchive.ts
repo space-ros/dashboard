@@ -33,3 +33,14 @@ export async function processedSarifContents(uri: Uri) {
     });
     return processed_sarif_uris;
 }
+
+export async function SarifContents(uri: string) {
+    const sarif_uris: Uri[] = [];
+    
+    walkSync(uri).forEach((file) => {
+        if (path.extname(file.name) === '.sarif') {
+            sarif_uris.push(Uri.parse(file.path));
+        }
+    });
+    return sarif_uris;
+}
