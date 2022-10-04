@@ -25,7 +25,7 @@
     },
     "activationEvents": [
         "onLanguage:json",
-        "onCommand:sarif.showPanel",
+        "onCommand:sarif.showPanel _",
         "onCommand:sarif.clearState"
     ],
     "main": "./out/context.js",
@@ -68,7 +68,7 @@
         ],
         "commands": [
             {
-                "command": "sarif.showPanel",
+                "command": "sarif.showPanel _",
                 "category": "SARIF",
                 "title": "Show spaceros dashboard"
             },

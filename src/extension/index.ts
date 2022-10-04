@@ -50,7 +50,7 @@ export async function activate(context: ExtensionContext) {
     const baser = new UriRebaser(mapDistinct(fileAndUris), store);
     // Panel
     const panel = new Panel(context, baser, store);
-    disposables.push(commands.registerCommand('sarif.showPanel', () => panel.show()));
+    disposables.push(commands.registerCommand('sarif.showPanel _', () => panel.show()));
 
     // General Activation
     activateDiagnostics(disposables, store, baser);
@@ -92,8 +92,8 @@ export async function activate(context: ExtensionContext) {
     };
 
     // TODO: to uncomment when process-sarif is integrated.
-    const uris = await processedSarifContents(Uri.parse("/home/mh/Downloads/latest_build_results.tar.bz2"));
-    // const uris = await SarifContents("/home/spaceros-user/src/spaceros/build");
+    // const uris = await processedSarifContents(Uri.parse("/home/mh/Downloads/latest_build_results.tar.bz2"));
+    const uris = await SarifContents("/home/mh/Downloads/latest_build_results/processed/");
     api.openLogs(uris, {});
     return api;
 }
