@@ -28,10 +28,6 @@ export async function activate(context: ExtensionContext) {
 
     const disposables = context.subscriptions;
     Store.globalState = context.globalState;
-    disposables.push(commands.registerCommand('sarif.clearState', () => {
-        context.globalState.update('view', undefined);
-        commands.executeCommand('workbench.action.reloadWindow');
-    }));
     const store = new Store();
 
     // Basing
@@ -50,7 +46,7 @@ export async function activate(context: ExtensionContext) {
     const baser = new UriRebaser(mapDistinct(fileAndUris), store);
     // Panel
     const panel = new Panel(context, baser, store);
-    disposables.push(commands.registerCommand('sarif.showPanel _', () => panel.show()));
+    disposables.push(commands.registerCommand('sarif.showPanel', () => panel.show()));
 
     // General Activation
     activateDiagnostics(disposables, store, baser);
@@ -93,7 +89,8 @@ export async function activate(context: ExtensionContext) {
 
     // TODO: to uncomment when process-sarif is integrated.
     // const uris = await processedSarifContents(Uri.parse("/home/mh/Downloads/latest_build_results.tar.bz2"));
-    const uris = await SarifContents("/home/mh/Downloads/latest_build_results/processed/");
+    // const uris = await SarifContents("/home/mh/Downloads/latest_build_results/processed/");
+    const uris = await SarifContents("/home/spaceros-user/src/spaceros/build");
     api.openLogs(uris, {});
     return api;
 }

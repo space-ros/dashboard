@@ -4,7 +4,7 @@
     "description": "Adds support for viewing SARIF logs",
     "author": "Open Robotics",
     "license": "MIT",
-    "version": "3.2.7",
+    "version": "3.2.9",
     "publisher": "openrobotics",
     "repository": {
         "type": "git",
@@ -25,8 +25,7 @@
     },
     "activationEvents": [
         "onLanguage:json",
-        "onCommand:sarif.showPanel _",
-        "onCommand:sarif.clearState"
+        "onCommand:sarif.showPanel"
     ],
     "main": "./out/context.js",
     "contributes": {
@@ -68,14 +67,9 @@
         ],
         "commands": [
             {
-                "command": "sarif.showPanel _",
+                "command": "sarif.showPanel",
                 "category": "SARIF",
                 "title": "Show spaceros dashboard"
-            },
-            {
-                "command": "sarif.clearState",
-                "category": "SARIF",
-                "title": "Clear State"
             }
         ]
     },
