@@ -16,7 +16,15 @@ import { postSelectArtifact, postSelectLog } from './indexStore';
 import { List, Tab, TabPanel, renderMessageTextWithEmbeddedLinks } from './widgets';
 import Button from '@mui/material/Button';
 import {JSONPath} from 'jsonpath-plus';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+// import { UpdateAnnotations } from '../extension/loadArchive';
 
+import data from "./annotations.json";
 type TabName = 'Info' | 'Analysis Steps';
 
 async function addQuery(result:Result) {
@@ -43,9 +51,57 @@ async function addQuery(result:Result) {
     }
 }
 
+// Returns annotation link if the issue was annotated by searching the annotations file
+function getLink(result:Result) : string {
+    // const dataHasLink = JSONPath({path: `$.[?(@.rule == "${result.ruleId}" && @.tool == "${decodeFileUri(result._log._uri)}" && @.message === "${JSON.stringify(result._message).replace(/[^\w\s+]/gi, '').split(" ").join("")}")]`, json: data });
+    const dataHasLink = JSONPath({path: `$.[?(@.rule == "${result.ruleId}" && @.tool == "${decodeFileUri(result._log._uri)}")]`, json: data });
+    // const a = "{'new': 'new'}";
+    // UpdateAnnotations(JSON.parse(a));
+    if (dataHasLink.length > 0)
+        return dataHasLink[0]["link"];
+    return "" as string;
+}
+
+interface FormDialogProps {
+    open : IObservableValue<boolean>}
+
+@observer export class FormDialog extends Component<FormDialogProps> {
+    constructor(props: FormDialogProps) {
+        super(props);
+    }
+    render() {
+        return(
+            <div>
+            <Dialog open={this.props.open.get()} onClose={()=> this.props.open.set(false)}>
+                <DialogTitle>Annotation</DialogTitle>
+                <DialogContent>
+                <DialogContentText>
+                    Add a link to the issue
+                </DialogContentText>
+                <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="Email Address"
+                    type="email"
+                    fullWidth
+                    variant="standard"
+                />
+                </DialogContent>
+                <DialogActions>
+                <Button onClick={ () => this.props.open.set(false)}>Cancel</Button>
+                <Button onClick={()=> this.props.open.set(false)}>Annotate</Button>
+                </DialogActions>
+            </Dialog>
+            </div>
+        )
+    };
+}
+
 interface DetailsProps { result: Result, height: IObservableValue<number>}
 @observer export class Details extends Component<DetailsProps> {
     private selectedTab = observable.box<TabName>('Info')
+    private dialogOpen = observable.box(false)
     @computed private get threadFlowLocations(): ThreadFlowLocation[] {
 		return this.props.result?.codeFlows?.[0]?.threadFlows?.[0].locations ?? [];
 	}
@@ -59,20 +115,22 @@ interface DetailsProps { result: Result, height: IObservableValue<number>}
             this.selectedTab.set(hasThreadFlows ? 'Analysis Steps' : 'Info');
         });
     }
+    
     render() {
         const renderRuleDesc = (result: Result) => {
             const desc = result?._rule?.fullDescription ?? result?._rule?.shortDescription;
             if (!desc) return '—';
             return desc.markdown
-                ? <ReactMarkdown className="svMarkDown" source={desc.markdown} escapeHtml={false} />
-                : renderMessageTextWithEmbeddedLinks(desc.text, result, vscode.postMessage);
+            ? <ReactMarkdown className="svMarkDown" source={desc.markdown} escapeHtml={false} />
+            : renderMessageTextWithEmbeddedLinks(desc.text, result, vscode.postMessage);
         };
-
+        
         const {result, height} = this.props;
         const helpUri = result?._rule?.helpUri;
 
         return <div className="svDetailsPane" style={{ height: height.get() }}>
             {result && <TabPanel selection={this.selectedTab}>
+                                        
                 <Tab name="Info">
                     <div className="svDetailsBody svDetailsInfo">
                         <div className="svDetailsMessage">
@@ -81,6 +139,12 @@ interface DetailsProps { result: Result, height: IObservableValue<number>}
                                 : renderMessageTextWithEmbeddedLinks(result._message, result, vscode.postMessage)}</div>
                         <div className="svDetailsGrid">
                             <span>Actions</span>			<span><><Button onClick={ e => {addQuery(result)}}>Add Query (same rule)</Button></></span>
+                            <span>Issue link</span>         {getLink(result).length > 0 
+                                                                ? <a href={getLink(result)} target="_blank" rel="noopener noreferrer">{getLink(result)}</a> 
+                                                                : <>
+                                                                <Button onClick={()=> this.dialogOpen.set(true)}>Add link</Button>
+                                                                <FormDialog open={this.dialogOpen}></FormDialog></>
+                                                            }
                             <span>Rule Id</span>			{helpUri ? <a href={helpUri} target="_blank" rel="noopener noreferrer">{result.ruleId}</a> : <span>{result.ruleId}</span>}
                             <span>Rule Name</span>			<span>{result._rule?.name ?? '—'}</span>
                             <span>Rule Description</span>	<span>{renderRuleDesc(result)}</span>
@@ -123,7 +187,7 @@ interface DetailsProps { result: Result, height: IObservableValue<number>}
                                                 if (typeof value === 'boolean')
                                                     return JSON.stringify(value, null, 2);
                                                 if (typeof value === 'object')
-                                                    return <pre style={{ margin: 0, fontSize: '0.7rem' }}><code>{JSON.stringify(value, null, 2)}</code></pre>;
+                                                return <pre style={{ margin: 0, fontSize: '0.7rem' }}><code>{JSON.stringify(value, null, 2)}</code></pre>;
                                                 return value;
                                             })()}</span>
                                         </Fragment>;
@@ -145,7 +209,7 @@ interface DetailsProps { result: Result, height: IObservableValue<number>}
                                     <div className="svLineNum">{region?.startLine}:{region?.startColumn ?? 1}</div>
                                 </>;
                             };
-
+                            
                             const selection = observable.box<ThreadFlowLocation | undefined>(undefined, { deep: false });
                             selection.observe(change => {
                                 const threadFlowLocation = change.newValue;
@@ -177,10 +241,10 @@ interface DetailsProps { result: Result, height: IObservableValue<number>}
                                     <div className="svLineNum">{region?.startLine}:1</div>
                                 </>;
                             };
-
+                            
                             return this.stacks.map(stack => {
                                 const stackFrames = stack.frames;
-
+                                
                                 const selection = observable.box<Location | undefined>(undefined, { deep: false });
                                 selection.observe(change => {
                                     const location = change.newValue;
