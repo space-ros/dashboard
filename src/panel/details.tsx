@@ -22,9 +22,10 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-// import { UpdateAnnotations } from '../extension/loadArchive';
+import { UpdateAnnotations } from '../extension/loadArchive';
 
 import data from "./annotations.json";
+
 type TabName = 'Info' | 'Analysis Steps';
 
 async function addQuery(result:Result) {
@@ -53,8 +54,12 @@ async function addQuery(result:Result) {
 
 // Returns annotation link if the issue was annotated by searching the annotations file
 function getLink(result:Result) : string {
+    console.log(data);
+    console.log(result);
+    
+    console.log(decodeFileUri(result._log._uri));
     // const dataHasLink = JSONPath({path: `$.[?(@.rule == "${result.ruleId}" && @.tool == "${decodeFileUri(result._log._uri)}" && @.message === "${JSON.stringify(result._message).replace(/[^\w\s+]/gi, '').split(" ").join("")}")]`, json: data });
-    const dataHasLink = JSONPath({path: `$.[?(@.rule == "${result.ruleId}" && @.tool == "${decodeFileUri(result._log._uri)}")]`, json: data });
+    const dataHasLink = JSONPath({path: `$.[?(@.rule === ${JSON.stringify(result.ruleId)} && @.tool === ${JSON.stringify(decodeFileUri(result._log._uri))})]`, json: data });
     // const a = "{'new': 'new'}";
     // UpdateAnnotations(JSON.parse(a));
     if (dataHasLink.length > 0)
@@ -62,12 +67,49 @@ function getLink(result:Result) : string {
     return "" as string;
 }
 
+async function updateData(result : Result, link : string){
+    console.log(link);
+    console.log(result);
+    const { message, uri, region } = parseLocation(result, location);
+    data[data.length] = {'rule': result.ruleId, 'tool': result._log._uri, 'link': link};
+    const textFile = new Blob([JSON.stringify(data)], {type: 'text/plain'}); //pass data from localStorage API to blob
+    const a = URL.createObjectURL(textFile);
+    const anchor = window.document.createElement('a');
+    anchor.href = window.URL.createObjectURL(textFile);
+    anchor.download = 'annotations';
+    document.body.appendChild(anchor);
+    console.log(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+    window.URL.revokeObjectURL(anchor.href);
+    window.document.write();
+    console.log(JSON.stringify(data));
+    vscode.postMessage({ command: 'writeAnnotations', data: JSON.stringify(data) });
+    console.log("posted annotation json in a message");
+}
+
+async function WriteAnnotationData(){
+    const textFile = new Blob([JSON.stringify(data)], {type: 'text/plain'}); //pass data from localStorage API to blob
+    const a = URL.createObjectURL(textFile);
+    const anchor = window.document.createElement('a');
+    anchor.href = window.URL.createObjectURL(textFile);
+    anchor.download = 'annotations';
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+    window.URL.revokeObjectURL(anchor.href);
+}
+
 interface FormDialogProps {
-    open : IObservableValue<boolean>}
+    open : IObservableValue<boolean>, result: Result}
 
 @observer export class FormDialog extends Component<FormDialogProps> {
+    private link = observable.box('http://');
     constructor(props: FormDialogProps) {
         super(props);
+    }
+    handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      this.link.set(event.target.value);  
     }
     render() {
         return(
@@ -82,15 +124,17 @@ interface FormDialogProps {
                     autoFocus
                     margin="dense"
                     id="name"
-                    label="Email Address"
-                    type="email"
+                    label="Link"
+                    type="url"
                     fullWidth
                     variant="standard"
+                    onChange={this.handleChange}
+                    value={this.link.get()}
                 />
                 </DialogContent>
                 <DialogActions>
                 <Button onClick={ () => this.props.open.set(false)}>Cancel</Button>
-                <Button onClick={()=> this.props.open.set(false)}>Annotate</Button>
+                <Button onClick={()=> {this.props.open.set(false);updateData(this.props.result, this.link.get())}}>Annotate</Button>
                 </DialogActions>
             </Dialog>
             </div>
@@ -143,7 +187,7 @@ interface DetailsProps { result: Result, height: IObservableValue<number>}
                                                                 ? <a href={getLink(result)} target="_blank" rel="noopener noreferrer">{getLink(result)}</a> 
                                                                 : <>
                                                                 <Button onClick={()=> this.dialogOpen.set(true)}>Add link</Button>
-                                                                <FormDialog open={this.dialogOpen}></FormDialog></>
+                                                                <FormDialog open={this.dialogOpen} result={result}></FormDialog></>
                                                             }
                             <span>Rule Id</span>			{helpUri ? <a href={helpUri} target="_blank" rel="noopener noreferrer">{result.ruleId}</a> : <span>{result.ruleId}</span>}
                             <span>Rule Name</span>			<span>{result._rule?.name ?? '—'}</span>

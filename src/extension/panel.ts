@@ -67,8 +67,8 @@ export class Panel {
                     default-src 'none';
                     connect-src vscode-resource:;
                     font-src    vscode-resource:;
-                    script-src  vscode-resource: 'unsafe-inline';
-                    style-src   vscode-resource: 'unsafe-inline';
+                    script-src  vscode-resource: 'unsafe-eval' 'unsafe-inline';
+                    style-src   vscode-resource: 'unsafe-eval' 'unsafe-inline';
                     ">
                 <style>
                     code { font-family: ${workspace.getConfiguration('editor').get('fontFamily')} }
@@ -145,6 +145,11 @@ export class Panel {
                     const oldState = Store.globalState.get('view', defaultState);
                     const {state} = message;
                     await Store.globalState.update('view', Object.assign(oldState, JSON.parse(state)));
+                    break;
+                }
+                case 'writeAnnotations': {
+                    const {data} = message;
+                    await fs.writeFile("annotations.json", data, ()=> console.log("written annotations.json to home dir"));
                     break;
                 }
                 default:

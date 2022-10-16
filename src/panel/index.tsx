@@ -30,8 +30,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import TextField from '@mui/material/TextField'; 
-import DialogTitle from '@mui/material/DialogTitle';
-import Dialog from '@mui/material/Dialog';
 import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
 import { StepIcon } from '@mui/material';
@@ -63,26 +61,6 @@ function SimpleDialog(props: SimpleDialogProps) {
   };
 
   const queries = JSON.parse(localStorage.getItem("queries") || "") 
-
-//   return (
-//     <div>
-//         <Dialog onClose={handleClose} open={open}>
-//         <DialogTitle>Select a query to annotate</DialogTitle>
-//         <List sx={{ pt: 0 }}>
-//         {queries.map((email) => (
-//             <ListItem button onClick={() => handleListItemClick(email)} key={email}>
-//                 <ListItemAvatar>
-//                 <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
-//                 </Avatar>
-//                 </ListItemAvatar>
-//                 <ListItemText primary={email} />
-//                 <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-//             </ListItem>
-//             ))}
-//         </List>
-//         </Dialog>
-//     </div>
-//   );
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>

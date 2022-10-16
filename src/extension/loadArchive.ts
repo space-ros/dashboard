@@ -1,5 +1,6 @@
 /// <reference path="jsonSourceMap.d.ts" />
 import { mkdtempSync, statSync } from 'fs';
+import * as fs from 'fs';
 import { execSync } from 'child_process';
 import { walkSync } from '@nodelib/fs.walk';
 import * as os from 'os';
@@ -43,4 +44,8 @@ export async function SarifContents(uri: string) {
         }
     });
     return sarif_uris;
+}
+
+export async function UpdateAnnotations(annotations:JSON) {
+    fs.writeFileSync('annotations.json', JSON.stringify(annotations), 'uft8');
 }
