@@ -18,114 +18,22 @@ import { Checkrow, Icon, Popover, ResizeHandle, Tab, TabPanel } from './widgets'
 import { Chart } from './chart';
 import { BurnDownChart } from './burnDownChart';
 import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-
-import Avatar from '@mui/material/Avatar';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemText from '@mui/material/ListItemText';
-import TextField from '@mui/material/TextField'; 
-import Typography from '@mui/material/Typography';
-import { blue } from '@mui/material/colors';
-import { StepIcon } from '@mui/material';
 
 export { React };
 export * as ReactDOM from 'react-dom';
 export { IndexStore as Store } from './indexStore';
 export { DetailsLayouts } from './details.layouts';
 
-const emails = ['username@gmail.com', 'user02@gmail.com'];
-
-localStorage.setItem('queries', "");
-
-export interface SimpleDialogProps {
-  open: boolean;
-  selectedValue: string;
-  onClose: (value: string) => void;
-}
-
-function SimpleDialog(props: SimpleDialogProps) {
-  const { onClose, selectedValue, open } = props;
-
-  const handleClose = () => {
-    onClose(selectedValue);
-  };
-
-  const handleListItemClick = (value: string) => {
-    onClose(value);
-  };
-
-  const queries = JSON.parse(localStorage.getItem("queries") || "") 
-  return (
-    <div>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Annotation</DialogTitle>
-         <List sx={{ pt: 0 }}>
-         {queries.map((email) => (
-             <ListItem button onClick={() => handleListItemClick(email)} key={email}>
-                <ListItemAvatar>
-                <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
-                 </Avatar>
-                 </ListItemAvatar>
-                 <ListItemText primary={email} />
-            </ListItem>
-             ))}
-         </List>
-        <DialogContent>
-          <DialogContentText>
-            Issue link
-          </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="link"
-            type="email"
-            fullWidth
-            variant="standard"
-          />
-        </DialogContent>
-
-        <DialogActions>
-          <Button onClick={handleClose}>Annotate XX issues</Button>
-        </DialogActions>
-      </Dialog>
-    </div>
-  );
-}
-
-export default function SimpleDialogDemo() {
-  const [open, setOpen] = React.useState(true);
-//   const [selectedQuery, setSelectedQuery] = React.useState(queries[0]);
-  const [selectedValue, setSelectedValue] = React.useState(emails[1]);
-
-  const handleClose = (value: string) => {
-    setOpen(false);
-    setSelectedValue(value);
-  };
-
-  return (
-    <div>
-      <SimpleDialog
-        selectedValue={selectedValue}
-        open={open}
-        onClose={handleClose}
-      />
-    </div>
-  );
-}
-
+// import annotation file
+import data from "./annotations.json";
 
 @observer export class Index extends Component<{ store: IndexStore, baselineStores: [IndexStore] }> {
     private showFilterPopup = observable.box(false)
     private detailsPaneHeight = observable.box(120)
     private chartsMode = observable.box(false);
     private annotationDialog = observable.box(false);
+    public annotations = observable.box(data);
+
     public queries = observable.box([]);
 
     render() {
@@ -141,7 +49,7 @@ export default function SimpleDialogDemo() {
             </div>;
         }
         const {logs, keywords} = store;
-        const {showFilterPopup, detailsPaneHeight, chartsMode, annotationDialog} = this;
+        const {showFilterPopup, detailsPaneHeight, chartsMode, annotationDialog, annotations} = this;
         const activeTableStore = store.selectedTab.get().store;
         const allCollapsed = activeTableStore?.groupsFilteredSorted.every(group => !group.expanded) ?? false;
         const selectedRow = store.selection.get();
@@ -166,7 +74,7 @@ export default function SimpleDialogDemo() {
                             <span className="slider round"></span>
                         </div>
                         </label>
-                        <Button onClick={function(e){annotationDialog.set(true);}}>Annotate</Button>
+                        <Button onClick={function(e){annotationDialog.set(true); vscode.postMessage({ command: 'writeAnnotations', data: JSON.stringify(annotations.get()) });}}>Write annotations</Button>
                     </>}>
                     <Tab name={store.tabs[0]} count={store.resultTableStoreByLocation.groupsFilteredSorted.length}>
                     {chartsMode.get() ? 
@@ -274,7 +182,7 @@ export default function SimpleDialogDemo() {
             <div className="svResizer">
                 <ResizeHandle size={detailsPaneHeight} />
             </div>
-            <Details result={selected} height={detailsPaneHeight} />
+            <Details result={selected} height={detailsPaneHeight} annotations={annotations}/>
             <Popover show={showFilterPopup} style={{ top: 35, right: 8 + 35 + 35 + 8 }}>
                 {Object.entries(store.filtersRow).map(([name, state]) => <Fragment key={name}>
                     <div className="svPopoverTitle">{name}</div>

@@ -3,7 +3,7 @@
 
 /* eslint-disable indent */ // Allowing for some custom intent under svDetailsGrid 2D layout.
 
-import { autorun, computed, IObservableValue, observable } from 'mobx';
+import { action, autorun, computed, IObservableValue, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import * as React from 'react';
 import { Component, Fragment } from 'react';
@@ -22,73 +22,23 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { UpdateAnnotations } from '../extension/loadArchive';
 
 import data from "./annotations.json";
 
 type TabName = 'Info' | 'Analysis Steps';
 
-async function addQuery(result:Result) {
-    const searchresult = JSONPath({path: '$._run.results[?(@.ruleId === @root.ruleId)]', json: result });
-    const ruleId = JSONPath({path:'$.ruleId', json: result });
-    const relativeUri = JSONPath({path:'$._relativeUri', json: result });
-
-    console.log(result);
-    // Also add source location to the dialog as well
-    // Add number of queried issues if possible
-
-    // Save query to local storage
-    const oldQueries = localStorage.getItem('queries');
-    let oldQueriesParsed = null;
-    if (oldQueries){
-        const a = JSON.parse(localStorage.getItem("queries") || "") 
-        console.log(a);
-        oldQueriesParsed = await JSON.parse(oldQueries);
-        console.log(oldQueriesParsed.concat(ruleId));
-        localStorage.setItem('queries', JSON.stringify(oldQueriesParsed.concat(ruleId)));
-    }
-    else{
-        localStorage.setItem('queries', JSON.stringify(ruleId))
-    }
-}
-
 // Returns annotation link if the issue was annotated by searching the annotations file
 function getLink(result:Result) : string {
-    console.log(data);
-    console.log(result);
-    
-    console.log(decodeFileUri(result._log._uri));
-    // const dataHasLink = JSONPath({path: `$.[?(@.rule == "${result.ruleId}" && @.tool == "${decodeFileUri(result._log._uri)}" && @.message === "${JSON.stringify(result._message).replace(/[^\w\s+]/gi, '').split(" ").join("")}")]`, json: data });
     const dataHasLink = JSONPath({path: `$.[?(@.rule === ${JSON.stringify(result.ruleId)} && @.tool === ${JSON.stringify(decodeFileUri(result._log._uri))})]`, json: data });
-    // const a = "{'new': 'new'}";
-    // UpdateAnnotations(JSON.parse(a));
     if (dataHasLink.length > 0)
         return dataHasLink[0]["link"];
     return "" as string;
 }
 
-async function updateData(result : Result, link : string){
-    console.log(link);
-    console.log(result);
-    const { message, uri, region } = parseLocation(result, location);
-    data[data.length] = {'rule': result.ruleId, 'tool': result._log._uri, 'link': link};
-    const textFile = new Blob([JSON.stringify(data)], {type: 'text/plain'}); //pass data from localStorage API to blob
-    const a = URL.createObjectURL(textFile);
-    const anchor = window.document.createElement('a');
-    anchor.href = window.URL.createObjectURL(textFile);
-    anchor.download = 'annotations';
-    document.body.appendChild(anchor);
-    console.log(anchor);
-    anchor.click();
-    document.body.removeChild(anchor);
-    window.URL.revokeObjectURL(anchor.href);
-    window.document.write();
-    console.log(JSON.stringify(data));
-    vscode.postMessage({ command: 'writeAnnotations', data: JSON.stringify(data) });
-    console.log("posted annotation json in a message");
-}
-
-async function WriteAnnotationData(){
+// Deprecated
+// Used to write annotation file when in browser mode
+// Breaks Ext mode
+async function WriteAnnotationDataBrowser(){
     const textFile = new Blob([JSON.stringify(data)], {type: 'text/plain'}); //pass data from localStorage API to blob
     const a = URL.createObjectURL(textFile);
     const anchor = window.document.createElement('a');
@@ -101,12 +51,16 @@ async function WriteAnnotationData(){
 }
 
 interface FormDialogProps {
-    open : IObservableValue<boolean>, result: Result}
+    open : IObservableValue<boolean>, result: Result, annotations? : IObservableValue<{ rule: string; location: string; line: string; tool: string; message: string; link: string; }[]>}
 
 @observer export class FormDialog extends Component<FormDialogProps> {
     private link = observable.box('http://');
     constructor(props: FormDialogProps) {
         super(props);
+    }
+    @action private append(result : Result, link : string) {
+        const annotation = {'rule': result.ruleId || '', 'tool': result._log._uri || '', 'link': link || '', location: '', line: '', message: ''};
+        this.props.annotations?.set(this.props.annotations?.get().concat(annotation));
     }
     handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       this.link.set(event.target.value);  
@@ -134,7 +88,7 @@ interface FormDialogProps {
                 </DialogContent>
                 <DialogActions>
                 <Button onClick={ () => this.props.open.set(false)}>Cancel</Button>
-                <Button onClick={()=> {this.props.open.set(false);updateData(this.props.result, this.link.get())}}>Annotate</Button>
+                <Button onClick={()=> {this.props.open.set(false);this.append(this.props.result, this.link.get())}}>Annotate</Button>
                 </DialogActions>
             </Dialog>
             </div>
@@ -142,7 +96,7 @@ interface FormDialogProps {
     };
 }
 
-interface DetailsProps { result: Result, height: IObservableValue<number>}
+interface DetailsProps { result: Result, height: IObservableValue<number>, annotations? : IObservableValue<{ rule: string; location: string; line: string; tool: string; message: string; link: string; }[]>}
 @observer export class Details extends Component<DetailsProps> {
     private selectedTab = observable.box<TabName>('Info')
     private dialogOpen = observable.box(false)
@@ -151,6 +105,9 @@ interface DetailsProps { result: Result, height: IObservableValue<number>}
 	}
     @computed private get stacks() {
         return this.props.result?.stacks;
+    }
+    @computed private get annotations() {
+        return this.props.annotations;
     }
     constructor(props: DetailsProps) {
         super(props);
@@ -182,12 +139,11 @@ interface DetailsProps { result: Result, height: IObservableValue<number>}
                                 ? <ReactMarkdown className="svMarkDown" source={result._markdown} escapeHtml={false} />
                                 : renderMessageTextWithEmbeddedLinks(result._message, result, vscode.postMessage)}</div>
                         <div className="svDetailsGrid">
-                            <span>Actions</span>			<span><><Button onClick={ e => {addQuery(result)}}>Add Query (same rule)</Button></></span>
                             <span>Issue link</span>         {getLink(result).length > 0 
                                                                 ? <a href={getLink(result)} target="_blank" rel="noopener noreferrer">{getLink(result)}</a> 
                                                                 : <>
                                                                 <Button onClick={()=> this.dialogOpen.set(true)}>Add link</Button>
-                                                                <FormDialog open={this.dialogOpen} result={result}></FormDialog></>
+                                                                <FormDialog open={this.dialogOpen} result={result} annotations={this.annotations}></FormDialog></>
                                                             }
                             <span>Rule Id</span>			{helpUri ? <a href={helpUri} target="_blank" rel="noopener noreferrer">{result.ruleId}</a> : <span>{result.ruleId}</span>}
                             <span>Rule Name</span>			<span>{result._rule?.name ?? '—'}</span>

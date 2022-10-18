@@ -12,6 +12,7 @@ import { regionToSelection } from './regionToSelection';
 import { Store } from './store';
 import { UriRebaser } from './uriRebaser';
 import { processedSarifContents } from './loadArchive';
+import * as path from 'path';
 
 export class Panel {
     private title = 'Dashboard'
@@ -149,7 +150,15 @@ export class Panel {
                 }
                 case 'writeAnnotations': {
                     const {data} = message;
-                    await fs.writeFile("annotations.json", data, ()=> console.log("written annotations.json to home dir"));
+                    const root_dir = process.cwd();
+                    console.log("written annotation file to: ", root_dir);
+                    fs.writeFileSync("new_annotaions.json", data);
+                    
+                    // Use Vscode Api to write file
+                    // const d = Buffer.from(data, 'utf8');
+                    // const folderUri = workspace.workspaceFolders[0].uri;
+                    // const fileUri = folderUri.with({ path: path.join(root_dir, 'new_annotations.json') });
+                    // workspace.fs.writeFile(fileUri, d);
                     break;
                 }
                 default:
