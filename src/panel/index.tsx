@@ -32,7 +32,7 @@ import data from "./annotations.json";
     private detailsPaneHeight = observable.box(120)
     private chartsMode = observable.box(false);
     private annotationDialog = observable.box(false);
-    public annotations = observable.box(data);
+    public annotations = observable.box(data || {});
 
     public queries = observable.box([]);
 
@@ -98,11 +98,6 @@ import data from "./annotations.json";
                                 </>;
                             }} />)
                         }
-                    {annotationDialog.get() ?
-                        <>
-                            <SimpleDialogDemo/>
-                        </>    
-                    :(null)}
                     </Tab>
                     <Tab name={store.tabs[1]} count={store.resultTableStoreByRule.groupsFilteredSorted.length}>
                         {chartsMode.get() ? 

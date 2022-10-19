@@ -23,13 +23,15 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-import data from "./annotations.json";
-
 type TabName = 'Info' | 'Analysis Steps';
 
 // Returns annotation link if the issue was annotated by searching the annotations file
-function getLink(result:Result) : string {
-    const dataHasLink = JSONPath({path: `$.[?(@.rule === ${JSON.stringify(result.ruleId)} && @.tool === ${JSON.stringify(decodeFileUri(result._log._uri))})]`, json: data });
+function getLink(result:Result, annotations : { rule: string; location: string; line: string; tool: string; message: string; link: string; }[]) : string {
+    console.log(JSON.stringify(decodeFileUri(result._log._uri))); 
+    const a = JSON.parse(JSON.stringify(annotations));
+    console.log(a);
+    const dataHasLink = JSONPath({path: `$.[?(@.rule === ${JSON.stringify(result.ruleId)} && @.tool === ${JSON.stringify(decodeFileUri(result._log._uri))})]`, json: a });
+    console.log(dataHasLink);
     if (dataHasLink.length > 0)
         return dataHasLink[0]["link"];
     return "" as string;
@@ -51,7 +53,7 @@ async function WriteAnnotationDataBrowser(){
 }
 
 interface FormDialogProps {
-    open : IObservableValue<boolean>, result: Result, annotations? : IObservableValue<{ rule: string; location: string; line: string; tool: string; message: string; link: string; }[]>}
+    open : IObservableValue<boolean>, result: Result, annotations : IObservableValue<{ rule: string; location: string; line: string; tool: string; message: string; link: string; }[]>}
 
 @observer export class FormDialog extends Component<FormDialogProps> {
     private link = observable.box('http://');
@@ -59,8 +61,10 @@ interface FormDialogProps {
         super(props);
     }
     @action private append(result : Result, link : string) {
-        const annotation = {'rule': result.ruleId || '', 'tool': result._log._uri || '', 'link': link || '', location: '', line: '', message: ''};
-        this.props.annotations?.set(this.props.annotations?.get().concat(annotation));
+        // TODO: don't hard code append file://
+        // Remove file:/ as json path breaks with special charcters
+        const annotation = {'rule': result.ruleId || '', 'tool': result._log._uri.split('file://')[1] || '', 'link': link || '', location: '', line: '', message: ''};
+        this.props.annotations.set(this.props.annotations.get().concat(annotation));
     }
     handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       this.link.set(event.target.value);  
@@ -96,7 +100,7 @@ interface FormDialogProps {
     };
 }
 
-interface DetailsProps { result: Result, height: IObservableValue<number>, annotations? : IObservableValue<{ rule: string; location: string; line: string; tool: string; message: string; link: string; }[]>}
+interface DetailsProps { result: Result, height: IObservableValue<number>, annotations : IObservableValue<{ rule: string; location: string; line: string; tool: string; message: string; link: string; }[]>}
 @observer export class Details extends Component<DetailsProps> {
     private selectedTab = observable.box<TabName>('Info')
     private dialogOpen = observable.box(false)
@@ -139,8 +143,8 @@ interface DetailsProps { result: Result, height: IObservableValue<number>, annot
                                 ? <ReactMarkdown className="svMarkDown" source={result._markdown} escapeHtml={false} />
                                 : renderMessageTextWithEmbeddedLinks(result._message, result, vscode.postMessage)}</div>
                         <div className="svDetailsGrid">
-                            <span>Issue link</span>         {getLink(result).length > 0 
-                                                                ? <a href={getLink(result)} target="_blank" rel="noopener noreferrer">{getLink(result)}</a> 
+                            <span>Issue link</span>         {getLink(result, this.annotations.get()).length > 0 
+                                                                ? <a href={getLink(result, this.annotations.get())} target="_blank" rel="noopener noreferrer">{getLink(result, this.annotations.get())}</a> 
                                                                 : <>
                                                                 <Button onClick={()=> this.dialogOpen.set(true)}>Add link</Button>
                                                                 <FormDialog open={this.dialogOpen} result={result} annotations={this.annotations}></FormDialog></>
