@@ -8,7 +8,6 @@ import { KeyboardEvent, memo, PureComponent, ReactNode } from 'react';
 import { Badge, css, Hi, Icon, ResizeHandle } from './widgets';
 import './table.scss';
 import { Column, RowGroup, RowItem, TableStore } from './tableStore';
-import Button from '@mui/material/Button';
 
 interface TableProps<T, G> {
     columns: Column<T>[];
