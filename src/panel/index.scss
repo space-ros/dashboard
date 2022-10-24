@@ -58,7 +58,7 @@ mark {
     & > * + * { margin-top: 16px; }
 
     & > div {
-        color: white;
+        color: var(--vscode-button-foreground);
         background: var(--vscode-button-background);
         width: 200px;
         padding: 4px;
@@ -127,7 +127,7 @@ mark {
     // VS Code has 0.7 here but 0.6 in other places.
     // Opacity causing z-order issues with position: sticky, so using manually calced color.
     // Need to solve calc relative to theme.
-    color: rgb(255, 255, 255);
+    color: rgb(139, 139, 139);
 }
 
 .svLogsPane {
