@@ -87,10 +87,7 @@ export async function activate(context: ExtensionContext) {
     };
 
     // TODO: to uncomment when process-sarif is integrated.
-    const uris = await processedSarifContents(Uri.parse("/home/mh/Downloads/latest_build_results.tar.bz2"));
-    // const uris = await SarifContents("/home/mh/Downloads/latest_build_results/processed/");
-    // const uris = await SarifContents("/home/mh/repos/visualize_sarif/samples/");
-    console.log(uris);
+    const uris = await processedSarifContents(Uri.parse("/home/spaceros-user/src/spaceros/log/build_results_archives/latest_build_results.tar.bz2"));
 
     api.openLogs(uris, {});
     return api;
