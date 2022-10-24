@@ -6,7 +6,13 @@ A [Visual Studio Code](https://code.visualstudio.com/) [extension] (WIP), and a 
 
 
 ## Usage
-## Standalone web application
+
+## Inside a SpaceROS image
+ - Run a SpaceROS docker image from [here](https://github.com/space-ros/docker-images/)
+ - Attach Vscode to the running docker container (you will need the Vscode docker extention installed for that)
+ - Install SpaceROS dashboard in the Vscode window running inside the docker container
+ - Use the dashboard by using using the command `spaceRos.showPanel` (using f1 then using "spaceros" as a keyword also works)
+## Standalone web application [No actively supported right now]
 ### Prerequest
 Node v16 or higher is recommended.
 
