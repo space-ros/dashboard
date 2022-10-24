@@ -15,6 +15,7 @@ import { Store } from './store';
 import * as Telemetry from './telemetry';
 import { update, updateChannelConfigSection } from './update';
 import { UriRebaser } from './uriRebaser';
+import { processedSarifContents } from './loadArchive';
 
 export async function activate(context: ExtensionContext) {
     // Borrowed from: https://github.com/Microsoft/vscode-languageserver-node/blob/db0f0f8c06b89923f96a8a5aebc8a4b5bb3018ad/client/src/main.ts#L217
@@ -26,10 +27,6 @@ export async function activate(context: ExtensionContext) {
 
     const disposables = context.subscriptions;
     Store.globalState = context.globalState;
-    disposables.push(commands.registerCommand('sarif.clearState', () => {
-        context.globalState.update('view', undefined);
-        commands.executeCommand('workbench.action.reloadWindow');
-    }));
     const store = new Store();
 
     // Basing
@@ -46,7 +43,6 @@ export async function activate(context: ExtensionContext) {
     const urisNonSarif = await workspace.findFiles('**', '.sarif', 10000); // Ignore folders?
     const fileAndUris = urisNonSarif.map(uri => [platformUriNormalize(uri.path).file, uri.toString(true /* skipEncoding */)]) as [string, string][];
     const baser = new UriRebaser(mapDistinct(fileAndUris), store);
-
     // Panel
     const panel = new Panel(context, baser, store);
     disposables.push(commands.registerCommand('sarif.showPanel', () => panel.show()));
@@ -90,9 +86,10 @@ export async function activate(context: ExtensionContext) {
         },
     };
 
-    // During development, use the following line to auto-load a log.
-    // api.openLogs([Uri.parse('/path/to/log.sarif')], {});
+    // TODO: to uncomment when process-sarif is integrated.
+    const uris = await processedSarifContents(Uri.parse("/home/spaceros-user/src/spaceros/log/build_results_archives/latest_build_results.tar.bz2"));
 
+    api.openLogs(uris, {});
     return api;
 }
 
@@ -153,7 +150,7 @@ function activateWatchDocuments(disposables: Disposable[], store: Store, panel: 
     const addLog = async (doc: TextDocument) => {
         if (!doc.fileName.match(/\.sarif$/i)) return;
         if (store.logs.some(log => log._uri === doc.uri.toString())) return; // TODO: Potentially redundant, need to verify.
-        store.logs.push(...await loadLogs([doc.uri]));
+        // store.logs.push(...await loadLogs([doc.uri]));
         panel.show();
     };
     workspace.textDocuments.forEach(addLog);

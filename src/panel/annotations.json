@@ -1,0 +1,18 @@
+[
+    {
+        "rule": "google-explicit",
+        "location": "filesystem_helper.hpp",
+        "line": "89",
+        "tool": "/samples/commit_1/f",
+        "message": "pathconststdstringpNOLINTruntimeexplicitthisisaconversionconstructornn",
+        "link": "https://github.com/space-ros/dashboard/issues/8"
+    },
+    {
+        "rule": "google-explicit-constructor",
+        "location": "filesystem_helper.hpp",
+        "line": "89",
+        "tool": "/samples/commit_1/",
+        "message": "pathconststdstringpNOLINTruntimeexplicitthisisaconversionconstructornn",
+        "link": "https://github.com/space-ros/dashboard/issues/8"
+    }
+]

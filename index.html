@@ -6,11 +6,14 @@ It mocks the html environment for `panel/Index.tsx`. Local Storage simulates `gl
 <html lang="en">
     <head>
         <link rel="stylesheet" href="index.css">
+        <script src="resources/d3.min.js"></script>
+
         <style>
             code { font-family: SF Mono, Menlo, Monaco, 'Courier New', monospace; }
         </style>
     </head>
-    <body class="vscode-dark">
+    <body class="vscode-light">
+        <img src="resources/spaceros_black_on_transparent.png"></img>
         <div id="root"></div>
         <script>
             acquireVsCodeApi = (() => ({ postMessage: message => {

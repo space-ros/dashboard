@@ -24,22 +24,43 @@
         },
         filtersColumn: {
             Columns: {
-                'Baseline': false,
-                'Suppression': false,
-                'Rule': false,
+                'Baseline': true,
+                'Suppression': true,
+                'Rule': true,
+                'Action': true
             },
         },
     };
+
     const state = localStorage.getItem('state');
     const store = new Store(JSON.parse(state) ?? defaultState, true);
-    const file = 'samples/demoSarif.json';
-    const response = await fetch(file);
-    const log = await response.json();
-    log._uri = `file:///Users/username/projects/${file}`;
-    store.logs.push(log);
+    const array = ['cpplint.sarif', 'cppcheck.sarif', 'clang_tidy.sarif'];
+    const baselines = 4;
+    let baselineStores = [];
+    const baselineFolder = "samples/commit_";
+
+    for (let index = 1; index < baselines; index++) {
+        const baselineStore = new Store(JSON.parse(state) ?? defaultState, true);
+        await loadLogs(baselineStore, baselineFolder+index.toString()+"/"); // too add other params
+        baselineStores.push(baselineStore);
+    }
+    async function loadLogs(store, basePath)  {
+        for (let index = 0; index < array.length; index++) {
+            const file = basePath + array[index];
+            const response = await fetch(file);
+            if (response.ok) {
+                const log = await response.json();
+                log._uri = `/home/steven/osrf/space-ros/dashboard/samples/commit_2/${array[index]}`;
+                store.logs.push(log);
+                log._uri = file;
+                store.logs.push(log);
+            }
+        }
+    }
+    await loadLogs(store, baselineFolder + "1/");
     document.body.classList.add('pageIndex') // Alternatively 'pageDetailsLayouts'.
     ReactDOM.render(
-        React.createElement(Index, {store}), // Alternatively 'DetailsLayouts'.
+        React.createElement(Index, {store, baselineStores}), // Alternatively 'DetailsLayouts'.
         document.getElementById('root'),
     );
 })();

@@ -11,9 +11,10 @@ import { loadLogs } from './loadLogs';
 import { regionToSelection } from './regionToSelection';
 import { Store } from './store';
 import { UriRebaser } from './uriRebaser';
+import { processedSarifContents } from './loadArchive';
 
 export class Panel {
-    private title = 'SARIF Result'
+    private title = 'Dashboard'
     @observable private panel: WebviewPanel | null = null
 
     constructor(
@@ -25,6 +26,7 @@ export class Panel {
             if (type !== 'splice') throw new Error('Only splice allowed on store.logs.');
             this.spliceLogs(removed, added);
         });
+       
         autorun(() => {
             const count = store.results.length;
             if (!this.panel) return;
@@ -65,8 +67,8 @@ export class Panel {
                     default-src 'none';
                     connect-src vscode-resource:;
                     font-src    vscode-resource:;
-                    script-src  vscode-resource: 'unsafe-inline';
-                    style-src   vscode-resource: 'unsafe-inline';
+                    script-src  vscode-resource: 'unsafe-eval' 'unsafe-inline';
+                    style-src   vscode-resource: 'unsafe-eval' 'unsafe-inline';
                     ">
                 <style>
                     code { font-family: ${workspace.getConfiguration('editor').get('fontFamily')} }
@@ -145,6 +147,19 @@ export class Panel {
                     await Store.globalState.update('view', Object.assign(oldState, JSON.parse(state)));
                     break;
                 }
+                case 'writeAnnotations': {
+                    const {data} = message;
+                    const root_dir = process.cwd();
+                    console.log("written annotation file to: ", root_dir);
+                    fs.writeFileSync("new_annotaions.json", data);
+                    
+                    // Use Vscode Api to write file
+                    // const d = Buffer.from(data, 'utf8');
+                    // const folderUri = workspace.workspaceFolders[0].uri;
+                    // const fileUri = folderUri.with({ path: path.join(root_dir, 'new_annotations.json') });
+                    // workspace.fs.writeFile(fileUri, d);
+                    break;
+                }
                 default:
                     throw new Error(`Unhandled command: ${message.command}`,);
             }
@@ -186,5 +201,11 @@ export class Panel {
 
     private async spliceLogs(removed: Log[], added: Log[]) {
         await this.panel?.webview.postMessage(this.createSpliceLogsMessage(removed, added));
+    }
+}
+
+export class FS {
+    constructor(){
+        return fs;
     }
 }

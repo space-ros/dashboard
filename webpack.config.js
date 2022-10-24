@@ -28,7 +28,7 @@ const common = {
         ]
     },
 
-    devtool: 'source-map', // 'inline-source-map' hits breakpoints more reliability, but inflate file size.
+    devtool: 'inline-source-map', // 'inline-source-map' hits breakpoints more reliability, but inflate file size.
     output: {
         filename: '[name].js', // Default, consider omitting.
         path: outputPath,
@@ -83,7 +83,8 @@ module.exports = [
         },
         target: 'node',
         externals: {
-            vscode: 'commonjs vscode' // the vscode-module is created on-the-fly and must be excluded.
+            vscode: 'commonjs vscode', // the vscode-module is created on-the-fly and must be excluded.
         },
     },
+    
 ];

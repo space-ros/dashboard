@@ -82,7 +82,8 @@ interface TableProps<T, G> {
                             </Hi>;
                         }
                         if (row instanceof RowItem) {
-                            return <TableItem key={row.key} isSelected={isSelected} item={row} gridTemplateColumns={this.gridTemplateColumns} />;
+                            
+                            return (<TableItem key={row.key} isSelected={isSelected} item={row} gridTemplateColumns={this.gridTemplateColumns} />)
                         }
                         return undefined; // Closed system: No other types expected.
                     })}

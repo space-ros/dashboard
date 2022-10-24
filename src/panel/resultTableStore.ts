@@ -16,7 +16,8 @@ export class ResultTableStore<G> extends TableStore<Result, G> {
             filtersRow: Record<string, Record<string, Visibility>>;
             filtersColumn: Record<string, Record<string, Visibility>>;
         },
-        readonly selection: IObservableValue<Row | undefined>) {
+        readonly selection: IObservableValue<Row | undefined>,
+        baslineResults: { baselineResults: ReadonlyArray<Result>} = {baselineResults:[]}) {
         super(
             groupBy,
             resultsSource,
@@ -35,6 +36,8 @@ export class ResultTableStore<G> extends TableStore<Result, G> {
         new Column<Result>('Baseline', 100, result => result.baselineState ?? ''),
         new Column<Result>('Suppression', 100, result => result._suppression ?? ''),
         new Column<Result>('Rule', 220, result => `${result._rule?.name ?? '—'} ${result.ruleId ?? '—'}`),
+        new Column<Result>('Action', 220, result => result.baselineState ?? ''),
+        new Column<Result>('Query', 220, result => `${result._rule?.id ?? '—'} ${result._id ?? '—'}`),
     ]
     get columns() {
         return [...this.columnsPermanent, ...this.columnsOptional];

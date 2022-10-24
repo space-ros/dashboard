@@ -70,7 +70,6 @@ Object.defineProperty(String.prototype, 'file', {
         return this.substring(this.lastIndexOf('/') + 1, this.length);
     }
 });
-
 !String.prototype.hasOwnProperty('path') &&
 Object.defineProperty(String.prototype, 'path', {
     get: function() {
