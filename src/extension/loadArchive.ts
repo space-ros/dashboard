@@ -1,5 +1,5 @@
 /// <reference path="jsonSourceMap.d.ts" />
-import { mkdtempSync, statSync } from 'fs';
+import { mkdtempSync } from 'fs';
 import * as fs from 'fs';
 import { execSync } from 'child_process';
 import { walkSync } from '@nodelib/fs.walk';
@@ -14,10 +14,6 @@ export async function unpackArchive(uri: Uri) {
     }
     const path = uri.path;
 
-    const archive_stats = statSync(path);
-    if (archive_stats.isFile()) {
-        throw new Error(`${path} is not a file.`);
-    }
     const tmpdir = mkdtempSync(`${os.tmpdir()}/build-results-`);
     execSync(`tar -C ${tmpdir} -xf ${path}`);
     return tmpdir;

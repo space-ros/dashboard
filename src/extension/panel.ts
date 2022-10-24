@@ -12,7 +12,6 @@ import { regionToSelection } from './regionToSelection';
 import { Store } from './store';
 import { UriRebaser } from './uriRebaser';
 import { processedSarifContents } from './loadArchive';
-import * as path from 'path';
 
 export class Panel {
     private title = 'Dashboard'
