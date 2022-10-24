@@ -29,7 +29,7 @@ import data from "./annotations.json";
 
 @observer export class Index extends Component<{ store: IndexStore, baselineStores: [IndexStore] }> {
     private showFilterPopup = observable.box(false)
-    private detailsPaneHeight = observable.box(120)
+    private detailsPaneHeight = observable.box(300)
     private chartsMode = observable.box(false);
     private annotationDialog = observable.box(false);
     public annotations = observable.box(data || {});
@@ -167,11 +167,11 @@ import data from "./annotations.json";
                             }} />)
                         }
                     </Tab>
-                    <Tab name={store.tabs[6]}>
+                    {/* <Tab name={store.tabs[6]}>
                             <>
                                 <BurnDownChart baselineStores={baselineStores} store={store.resultTableStoreByRule}  />
                             </>
-                    </Tab>
+                    </Tab> */}
                 </TabPanel>
             </div>
             <div className="svResizer">
