@@ -11,7 +11,6 @@ import { loadLogs } from './loadLogs';
 import { regionToSelection } from './regionToSelection';
 import { Store } from './store';
 import { UriRebaser } from './uriRebaser';
-import { processedSarifContents } from './loadArchive';
 
 export class Panel {
     private title = 'Dashboard'
@@ -26,7 +25,7 @@ export class Panel {
             if (type !== 'splice') throw new Error('Only splice allowed on store.logs.');
             this.spliceLogs(removed, added);
         });
-       
+
         autorun(() => {
             const count = store.results.length;
             if (!this.panel) return;
@@ -149,15 +148,7 @@ export class Panel {
                 }
                 case 'writeAnnotations': {
                     const {data} = message;
-                    const root_dir = process.cwd();
-                    console.log("written annotation file to: ", root_dir);
-                    fs.writeFileSync("new_annotaions.json", data);
-                    
-                    // Use Vscode Api to write file
-                    // const d = Buffer.from(data, 'utf8');
-                    // const folderUri = workspace.workspaceFolders[0].uri;
-                    // const fileUri = folderUri.with({ path: path.join(root_dir, 'new_annotations.json') });
-                    // workspace.fs.writeFile(fileUri, d);
+                    fs.writeFileSync('annotaions.json', data);
                     break;
                 }
                 default:
