@@ -6,19 +6,21 @@ import { PureComponent } from 'react';
 import { ResultTableStore } from './resultTableStore';
 import * as d3 from 'd3';
 
-interface ChartProps<G> {
+export interface ChartProps<G> {
     store: ResultTableStore<G>;
 }
 @observer export class Chart<G> extends PureComponent<ChartProps<G>> {
     private ref!: SVGSVGElement;
-    private PieChart = () => {
+    private pieChart = () => {
         const { store } = this.props;
         const { rows } = store;
         let names: string[];
+
+        // If the title is an object then use the id as a title for the pie
         if (typeof(rows[0].title) === 'object'){
-            console.log(typeof(rows[0].title));
             names = d3.map(rows, d => d.title.id);
-        }else{
+        }
+        else{
             names = d3.map(rows, d => d.title);
         }
         let values: number[] = d3.map(rows, d => d.items.length);
@@ -43,7 +45,7 @@ interface ChartProps<G> {
         const strokeWidth = 1; // width of stroke separating wedges
         const strokeLinejoin = 'round'; // line join of stroke separating wedges
 
-        // Chose a default color scheme based on cardinality.
+        // Choose a default color scheme based on cardinality.
         let colors = d3.schemeSpectral[names.length];
         colors = d3.quantize(t => d3.interpolateSpectral(t * 0.8 + 0.1), names.length);
 
@@ -71,10 +73,10 @@ interface ChartProps<G> {
             .selectAll('path')
             .data(arcs)
             .join('path')
-            .attr('fill', d => color(names[d.data]))
+            .attr('fill', d => color(names[d.data.valueOf()]))
             .attr('d', arc)
             .append('title')
-            .text(d => title(d.data));
+            .text(d => title(d.data.valueOf()));
 
         svg.append('g')
             .attr('font-family', 'sans-serif')
@@ -86,7 +88,7 @@ interface ChartProps<G> {
             .attr('transform', d => `translate(${arcLabel.centroid(d)})`)
             .selectAll('tspan')
             .data(d => {
-                const lines = `${title(d.data)}`.split(/\n/);
+                const lines = `${title(d.data.valueOf())}`.split(/\n/);
                 return (d.endAngle - d.startAngle) > 0.25 ? lines : lines.slice(0, 1);
             })
             .join('tspan')
@@ -100,8 +102,9 @@ interface ChartProps<G> {
 
     componentDidMount() {
         // activate
-        this.PieChart();
+        this.pieChart();
     }
+
     render() {
         return (<div className="svg">
             <svg className="container" ref={(ref: SVGSVGElement) => this.ref = ref}></svg>
