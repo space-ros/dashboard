@@ -75,7 +75,7 @@ export { DetailsLayouts } from './details.layouts';
                         </label>
                     </>}>
                     <Tab name={store.tabs[0]} count={store.resultTableStoreByLocation.groupsFilteredSorted.length}>
-                        {chartsMode.get() ?
+                        {chartsMode.get() && !selected ?
                             <Chart store={store.resultTableStoreByLocation} />
                             :(<ResultTable store={store.resultTableStoreByLocation} onClearFilters={() => store.clearFilters()}
                                 renderGroup={(title: string) => {
@@ -88,7 +88,7 @@ export { DetailsLayouts } from './details.layouts';
                         }
                     </Tab>
                     <Tab name={store.tabs[1]} count={store.resultTableStoreByRule.groupsFilteredSorted.length}>
-                        {chartsMode.get() ?
+                        {chartsMode.get() && !selected ?
                             <Chart store={store.resultTableStoreByRule} />
                             :
                             <ResultTable store={store.resultTableStoreByRule} onClearFilters={() => store.clearFilters()}
