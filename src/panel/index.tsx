@@ -5,7 +5,7 @@ import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import * as React from 'react';
 import { Component, Fragment } from 'react';
-import { ReportingDescriptor } from 'sarif';
+import { ReportingDescriptor, Result } from 'sarif';
 import 'vscode-codicons/dist/codicon.css';
 import '../shared/extension';
 import { Details } from './details';
@@ -94,6 +94,33 @@ export { DetailsLayouts } from './details.layouts';
                                 </div>;
                             })}
                         </div>
+                    </Tab>
+                    <Tab name={store.tabs[3]} count={store.resultTableStoreByTool.groupsFilteredSorted.length}>
+                        <ResultTable store={store.resultTableStoreByTool} onClearFilters={() => store.clearFilters()}
+                            renderGroup={(tool: string | undefined) => {
+                                return <>
+                                    <span>{tool ?? '—'}</span>
+                                    <span className="ellipsis svSecondary">{tool ?? '—'}</span>
+                                </>;
+                            }} />
+                    </Tab>
+                    <Tab name={store.tabs[4]} count={store.resultTableStoreByLevel.groupsFilteredSorted.length}>
+                        <ResultTable store={store.resultTableStoreByLevel} onClearFilters={() => store.clearFilters()}
+                            renderGroup={(level: Result.level | undefined) => {
+                                return <>
+                                    <span>{level ?? '—'}</span>
+                                    <span className="ellipsis svSecondary">{level ?? '—'}</span>
+                                </>;
+                            }} />
+                    </Tab>
+                    <Tab name={store.tabs[5]} count={store.resultTableStoreByKind.groupsFilteredSorted.length}>
+                        <ResultTable store={store.resultTableStoreByKind} onClearFilters={() => store.clearFilters()}
+                            renderGroup={(kind: Result.kind | undefined) => {
+                                return <>
+                                    <span>{kind ?? '—'}</span>
+                                    <span className="ellipsis svSecondary">{kind ?? '—'}</span>
+                                </>;
+                            }} />
                     </Tab>
                 </TabPanel>
             </div>
