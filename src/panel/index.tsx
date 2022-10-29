@@ -33,6 +33,9 @@ export { DetailsLayouts } from './details.layouts';
                 <div onClick={() => vscode.postMessage({ command: 'open' })}>
                     Open SARIF log
                 </div>
+                <div onClick={() => vscode.postMessage({ command: 'openArchive' })}>
+                    Open SARIF logs archive
+                </div>
             </div>;
         }
 

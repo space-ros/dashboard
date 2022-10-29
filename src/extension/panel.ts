@@ -8,6 +8,7 @@ import { Log, Region, Result } from 'sarif';
 import { commands, ExtensionContext, TextEditorRevealType, Uri, ViewColumn, WebviewPanel, window, workspace } from 'vscode';
 import { CommandPanelToExtension, filtersColumn, filtersRow, JsonMap, ResultId } from '../shared';
 import { loadLogs } from './loadLogs';
+import { unpackedSarifContents } from './loadLogsUtils';
 import { regionToSelection } from './regionToSelection';
 import { Store } from './store';
 import { UriRebaser } from './uriRebaser';
@@ -98,6 +99,17 @@ export class Panel {
                         filters: { 'SARIF files': ['sarif', 'json'] },
                     });
                     if (!uris) return;
+                    store.logs.push(...await loadLogs(uris));
+                    break;
+                }
+                case 'openArchive': {
+                    const archive = await window.showOpenDialog({
+                        canSelectMany: false,
+                        defaultUri: undefined,
+                        filters: { 'Archives': ['tar.bz2', 'tar'] },
+                    });
+                    if (!archive) return;
+                    const uris = await unpackedSarifContents(archive[0]);
                     store.logs.push(...await loadLogs(uris));
                     break;
                 }
