@@ -19,13 +19,9 @@ import { execSync } from 'child_process';
 import { walkSync } from '@nodelib/fs.walk';
 import * as os from 'os';
 import * as path from 'path';
-import { Uri, } from 'vscode';
+import { Uri } from 'vscode';
 
 export async function unpackArchive(uri: Uri) {
-
-    if (uri.scheme !== 'file') {
-        throw new Error('Archive must be a local file:// url.');
-    }
     const path = uri.path;
 
     const tmpdir = mkdtempSync(`${os.tmpdir()}/build-results-`);
@@ -33,7 +29,7 @@ export async function unpackArchive(uri: Uri) {
     return tmpdir;
 }
 
-export async function processedSarifContents(uri: Uri) {
+export async function unpackedSarifContents(uri: Uri) {
     const unpacked_path = await unpackArchive(uri);
     const processed_sarif_uris: Uri[] = [];
 
@@ -45,7 +41,7 @@ export async function processedSarifContents(uri: Uri) {
     return processed_sarif_uris;
 }
 
-export async function SarifContents(uri: string) {
+export async function sarifContents(uri: string) {
     const sarif_uris: Uri[] = [];
 
     walkSync(uri).forEach((file) => {
