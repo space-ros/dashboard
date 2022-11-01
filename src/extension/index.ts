@@ -15,6 +15,8 @@ import { Store } from './store';
 import * as Telemetry from './telemetry';
 import { update, updateChannelConfigSection } from './update';
 import { UriRebaser } from './uriRebaser';
+import { env } from 'process';
+import { unpackedSarifContents } from './loadLogsUtils';
 
 export async function activate(context: ExtensionContext) {
     // Borrowed from: https://github.com/Microsoft/vscode-languageserver-node/blob/db0f0f8c06b89923f96a8a5aebc8a4b5bb3018ad/client/src/main.ts#L217
@@ -67,6 +69,18 @@ export async function activate(context: ExtensionContext) {
         update();
     }
 
+    if (env.SPACEROS_LOG_DIR)
+    {
+        const uris = await unpackedSarifContents(Uri.parse(env.SPACEROS_LOG_DIR));
+        store.logs.push(...await loadLogs(uris));
+    }
+    else
+    {
+        const path = '/home/spaceros-user/src/spaceros/log/build_results_archives/latest_build_results.tar.bz2';
+        const uris = await unpackedSarifContents(Uri.parse(path));
+        store.logs.push(...await loadLogs(uris));
+    }
+
     // API
     return {
         async openLogs(logs: Uri[], _options: unknown, cancellationToken?: CancellationToken) {
@@ -89,6 +103,7 @@ export async function activate(context: ExtensionContext) {
             baser.uriBases = values.map(uri => uri.toString());
         },
     };
+
 }
 
 function activateDiagnostics(disposables: Disposable[], store: Store, baser: UriRebaser) {
