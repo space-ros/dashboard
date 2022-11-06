@@ -9,7 +9,7 @@ import '../shared/extension';
 
 export class Store {
     static globalState: Memento
-
+    name? = '' as string
     @observable.shallow logs = [] as Log[]
     @computed get results() {
         const runs = this.logs.map(log => log.runs).flat();
