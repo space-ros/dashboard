@@ -46,7 +46,7 @@ export async function unpackAllBuilds(uri: Uri) {
     walkSync(uri.path).forEach(async (archive) => {
         const unpacked_path = await unpackArchive(Uri.parse(archive.path));
         const uris = await sarifContents(unpacked_path);
-        build_sarif_uris.set(archive.name, uris);
+        build_sarif_uris.set(archive.path, uris);
     });
     return build_sarif_uris;
 }
