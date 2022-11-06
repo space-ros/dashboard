@@ -20,7 +20,8 @@ export class Panel {
     constructor(
         readonly context: Pick<ExtensionContext, 'extensionPath' | 'subscriptions'>,
         readonly basing: UriRebaser,
-        readonly store: Pick<Store, 'logs' | 'results'>) {
+        readonly store: Pick<Store, 'logs' | 'results'>,
+        readonly baselineStores: Array<Store>) {
         observe(store.logs, change => {
             const {type, removed, added} = change as unknown as IArraySplice<Log>;
             if (type !== 'splice') throw new Error('Only splice allowed on store.logs.');
@@ -39,7 +40,7 @@ export class Panel {
             return;
         }
 
-        const {context, basing, store} = this;
+        const {context, basing, store, baselineStores} = this;
         const {webview} = this.panel = window.createWebviewPanel(
             'Index', `${this.title}s`, { preserveFocus: true, viewColumn: ViewColumn.Two }, // ViewColumn.Besides steals focus regardless of preserveFocus.
             {
@@ -57,6 +58,7 @@ export class Panel {
             filtersColumn,
         };
         const state = Store.globalState.get('view', defaultState);
+        const debug = baselineStores.length;
         webview.html = `<!DOCTYPE html>
             <html lang="en">
             <head>
@@ -65,8 +67,8 @@ export class Panel {
                     default-src 'none';
                     connect-src vscode-resource:;
                     font-src    vscode-resource:;
-                    script-src  vscode-resource: 'unsafe-inline';
-                    style-src   vscode-resource: 'unsafe-inline';
+                    script-src  vscode-resource: 'unsafe-eval' 'unsafe-inline';
+                    style-src   vscode-resource: 'unsafe-eval' 'unsafe-inline';
                     ">
                 <style>
                     code { font-family: ${workspace.getConfiguration('editor').get('fontFamily')} }
@@ -79,9 +81,14 @@ export class Panel {
                     vscode = acquireVsCodeApi();
                     (async () => {
                         const store = new Store(${JSON.stringify(state)})
+                        const baselineStores = [new Store(${JSON.stringify(state)}), new Store(${JSON.stringify(state)})];
+                        await baselineStores[0].onMessage({ data: ${JSON.stringify(this.createSpliceLogsMessage([], baselineStores[0].logs))} })
+                        await baselineStores[1].onMessage({ data: ${JSON.stringify(this.createSpliceLogsMessage([], baselineStores[1].logs))} })
+                        for (const bl in ${JSON.stringify(debug)}) {
+                        }
                         await store.onMessage({ data: ${JSON.stringify(this.createSpliceLogsMessage([], store.logs))} })
                         ReactDOM.render(
-                            React.createElement(Index, { store }),
+                            React.createElement(Index, { store, baselineStores }),
                             document.getElementById('root'),
                         )
                     })();
@@ -101,6 +108,7 @@ export class Panel {
                     if (!uris) return;
                     store.logs.push(...await loadLogs(uris));
                     break;
+
                 }
                 case 'openArchive': {
                     const archive = await window.showOpenDialog({
