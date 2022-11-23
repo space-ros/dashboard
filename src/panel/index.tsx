@@ -21,13 +21,18 @@ export { React };
 export * as ReactDOM from 'react-dom';
 export { IndexStore as Store } from './indexStore';
 export { DetailsLayouts } from './details.layouts';
+import { DropMenu } from './dropdown';
+import { IndexStoreRemoved } from './indexStoreRemoved';
+import { IndexStoreRemovedd } from './indexStoreRemovedd';
+import { IndexStoreAdded } from './indexStoreAdded';
 
-@observer export class Index extends Component<{ store: IndexStore }> {
+@observer export class Index extends Component<{ store: IndexStore, compareStoreRemoved : IndexStoreRemoved, compareStoreAdded : IndexStoreAdded, builds: Array<string> }> {
     private showFilterPopup = observable.box(false)
     private detailsPaneHeight = observable.box(300)
 
     render() {
-        const {store} = this.props;
+        const {store, compareStoreAdded, compareStoreRemoved, builds} = this.props;
+
         if (!store.logs.length) {
             return <div className="svZeroData">
                 <div onClick={() => vscode.postMessage({ command: 'open' })}>
@@ -98,6 +103,18 @@ export { DetailsLayouts } from './details.layouts';
                             })}
                         </div>
                     </Tab>
+                    <Tab name='compare'>
+                        <DropMenu compareStoreAdded={compareStoreAdded} compareStoreRemoved={compareStoreRemoved} builds={builds}></DropMenu>
+                    </Tab>
+                    <Tab name='compare results'>
+                        <ResultTable store={compareStoreRemoved.resultTableStoreByRule} onClearFilters={() => compareStoreRemoved.clearFilters()}
+                            renderGroup={(rule: ReportingDescriptor | undefined) => {
+                                return <>
+                                    <span>{rule?.name ?? '—'}</span>
+                                    <span className="ellipsis svSecondary">{rule?.id ?? '—'}</span>
+                                </>;
+                            }} />
+                    </Tab>
                 </TabPanel>
             </div>
             <div className="svResizer">
@@ -119,10 +136,10 @@ export { DetailsLayouts } from './details.layouts';
     }
 
     componentDidMount() {
-        addEventListener('message', this.props.store.onMessage);
+        // addEventListener('message', this.props.store.onMessage);
     }
 
     componentWillUnmount() {
-        removeEventListener('message', this.props.store.onMessage);
+        // removeEventListener('message', this.props.store.onMessage);
     }
 }

@@ -16,7 +16,7 @@ import * as Telemetry from './telemetry';
 import { update, updateChannelConfigSection } from './update';
 import { UriRebaser } from './uriRebaser';
 import { env } from 'process';
-import { unpackedSarifContents, unpackAllBuilds } from './loadLogsUtils';
+import { unpackedSarifContents, listAllBuilds } from './loadLogsUtils';
 
 export async function activate(context: ExtensionContext) {
     // Borrowed from: https://github.com/Microsoft/vscode-languageserver-node/blob/db0f0f8c06b89923f96a8a5aebc8a4b5bb3018ad/client/src/main.ts#L217
@@ -33,8 +33,10 @@ export async function activate(context: ExtensionContext) {
         commands.executeCommand('workbench.action.reloadWindow');
     }));
     const store = new Store();
+    const leftStore = new Store();
+    const rightStore = new Store();
 
-    const baselineStores: Array<Store> = new Array<Store>();
+    const builds: Array<string> = new Array<string>();
 
     // Basing
     //
@@ -52,7 +54,7 @@ export async function activate(context: ExtensionContext) {
     const baser = new UriRebaser(mapDistinct(fileAndUris), store);
 
     // Panel
-    const panel = new Panel(context, baser, store, baselineStores);
+    const panel = new Panel(context, baser, store, builds, leftStore, rightStore);
     disposables.push(commands.registerCommand('sarif.showPanel', () => panel.show()));
 
     // General Activation
@@ -73,21 +75,17 @@ export async function activate(context: ExtensionContext) {
 
     if (env.SPACEROS_LOG_DIR)
     {
-        const uris = await unpackedSarifContents(Uri.parse(env.SPACEROS_LOG_DIR));
-        store.logs.push(...await loadLogs(uris));
+        const contents = await unpackedSarifContents(Uri.parse(env.SPACEROS_LOG_DIR));
+        store.logs.push(...await loadLogs(contents['uris']));
     }
     else
     {
-        const buildsUris = await unpackAllBuilds(Uri.parse('/home/m/Downloads/build_archives'));
-        (await buildsUris).forEach(async (uris, build) => {
-            const tempStore = new Store();
-            tempStore.name = build;
-            tempStore.logs.push(...await loadLogs(uris));
-            baselineStores.push(tempStore);
-        });
-        const path = '/home/m/Downloads/build_results_2022-09-14T234913Z.tar.bz2';
-        const uris = await unpackedSarifContents(Uri.parse(path));
-        store.logs.push(...await loadLogs(uris));
+        builds.push(...await listAllBuilds(Uri.parse('/home/m/Downloads/build_archives')));
+        const path = '/home/m/Downloads/build_archives/latest_build.tar.bz2';
+        const contents = await unpackedSarifContents(Uri.parse(path));
+        // path of the exctracted archive
+        store.path = contents['path'];
+        store.logs.push(...await loadLogs(contents['uris']));
     }
 
     // API

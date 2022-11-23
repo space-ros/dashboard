@@ -20,11 +20,16 @@ import { walkSync, walk } from '@nodelib/fs.walk';
 import * as os from 'os';
 import * as path from 'path';
 import { Uri } from 'vscode';
+import * as diff from 'diff';
+import { Log, Result as LogResult } from 'sarif';
+import { compare, compareSync, Options, Result } from 'dir-compare';
+import { reRequire } from 'mock-require';
 
 export async function unpackArchive(uri: Uri) {
     const path = uri.path;
 
-    const tmpdir = mkdtempSync(`${os.tmpdir()}/build-results-`);
+    const buildName = uri.path.substring(uri.path.lastIndexOf('/'));
+    const tmpdir = mkdtempSync(`${os.tmpdir()}/${buildName}`);
     execSync(`tar -C ${tmpdir} -xf ${path}`);
     return tmpdir;
 }
@@ -38,7 +43,8 @@ export async function unpackedSarifContents(uri: Uri) {
             processed_sarif_uris.push(Uri.parse(file.path));
         }
     });
-    return processed_sarif_uris;
+    // TODO MH add interface for this return type
+    return {'uris': processed_sarif_uris, 'path': unpacked_path};
 }
 
 export async function unpackAllBuilds(uri: Uri) {
@@ -49,6 +55,72 @@ export async function unpackAllBuilds(uri: Uri) {
         build_sarif_uris.set(archive.path, uris);
     });
     return build_sarif_uris;
+}
+
+function equalResult(lr: LogResult, rr: LogResult) : boolean {
+    if (lr.ruleId === rr.ruleId && lr._message === rr._message && lr._region?.startLine === rr._region?.startLine &&  lr._uri === rr._uri ){
+        return true;
+    }
+    return false;
+}
+
+export function compareResults(leftLogResult: LogResult[], rightLogResult: LogResult[]) {
+    const l : Results[] = [];
+    const r : Results[] = [];
+    leftLogResult.forEach((lr, i) => {
+        let onlyLeft = true;
+        rightLogResult.forEach(rr => {
+            if(equalResult(lr, rr)){
+                onlyLeft = false;
+                return;
+            }
+        });
+        if (onlyLeft){l.push(lr);}
+    });
+    rightLogResult.forEach((rr, i) => {
+        let onlyRight = true;
+        leftLogResult.forEach(lr => {
+            if(equalResult(lr, rr)){
+                onlyRight = false;
+                return;
+            }
+        });
+        if (onlyRight){r.push(rr);}
+    });
+    return {l, r};
+}
+
+export async function compareBuilds(latestBuildlogs: Log[], buildlogs: Log[]) {
+    const result = diff.diffArrays(latestBuildlogs, buildlogs);
+    return result;
+}
+
+export async function compareBuildsResults(latestBuildlogs: LogResult[], buildlogs: LogResult[]) {
+    const result = diff.diffArrays(latestBuildlogs, buildlogs);
+    return result;
+}
+
+export async function compareArchives(leftBuildUri : Uri, rightBuildUri : Uri) {
+    const options : Options = { compareSize: true, compareContent: true };
+    let rightBuildUnpackedUri :string = rightBuildUri.path;
+    let leftBuildUnpackedUri :string = leftBuildUri.path;
+    if (rightBuildUri.path.indexOf('tmp') === -1){
+        rightBuildUnpackedUri = await unpackArchive(rightBuildUri);
+    }
+    if (leftBuildUri.path.indexOf('tmp') === -1){
+        leftBuildUnpackedUri = await unpackArchive(leftBuildUri);
+    }
+    const result: Result = compareSync(path.join(leftBuildUnpackedUri, 'processed'), path.join(rightBuildUnpackedUri, 'processed'), options);
+    return result;
+}
+
+export async function listAllBuilds(uri: Uri) {
+    // List all archive names in uri
+    const builds: string[] = [];
+    walkSync(uri.path).forEach(async (archive) => {
+        builds.push(archive.path);
+    });
+    return builds;
 }
 
 export async function sarifContents(uri: string) {
