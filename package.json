@@ -4,7 +4,7 @@
     "description": "Adds support for viewing SARIF logs",
     "author": "Open Robotics",
     "license": "MIT",
-    "version": "3.2.16",
+    "version": "3.2.17",
     "publisher": "openrobotics",
     "repository": {
         "type": "git",
