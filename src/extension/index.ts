@@ -76,15 +76,15 @@ export async function activate(context: ExtensionContext) {
         const contents = await unpackedSarifContents(Uri.parse(env.SPACEROS_LOG_DIR));
         store.logs.push(...await loadLogs(contents['uris']));
     }
-    else
-    {
-        builds.push(...await listAllBuilds(Uri.parse('/home/m/Downloads/build_archives')));
-        const path = '/home/m/Downloads/build_archives/latest_build.tar.bz2';
-        const contents = await unpackedSarifContents(Uri.parse(path));
-        // path of the exctracted archive
-        store.path = contents['path'];
-        store.logs.push(...await loadLogs(contents['uris']));
-    }
+    // else
+    // {
+    //     builds.push(...await listAllBuilds(Uri.parse('/home/m/Downloads/build_archives')));
+    //     const path = '/home/m/Downloads/build_archives/latest_build.tar.bz2';
+    //     const contents = await unpackedSarifContents(Uri.parse(path));
+    //     // path of the exctracted archive
+    //     store.path = contents['path'];
+    //     store.logs.push(...await loadLogs(contents['uris']));
+    // }
 
     // API
     return {
