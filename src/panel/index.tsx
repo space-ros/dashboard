@@ -16,6 +16,7 @@ import { ResultTable } from './resultTable';
 import { RowItem } from './tableStore';
 import { Checkrow, Icon, Popover, ResizeHandle, Tab, TabPanel } from './widgets';
 import { decodeFileUri } from '../shared';
+import { Chart } from './chart';
 
 export { React };
 export * as ReactDOM from 'react-dom';
@@ -26,6 +27,7 @@ import { DropMenu } from './dropdown';
 @observer export class Index extends Component<{ store: IndexStore, builds: Array<string> }> {
     private showFilterPopup = observable.box(false)
     private detailsPaneHeight = observable.box(300)
+    private chartsMode = observable.box(false);
 
     render() {
         const {store, builds} = this.props;
@@ -42,7 +44,7 @@ import { DropMenu } from './dropdown';
         }
 
         const {logs, keywords} = store;
-        const {showFilterPopup, detailsPaneHeight} = this;
+        const {showFilterPopup, detailsPaneHeight, chartsMode} = this;
         const activeTableStore = store.selectedTab.get().store;
         const allCollapsed = activeTableStore?.groupsFilteredSorted.every(group => !group.expanded) ?? false;
         const selectedRow = store.selection.get();
@@ -67,25 +69,41 @@ import { DropMenu } from './dropdown';
                             visible={!activeTableStore}
                             onClick={() => vscode.postMessage({ command: 'closeAllLogs' })} />
                         <Icon name="folder-opened" title="Open Log" onClick={() => vscode.postMessage({ command: 'open' })} />
+                        <label className="switch">
+                            <div>
+                                <input type="checkbox"
+                                    onChange={function(e){
+                                        chartsMode.set(e.target.checked);
+                                    }}></input>
+                                <span className="slider round"></span>
+                            </div>
+                        </label>
                     </>}>
                     <Tab name={store.tabs[0]} count={store.resultTableStoreByLocation.groupsFilteredSorted.length}>
-                        <ResultTable store={store.resultTableStoreByLocation} onClearFilters={() => store.clearFilters()}
-                            renderGroup={(title: string) => {
-                                const {pathname} = new URL(title, 'file:');
-                                return <>
-                                    <span>{pathname.file || 'No Location'}</span>
-                                    <span className="ellipsis svSecondary">{pathname.path}</span>
-                                </>;
-                            }} />
+                        {chartsMode.get() && !selected ?
+                            <Chart store={store.resultTableStoreByLocation} />
+                            :(<ResultTable store={store.resultTableStoreByLocation} onClearFilters={() => store.clearFilters()}
+                                renderGroup={(title: string) => {
+                                    const {pathname} = new URL(title, 'file:');
+                                    return <>
+                                        <span>{pathname.file || 'No Location'}</span>
+                                        <span className="ellipsis svSecondary">{pathname.path}</span>
+                                    </>;
+                                }} />)
+                        }
                     </Tab>
                     <Tab name={store.tabs[1]} count={store.resultTableStoreByRule.groupsFilteredSorted.length}>
-                        <ResultTable store={store.resultTableStoreByRule} onClearFilters={() => store.clearFilters()}
-                            renderGroup={(rule: ReportingDescriptor | undefined) => {
-                                return <>
-                                    <span>{rule?.name ?? '—'}</span>
-                                    <span className="ellipsis svSecondary">{rule?.id ?? '—'}</span>
-                                </>;
-                            }} />
+                        {chartsMode.get() && !selected ?
+                            <Chart store={store.resultTableStoreByRule} />
+                            :
+                            <ResultTable store={store.resultTableStoreByRule} onClearFilters={() => store.clearFilters()}
+                                renderGroup={(rule: ReportingDescriptor | undefined) => {
+                                    return <>
+                                        <span>{rule?.name ?? '—'}</span>
+                                        <span className="ellipsis svSecondary">{rule?.id ?? '—'}</span>
+                                    </>;
+                                }} />
+                        }
                     </Tab>
                     <Tab name={store.tabs[2]} count={logs.length}>
                         <div className="svLogsPane">
