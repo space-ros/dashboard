@@ -100,9 +100,6 @@ import { DropMenu } from './dropdown';
                             })}
                         </div>
                     </Tab>
-                    <Tab name='compare'>
-                        <DropMenu builds={builds}></DropMenu>
-                    </Tab>
                     <Tab name={store.tabs[3]} count={store.resultTableStoreByTool.groupsFilteredSorted.length}>
                         <ResultTable store={store.resultTableStoreByTool} onClearFilters={() => store.clearFilters()}
                             renderGroup={(tool: string | undefined) => {
@@ -129,6 +126,9 @@ import { DropMenu } from './dropdown';
                                     <span className="ellipsis svSecondary">{kind ?? '—'}</span>
                                 </>;
                             }} />
+                    </Tab>
+                    <Tab name='compare'>
+                        <DropMenu builds={builds}></DropMenu>
                     </Tab>
                 </TabPanel>
             </div>

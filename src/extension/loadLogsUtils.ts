@@ -16,14 +16,13 @@
  */
 import { mkdtempSync } from 'fs';
 import { execSync } from 'child_process';
-import { walkSync, walk } from '@nodelib/fs.walk';
+import { walkSync } from '@nodelib/fs.walk';
 import * as os from 'os';
 import * as path from 'path';
 import { Uri } from 'vscode';
 import * as diff from 'diff';
 import { Log, Result as LogResult } from 'sarif';
-import { compare, compareSync, Options, Result } from 'dir-compare';
-import { reRequire } from 'mock-require';
+import { compareSync, Options, Result } from 'dir-compare';
 
 export async function unpackArchive(uri: Uri) {
     const path = uri.path;
@@ -69,7 +68,7 @@ function equalResult(lr: LogResult, rr: LogResult) : boolean {
 export function compareResults(leftLogResult: LogResult[], rightLogResult: LogResult[]) {
     const l : LogResult[] = [];
     const r : LogResult[] = [];
-    leftLogResult.forEach((lr, i) => {
+    leftLogResult.forEach((lr) => {
         let onlyLeft = true;
         rightLogResult.forEach(rr => {
             // If Result exists on both arrays dont add to left
@@ -80,7 +79,7 @@ export function compareResults(leftLogResult: LogResult[], rightLogResult: LogRe
         });
         if (onlyLeft){l.push(lr);}
     });
-    rightLogResult.forEach((rr, i) => {
+    rightLogResult.forEach((rr) => {
         let onlyRight = true;
         leftLogResult.forEach(lr => {
             if(equalResult(lr, rr)){

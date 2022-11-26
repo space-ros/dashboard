@@ -1,35 +1,22 @@
 import * as React from 'react';
-import { IObservableValue, observable, action } from 'mobx';
+import { observable, action } from 'mobx';
 import { Component } from 'react';
 import { observer } from 'mobx-react';
-import { IndexStore } from './indexStore';
-import Divider from '@mui/material/Divider';
-import Paper from '@mui/material/Paper';
 import MenuList from '@mui/material/MenuList';
 import MenuItem from '@mui/material/MenuItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import Typography from '@mui/material/Typography';
-import ContentCut from '@mui/icons-material/ContentCut';
-import { ResultTable } from './resultTable';
-import { Checkrow, Icon, Popover, renderMessageTextWithEmbeddedLinks, ResizeHandle, Tab, TabPanel } from './widgets';
-import { decodeFileUri } from '../shared';
-import { ReportingDescriptor, Run, Result as LogResult } from 'sarif';
+import { ResizeHandle } from './widgets';
+import { Result as LogResult } from 'sarif';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import { Log, PhysicalLocation, Result } from 'sarif';
-import { RowItem } from './tableStore';
+import { Log } from 'sarif';
 import { Details } from './details';
-import { ResultTableStore } from './resultTableStore';
-import { List, ListItem, ListSubheader } from '@mui/material';
 
 interface DropMenuProps {
     builds: Array<string>;
 }
 
 @observer export class DropMenu extends Component<DropMenuProps> {
-    private leftBuild = observable.box('')
     private rightBuild = observable.box('')
     private selectedRightResult = observable.box()
     private selectedLeftResult = observable.box()
@@ -42,15 +29,15 @@ interface DropMenuProps {
         this.rules.push(val);
     }
 
-    @observable rResults : Result[] = []
+    @observable rResults : LogResult[] = []
     @action
-    appendRightResults(val: Result){
+    appendRightResults(val: LogResult){
         this.rResults.push(val);
     }
 
-    @observable lResults : Result[] = []
+    @observable lResults : LogResult[] = []
     @action
-    appendLeftResults(val: Result){
+    appendLeftResults(val: LogResult){
         this.lResults.push(val);
     }
     @action
@@ -81,24 +68,7 @@ interface DropMenuProps {
         this.llogsIndices.push(val);
     }
 
-    private rightLogs = observable.box()
-    private leftLogs = observable.box()
     @observable rlogsobs = [] as Log[];
-
-    private renderCell = (result: Result) => {
-        const customRenderers = {
-            'File':     result => <span title={result._uri}>{result._uri?.file ?? '—'}</span>,
-            'Line':     result => <span>{result._region?.startLine ?? '—'}</span>,
-            'Message':  result => <span>{renderMessageTextWithEmbeddedLinks(result._message, result, vscode.postMessage)}</span>,
-            'Rule':     result => <>
-                <span>{result._rule?.name ?? '—'}</span>
-                <span className="svSecondary">{result.ruleId}</span>
-            </>,
-        } as Record<string, (result: Result) => React.ReactNode>;
-
-        const renderer = customRenderers['File'];
-        return renderer(result);
-    }
 
     private onMessageLog = async (event: MessageEvent) => {
         if (!event.data) return; // Ignore mysterious empty message
@@ -155,15 +125,7 @@ interface DropMenuProps {
         }
     }
 
-    // private resultTableStore = new ResultTableStore('File', result => result._relativeUri, this.lResults, , this.selection)
-
     render() {
-        const handleClickLeft = (event: React.MouseEvent<HTMLElement>) => {
-            const { myValue } = event.currentTarget.dataset;
-            if (myValue){
-                this.leftBuild.set(myValue);
-            }
-        };
         const handleClickRight = (event: React.MouseEvent<HTMLElement>) => {
             const { myValue } = event.currentTarget.dataset;
             if(myValue){
@@ -171,7 +133,7 @@ interface DropMenuProps {
             }
         };
 
-        const handleCompare = (event: React.MouseEvent<HTMLElement>) => {
+        const handleCompare = (_: React.MouseEvent<HTMLElement>) => {
             if(this.rightBuild.get().length>0){
                 vscode.postMessage({ command: 'compare', build: this.rightBuild.get() });
                 this.emptyResults();
