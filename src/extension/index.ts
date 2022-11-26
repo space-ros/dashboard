@@ -33,8 +33,6 @@ export async function activate(context: ExtensionContext) {
         commands.executeCommand('workbench.action.reloadWindow');
     }));
     const store = new Store();
-    const leftStore = new Store();
-    const rightStore = new Store();
 
     const builds: Array<string> = new Array<string>();
 
@@ -54,7 +52,7 @@ export async function activate(context: ExtensionContext) {
     const baser = new UriRebaser(mapDistinct(fileAndUris), store);
 
     // Panel
-    const panel = new Panel(context, baser, store, builds, leftStore, rightStore);
+    const panel = new Panel(context, baser, store, builds);
     disposables.push(commands.registerCommand('sarif.showPanel', () => panel.show()));
 
     // General Activation

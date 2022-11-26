@@ -15,23 +15,17 @@ import { ResultTable } from './resultTable';
 import { Checkrow, Icon, Popover, renderMessageTextWithEmbeddedLinks, ResizeHandle, Tab, TabPanel } from './widgets';
 import { decodeFileUri } from '../shared';
 import { ReportingDescriptor, Run, Result as LogResult } from 'sarif';
-import { IndexStoreRemoved } from './indexStoreRemoved';
-import { IndexStoreRemovedd } from './indexStoreRemovedd';
-import { IndexStoreAdded } from './indexStoreAdded';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import { Log, PhysicalLocation, Result } from 'sarif';
 import { RowItem } from './tableStore';
 import { Details } from './details';
-import { SimpleStore } from './simpleStore';
 import { ResultTableStore } from './resultTableStore';
 import { List, ListItem, ListSubheader } from '@mui/material';
 
 interface DropMenuProps {
     builds: Array<string>;
-    compareStoreRemoved : IndexStoreRemoved;
-    compareStoreAdded : IndexStoreAdded;
 }
 
 @observer export class DropMenu extends Component<DropMenuProps> {
@@ -164,13 +158,6 @@ interface DropMenuProps {
     // private resultTableStore = new ResultTableStore('File', result => result._relativeUri, this.lResults, , this.selection)
 
     render() {
-        const handleRightResultClickLeft = (event: React.MouseEvent<HTMLElement>) => {
-            const { myValue } = event.currentTarget.dataset;
-            rightResult = myValue;
-            if(myValue){
-                this.selectedRightResult.set(myValue);
-            }
-        };
         const handleClickLeft = (event: React.MouseEvent<HTMLElement>) => {
             const { myValue } = event.currentTarget.dataset;
             if (myValue){
@@ -193,14 +180,7 @@ interface DropMenuProps {
             }
         };
 
-        let rightResult = undefined;
-
-        const selectedRowLeft = this.props.compareStoreRemoved.selection.get();
-        const selectedLeft = selectedRowLeft instanceof RowItem && selectedRowLeft.item;
-        const selectedRowRight = this.props.compareStoreAdded.selection.get();
-        const selectedRight = selectedRowRight instanceof RowItem && selectedRowRight.item;
-
-        const { builds, compareStoreAdded, compareStoreRemoved } = this.props;
+        const { builds } = this.props;
         return(
             <>
                 <Box
@@ -253,8 +233,8 @@ interface DropMenuProps {
                 >
                     <div className="svListPane" >
                         <div>
-                            <Typography variant="inherit" sx={{marginBottom: 5}} color={'red'} noWrap>
-                                New
+                            <Typography variant="inherit" sx={{marginBottom: 5}} color={'green'} noWrap>
+                                Solved issues
                             </Typography>
                         </div>
                         <MenuList
@@ -265,7 +245,7 @@ interface DropMenuProps {
                         >
                             {this.lResults.map((result) => (
                                 <MenuItem data-my-value={result} onClick={() => this.selectedLeftResult.set(result)}>
-                                    <Typography variant="inherit" noWrap>
+                                    <Typography variant="caption">
                                         {result.ruleId}
                                     </Typography>
                                 </MenuItem>
@@ -279,8 +259,8 @@ interface DropMenuProps {
                     </div>
                     <div className="svListPane">
                         <div>
-                            <Typography variant="inherit" sx={{marginBottom: 5}} color={'green'} noWrap>
-                                Solved
+                            <Typography variant="inherit" sx={{marginBottom: 5}} color={'red'} noWrap>
+                                New issues
                             </Typography>
                         </div>
                         <MenuList
@@ -291,7 +271,7 @@ interface DropMenuProps {
                         >
                             {this.rResults.map((result) => (
                                 <MenuItem data-my-vue={result} onClick={() => this.selectedRightResult.set(result)}>
-                                    <Typography variant="inherit" noWrap>
+                                    <Typography variant="caption">
                                         {result.ruleId}
                                     </Typography>
                                 </MenuItem>
@@ -308,14 +288,10 @@ interface DropMenuProps {
         );
     }
     componentDidMount() {
-        addEventListener('message', this.props.compareStoreRemoved.onMessage);
-        addEventListener('message', this.props.compareStoreAdded.onMessage);
         addEventListener('message', this.onMessageLog);
     }
 
     componentWillUnmount() {
-        removeEventListener('message', this.props.compareStoreRemoved.onMessage);
-        removeEventListener('message', this.props.compareStoreAdded.onMessage);
         removeEventListener('message', this.onMessageLog);
     }
 }

@@ -25,8 +25,6 @@ export class Panel {
         readonly basing: UriRebaser,
         readonly store: Pick<Store, 'logs' | 'results' | 'path'>,
         readonly builds: Array<string>,
-        readonly leftStore: Pick<Store, 'logs' | 'results' | 'path'>,
-        readonly rightStore: Pick<Store, 'logs' | 'results' | 'path'>
     ) {
         observe(store.logs, change => {
             const {type, removed, added} = change as unknown as IArraySplice<Log>;
@@ -46,7 +44,7 @@ export class Panel {
             return;
         }
 
-        const {context, basing, store, builds, leftStore, rightStore} = this;
+        const {context, basing, store, builds} = this;
         const {webview} = this.panel = window.createWebviewPanel(
             'Index', `${this.title}s`, { preserveFocus: true, viewColumn: ViewColumn.Two }, // ViewColumn.Besides steals focus regardless of preserveFocus.
             {
@@ -64,8 +62,6 @@ export class Panel {
             filtersColumn,
         };
         const state = Store.globalState.get('view', defaultState);
-        const state_ = Store.globalState.get('view_', defaultState);
-        const state__ = Store.globalState.get('view__', defaultState);
 
         webview.html = `<!DOCTYPE html>
             <html lang="en">
@@ -89,18 +85,11 @@ export class Panel {
                     vscode = acquireVsCodeApi();
                     (async () => {
                         const store = new Store(${JSON.stringify(state)})
-                        const compareStore_ = new Store(${JSON.stringify(state)})
-                        const compareStoreAdded = new Store(${JSON.stringify(state_)})
-                        const compareStoreRemoved = new Store(${JSON.stringify(state__)})
-
                         const builds =  ${JSON.stringify(builds)}
-
-                        // await compareStoreAdded.onMessage({ data: ${JSON.stringify(this.createSpliceLogsMessage([], store.logs))} })
-                        // await compareStoreRemoved.onMessage({ data: ${JSON.stringify(this.createSpliceLogsMessage([], store.logs))} })
                         await store.onMessage({ data: ${JSON.stringify(this.createSpliceLogsMessage([], store.logs))} })
 
                         ReactDOM.render(
-                            React.createElement(Index, { store, compareStoreRemoved, compareStoreAdded, builds }),
+                            React.createElement(Index, { store, builds }),
                             document.getElementById('root'),
                         )
                     })();

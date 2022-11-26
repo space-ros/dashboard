@@ -22,16 +22,13 @@ export * as ReactDOM from 'react-dom';
 export { IndexStore as Store } from './indexStore';
 export { DetailsLayouts } from './details.layouts';
 import { DropMenu } from './dropdown';
-import { IndexStoreRemoved } from './indexStoreRemoved';
-import { IndexStoreRemovedd } from './indexStoreRemovedd';
-import { IndexStoreAdded } from './indexStoreAdded';
 
-@observer export class Index extends Component<{ store: IndexStore, compareStoreRemoved : IndexStoreRemoved, compareStoreAdded : IndexStoreAdded, builds: Array<string> }> {
+@observer export class Index extends Component<{ store: IndexStore, builds: Array<string> }> {
     private showFilterPopup = observable.box(false)
     private detailsPaneHeight = observable.box(300)
 
     render() {
-        const {store, compareStoreAdded, compareStoreRemoved, builds} = this.props;
+        const {store, builds} = this.props;
 
         if (!store.logs.length) {
             return <div className="svZeroData">
@@ -104,7 +101,7 @@ import { IndexStoreAdded } from './indexStoreAdded';
                         </div>
                     </Tab>
                     <Tab name='compare'>
-                        <DropMenu compareStoreAdded={compareStoreAdded} compareStoreRemoved={compareStoreRemoved} builds={builds}></DropMenu>
+                        <DropMenu builds={builds}></DropMenu>
                     </Tab>
                 </TabPanel>
             </div>
