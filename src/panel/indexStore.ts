@@ -72,6 +72,9 @@ export class IndexStore {
     selection = observable.box<Row | undefined>(undefined)
     resultTableStoreByLocation = new ResultTableStore('File', result => result._relativeUri, this, this, this.selection)
     resultTableStoreByRule     = new ResultTableStore('Rule', result => result._rule,        this, this, this.selection)
+    resultTableStoreByTool     = new ResultTableStore('Tool', result => result._run.tool.driver.name,        this, this, this.selection)
+    resultTableStoreByLevel     = new ResultTableStore('Level', result => result.level,        this, this, this.selection)
+    resultTableStoreByKind      = new ResultTableStore('Kind', result => result.kind,        this, this, this.selection)
 
     // Filters
     @observable keywords = ''
@@ -91,6 +94,9 @@ export class IndexStore {
         { toString: () => 'Locations', store: this.resultTableStoreByLocation },
         { toString: () => 'Rules', store: this.resultTableStoreByRule },
         { toString: () => 'Logs', store: undefined },
+        { toString: () => 'Tool', store: this.resultTableStoreByTool },
+        { toString: () => 'Level', store: this.resultTableStoreByLevel },
+        { toString: () => 'Kind', store: this.resultTableStoreByKind },
     ] as { store: ResultTableStore<string | ReportingDescriptor> | undefined }[]
     selectedTab = observable.box(this.tabs[0], { deep: false })
 
