@@ -75,6 +75,7 @@ export async function activate(context: ExtensionContext) {
     {
         const contents = await unpackedSarifContents(Uri.parse(env.SPACEROS_LOG_DIR));
         store.logs.push(...await loadLogs(contents['uris']));
+        builds.push(...await listAllBuilds(Uri.parse(env.SPACEROS_LOG_DIR)));
     }
     // else
     // {
