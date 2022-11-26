@@ -8,13 +8,11 @@ import { Log, Region, Result } from 'sarif';
 import { commands, ExtensionContext, TextEditorRevealType, Uri, ViewColumn, WebviewPanel, window, workspace } from 'vscode';
 import { CommandPanelToExtension, filtersColumn, filtersRow, JsonMap, ResultId } from '../shared';
 import { loadLogs } from './loadLogs';
-import { unpackedSarifContents, compareBuilds, compareArchives, compareBuildsResults, compareResults } from './loadLogsUtils';
+import { unpackedSarifContents, compareArchives, compareResults } from './loadLogsUtils';
 import { regionToSelection } from './regionToSelection';
 import { Store } from './store';
 import { UriRebaser } from './uriRebaser';
 import * as path from 'path';
-import { Difference, DiffSet } from 'dir-compare';
-
 
 export class Panel {
     private title = 'SARIF Result'
@@ -270,24 +268,6 @@ export class Panel {
         };
     }
 
-    private sendResults(command: string, left: Result[], right: Result[], lindices:number[], rindices:number[]) {
-        return {
-            command: command,
-            left: left.map(result => ({
-                uri: result._log._uri,
-                uriUpgraded: result._log._uriUpgraded,
-                webviewUri: this.panel?.webview.asWebviewUri(Uri.parse(result._log._uriUpgraded ?? result._log._uri, true)).toString(),
-            })),
-            right: right.map(result => ({
-                uri: result._log._uri,
-                uriUpgraded: result._log._uriUpgraded,
-                webviewUri: this.panel?.webview.asWebviewUri(Uri.parse(result._log._uriUpgraded ?? result._log._uri, true)).toString(),
-            })),
-            lindices: lindices,
-            rindices: rindices
-        };
-    }
-
     private sendRawResults(command: string, left: Result[], right: Result[]) {
         return {
             command: command,
@@ -312,21 +292,6 @@ export class Panel {
         };
     }
 
-    private sendResultsLog(command: string, logsL: Log[], logsR: Log[]) {
-        return {
-            command: command,
-            left: logsL.map(log => ({
-                uri: log._uri,
-                uriUpgraded: log._uriUpgraded,
-                webviewUri: this.panel?.webview.asWebviewUri(Uri.parse(log._uriUpgraded ?? log._uri, true)).toString(),
-            })),
-            right: logsR.map(log => ({
-                uri: log._uri,
-                uriUpgraded: log._uriUpgraded,
-                webviewUri: this.panel?.webview.asWebviewUri(Uri.parse(log._uriUpgraded ?? log._uri, true)).toString(),
-            })),
-        };
-    }
 
     private createSpliceLogsMessageWithCommand(command: string, removed: Log[], added: Log[]) {
         return {
