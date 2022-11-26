@@ -58,18 +58,21 @@ export async function unpackAllBuilds(uri: Uri) {
 }
 
 function equalResult(lr: LogResult, rr: LogResult) : boolean {
-    if (lr.ruleId === rr.ruleId && lr._message === rr._message && lr._region?.startLine === rr._region?.startLine &&  lr._uri === rr._uri ){
+    // the bug is here
+    // this produces false negatives
+    if (lr.ruleId === rr.ruleId && lr._region?.startLine === rr._region?.startLine &&  lr._uri === rr._uri ){
         return true;
     }
     return false;
 }
 
 export function compareResults(leftLogResult: LogResult[], rightLogResult: LogResult[]) {
-    const l : Results[] = [];
-    const r : Results[] = [];
+    const l : LogResult[] = [];
+    const r : LogResult[] = [];
     leftLogResult.forEach((lr, i) => {
         let onlyLeft = true;
         rightLogResult.forEach(rr => {
+            // If Result exists on both arrays dont add to left
             if(equalResult(lr, rr)){
                 onlyLeft = false;
                 return;

@@ -38,6 +38,7 @@ interface DropMenuProps {
     private leftBuild = observable.box('')
     private rightBuild = observable.box('')
     private selectedRightResult = observable.box()
+    private selectedLeftResult = observable.box()
     private leftDetailsPaneHeight = observable.box(300)
     private rightDetailsPaneHeight = observable.box(300)
 
@@ -47,16 +48,21 @@ interface DropMenuProps {
         this.rules.push(val);
     }
 
-    @observable rawResults : Result[] = []
+    @observable rResults : Result[] = []
     @action
-    appendrawResults(val: Result){
-        this.rawResults.push(val);
+    appendRightResults(val: Result){
+        this.rResults.push(val);
     }
 
     @observable lResults : Result[] = []
     @action
-    appendLResult(val: Result){
+    appendLeftResults(val: Result){
         this.lResults.push(val);
+    }
+    @action
+    emptyResults(){
+        this.lResults = [];
+        this.rResults = [];
     }
 
     @observable rlogs : Log[] = []
@@ -102,83 +108,55 @@ interface DropMenuProps {
 
     private onMessageLog = async (event: MessageEvent) => {
         if (!event.data) return; // Ignore mysterious empty message
-        console.log('recived msg', event.data);
-        if (event.data.command === 'removed'){
-            for (const {uri, uriUpgraded, webviewUri} of event.data.added) {
-                const response = await fetch(webviewUri);
-                const log = await response.json() as Log;
-                log._uri = uri;
-                log._uriUpgraded = uriUpgraded;
-                this.appendLLogs(log);
-                for(const r of log.runs){
-                    if(r.results){
-                        for(const result of r.results){
-                            this.appendLResult(result);
-                        }
-                    }
-                }
-                // this.rightLogs.set(this.rightLogs.get().concat(log));
-            }
-        }
-        if (event.data.command === 'added'){
-            for (const {uri, uriUpgraded, webviewUri} of event.data.added) {
-                const response = await fetch(webviewUri);
-                const log = await response.json() as Log;
-                log._uri = uri;
-                log._uriUpgraded = uriUpgraded;
-                this.appendRLogs(log);
-                // this.leftLogs.set(this.leftLogs.get().concat(log));
-            }
-            this.rightLogs.set(this.rlogsobs);
-        }
-        let count = 0;
-        for (let index = 0; index < this.rlogsobs.length; index++) {
-            if(this.rlogsobs[index].runs[0].results){
-                for(const result of this.rlogsobs[index].runs[0].results)
-                {
-                    this.appendLResult(result);
-                    if(result.ruleId){
-                        console.log(count);
-                        count = count +1;
-                        this.appendRules(result.ruleId);
-                        // this.rules.set(this.rules.get().concat(result.message.text));
-                    }
-                }
-            }
-
-        }
-        if (event.data.command === 'results'){
-            for (const {uri, uriUpgraded, webviewUri} of event.data.left) {
-                const response = await fetch(webviewUri);
-                const log = await response.json() as Log;
-                log._uri = uri;
-                log._uriUpgraded = uriUpgraded;
-                this.appendLLogs(log);
-                for(const r of log.runs){
-                    if(r.results){
-                        for(const result of r.results){
-                            this.appendLResult(result);
-                        }
-                    }
-                }
-            }
-            for (const {uri, uriUpgraded, webviewUri} of event.data.right) {
-                const response = await fetch(webviewUri);
-                const log = await response.json() as Log;
-                log._uri = uri;
-                log._uriUpgraded = uriUpgraded;
-                this.appendRLogs(log);
-            }
-            for(const index of event.data.lindices){
-                this.appendLLogsIndices(index);
-            }
-            for(const index of event.data.rindices){
-                this.appendRLogsIndices(index);
-            }
-        }
+        // console.log('recived msg', event.data);
+        // if (event.data.command === 'removed'){
+        //     for (const {uri, uriUpgraded, webviewUri} of event.data.added) {
+        //         const response = await fetch(webviewUri);
+        //         const log = await response.json() as Log;
+        //         log._uri = uri;
+        //         log._uriUpgraded = uriUpgraded;
+        //         this.appendLLogs(log);
+        //         // console.log(log);
+        //         for(const r of log.runs){
+        //             if(r.results){
+        //                 // console.log(r.results[0]);
+        //                 for(const result of r.results){
+        //                     // TODO uncomment to show locations
+        //                     // locations depends on the runs object which we lost for results displayed here
+        //                     result.locations = undefined;
+        //                     this.appendLeftResults(result as LogResult);
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+        // if (event.data.command === 'added'){
+        //     for (const {uri, uriUpgraded, webviewUri} of event.data.added) {
+        //         const response = await fetch(webviewUri);
+        //         const log = await response.json() as Log;
+        //         log._uri = uri;
+        //         log._uriUpgraded = uriUpgraded;
+        //         this.appendRLogs(log);
+        //         // console.log(log);
+        //         for(const r of log.runs){
+        //             if(r.results){
+        //                 // console.log(r.results[0]);
+        //                 for(const result of r.results){
+        //                     // TODO uncomment to show locations
+        //                     // locations depends on the runs object which we lost for results displayed here
+        //                     result.locations = undefined;
+        //                     this.appendRightResults(result as LogResult);
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
         if (event.data.command === 'rawresults'){
             for (const r of event.data.left) {
-                this.appendrawResults(r as LogResult);
+                this.appendLeftResults(r as LogResult);
+            }
+            for (const r of event.data.right) {
+                this.appendRightResults(r as LogResult);
             }
         }
     }
@@ -209,6 +187,9 @@ interface DropMenuProps {
         const handleCompare = (event: React.MouseEvent<HTMLElement>) => {
             if(this.rightBuild.get().length>0){
                 vscode.postMessage({ command: 'compare', build: this.rightBuild.get() });
+                this.emptyResults();
+                this.selectedLeftResult.set(undefined);
+                this.selectedRightResult.set(undefined);
             }
         };
 
@@ -228,40 +209,36 @@ interface DropMenuProps {
                         flexWrap: 'wrap',
                         '& > :not(style)': {
                             m: 1,
-                            width: 300,
-                            height: 128,
+                            width: '100%',
+                            maxHeight: 60,
                         },
+                        marginBottom: 5,
                     }}
                 >
-                    {/* <MenuList
-                        id="left-menu"
-                        aria-labelledby="long-button"
-                    >
-                        {builds.map((build) => (
-                            <MenuItem data-my-value={build} selected={build === this.leftBuild.get()} onClick={handleClickLeft}>
-                                <Typography variant="inherit" noWrap>
-                                    {build.substring(build.lastIndexOf('/'))}
-                                </Typography>
-                            </MenuItem>
-                        ))}
-                    </MenuList> */}
-                    <MenuList
-                        id="right-menu"
-                        aria-labelledby="long-button"
-                        sx={{overflow: 'auto',
-                            maxHeight: 300}}
-                    >
-                        {builds.map((build) => (
-                            <MenuItem data-my-value={build} selected={build === this.rightBuild.get()} onClick={handleClickRight}>
-                                <Typography variant="inherit" noWrap>
-                                    {build.substring(build.lastIndexOf('/'))}
-                                </Typography>
-                            </MenuItem>
-                        ))}
-                    </MenuList>
-                    <Button variant={'contained'} onClick={handleCompare} size={'small'} disabled={this.rightBuild.get().length<1}>
-                        View diff
-                    </Button>
+                    <>
+                        <div>
+                            Past Builds
+                        </div>
+                        <MenuList
+                            id="right-menu"
+                            aria-labelledby="long-button"
+                            sx={{overflow: 'auto',
+                                maxHeight: 300}}
+                        >
+                            {builds.map((build) => (
+                                <MenuItem data-my-value={build} selected={build === this.rightBuild.get()} onClick={handleClickRight}>
+                                    <Typography variant="inherit" noWrap>
+                                        {build.substring(build.lastIndexOf('/')+1)}
+                                    </Typography>
+                                </MenuItem>
+                            ))}
+                        </MenuList>
+                    </>
+                    <>
+                        <Button sx={{maxHeight: '30px', minHeight: '16px'}} variant={'contained'} onClick={handleCompare} size={'small'} disabled={this.rightBuild.get().length<1}>
+                        compare to latest
+                        </Button>
+                    </>
                 </Box>
                 <Box
                     sx={{
@@ -275,62 +252,19 @@ interface DropMenuProps {
                     }}
                 >
                     <div className="svListPane" >
-                        <List
-                            sx={{
-                                width: '100%',
-                                maxWidth: 360,
-                                bgcolor: 'background.paper',
-                                position: 'relative',
-                                overflow: 'auto',
-                                maxHeight: 300,
-                                '& ul': { padding: 0 },
-                            }}
-                            subheader={<li />}
-                        >
-                            {this.rlogsIndices.map((sectionId) => (
-                                <li key={`section-${this.rlogs[sectionId]._uri}`} onClick={()=>{}}>
-                                    <ListItem key={`item-${sectionId}`}>{`${sectionId}${this.rlogs[sectionId]._uri}`}</ListItem>
-                                </li>
-                            ))}
-                        </List>
-                        <div className="svResizer">
-                            <ResizeHandle size={this.leftDetailsPaneHeight} />
+                        <div>
+                            <Typography variant="inherit" sx={{marginBottom: 5}} color={'red'} noWrap>
+                                New
+                            </Typography>
                         </div>
-                        <Details result={selectedLeft} height={this.leftDetailsPaneHeight} />
-                    </div>
-                    <div className="svListPane">
-
-                        {/* {this.llogsIndices.map((sectionId) => (
-                                this.llogs[sectionId].runs[0].results.map((result) => {
-                                    <li>
-                                        <ListItem onClick={handleRightResultClickLeft} key={`item-${sectionId}`}>{`${sectionId}${this.llogs[sectionId].runs[0].results[0].ruleId}`}</ListItem>
-                                        <li key={`section_-${this.llogs[sectionId]._uri}`}>
-                                            <ListItem>{result.ruleId}</ListItem>
-                                        </li>;
-                                        <li key={`section-${this.llogs[sectionId]._uri}`}>
-                                            {this.renderCell(result)}
-                                        </li>;
-                                    </li>;
-                                })
-                            ))} */}
-                        {/* {this.llogsIndices.map((sectionId) => (
-                                <li key={`section-${this.llogs[sectionId]._uri}`}>
-                                    <ListItem onClick={handleRightResultClickLeft} key={`item-${sectionId}`}>{`${sectionId}${this.llogs[sectionId].runs[0].results[0].ruleId}`}</ListItem>
-                                </li>
-                            ))} */}
-                        {/* {this.lResults.map((result, i) => (
-                                <li key={`section-${result.ruleId}`}>
-                                    <ListItem onClick={handleRightResultClickLeft} key={`item-${result.ruleId}`}>{`${i}: ${result.ruleId}`}</ListItem>
-                                </li>
-                            ))} */}
                         <MenuList
-                            id="right-menu"
+                            id="left-menu"
                             aria-labelledby="long-button"
                             sx={{overflow: 'auto',
                                 maxHeight: 300}}
                         >
-                            {this.rawResults.map((result) => (
-                                <MenuItem data-my-value={result} onClick={() => this.selectedRightResult.set(result)}>
+                            {this.lResults.map((result) => (
+                                <MenuItem data-my-value={result} onClick={() => this.selectedLeftResult.set(result)}>
                                     <Typography variant="inherit" noWrap>
                                         {result.ruleId}
                                     </Typography>
@@ -338,56 +272,38 @@ interface DropMenuProps {
                             ))}
                         </MenuList>
 
+                        <div className="svResizer">
+                            <ResizeHandle size={this.leftDetailsPaneHeight} />
+                        </div>
+                        <Details result={this.selectedLeftResult.get()} height={this.leftDetailsPaneHeight} />
+                    </div>
+                    <div className="svListPane">
+                        <div>
+                            <Typography variant="inherit" sx={{marginBottom: 5}} color={'green'} noWrap>
+                                Solved
+                            </Typography>
+                        </div>
+                        <MenuList
+                            id="right-menu"
+                            aria-labelledby="long-button"
+                            sx={{overflow: 'auto',
+                                maxHeight: 300}}
+                        >
+                            {this.rResults.map((result) => (
+                                <MenuItem data-my-vue={result} onClick={() => this.selectedRightResult.set(result)}>
+                                    <Typography variant="inherit" noWrap>
+                                        {result.ruleId}
+                                    </Typography>
+                                </MenuItem>
+                            ))}
+                        </MenuList>
 
-                        {/* <ol>
-
-                                <input type="checkbox" checked={this.siwtch.get()}>
-                                </input>
-                                <span>empty logs</span>
-                                {this.rightLogs.get() ? (
-                                    this.rightLogs.get().map((log, i) => {
-                                        <span>not empty logs</span>;
-                                        <span>{log.runs[0].results[0].ruleId}</span>;
-                                        const runs = log.runs;
-                                        {
-                                            runs.map((run, ii) => {
-                                                const results = run.results;
-                                                {results ? (results.map((result, i) => {
-                                                    <span title={result._uri}>'File':  {result._uri?.file ?? '—'}</span>;
-                                                    <span>'Line':  {result._region?.startLine ?? '—'}</span>;
-                                                })
-                                                ):(null);}
-                                            });
-                                        }
-                                    })
-
-                                ): (null)
-                                }
-                                {
-                                    this.llogsIndices.map((index) => <li>{this.llogs[index]._uri}</li>)
-                                }
-                            </ol> */}
-                        {/* {this.rightLogs.get().length > 0 ? (
-                                <div className="svLogsPane">
-                                    {this.rightLogs.get().map((log, i) => {
-                                        const {pathname} = new URL(log.uri);
-                                        return <div key={i} className="svListItem">
-                                            <div>{pathname.file}</div>
-                                            <div className="ellipsis svSecondary">{decodeFileUri(log.uri)}</div>
-                                            <Icon name="close" title="Close Log"
-                                                onClick={() => vscode.postMessage({ command: 'closeLog', uri: log.uri })} />
-                                        </div>;
-                                    })}
-                                </div>
-                            ):(null)
-                            } */}
                         <div className="svResizer">
                             <ResizeHandle size={this.rightDetailsPaneHeight} />
                         </div>
                         <Details result={this.selectedRightResult.get()} height={this.rightDetailsPaneHeight} />
                     </div>
                 </Box>
-
             </>
         );
     }

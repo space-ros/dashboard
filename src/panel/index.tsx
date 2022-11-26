@@ -106,15 +106,6 @@ import { IndexStoreAdded } from './indexStoreAdded';
                     <Tab name='compare'>
                         <DropMenu compareStoreAdded={compareStoreAdded} compareStoreRemoved={compareStoreRemoved} builds={builds}></DropMenu>
                     </Tab>
-                    <Tab name='compare results'>
-                        <ResultTable store={compareStoreRemoved.resultTableStoreByRule} onClearFilters={() => compareStoreRemoved.clearFilters()}
-                            renderGroup={(rule: ReportingDescriptor | undefined) => {
-                                return <>
-                                    <span>{rule?.name ?? '—'}</span>
-                                    <span className="ellipsis svSecondary">{rule?.id ?? '—'}</span>
-                                </>;
-                            }} />
-                    </Tab>
                 </TabPanel>
             </div>
             <div className="svResizer">
