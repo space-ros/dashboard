@@ -148,7 +148,15 @@ export class Panel {
                 }
                 case 'writeAnnotations': {
                     const {data} = message;
-                    fs.writeFileSync('annotaions.json', data);
+                    const uri = await window.showSaveDialog({
+                        defaultUri: workspace.workspaceFolders?.[0]?.uri,
+                        saveLabel: 'save',
+                        filters: { 'Annotiation file': ['json'] },
+                    });
+                    if(uri){
+                        fs.writeFileSync(uri.path, data);
+                        console.log('annotatin file saved successfully');
+                    }
                     break;
                 }
                 case 'readAnnotations': {

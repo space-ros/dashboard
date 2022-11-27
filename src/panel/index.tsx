@@ -17,16 +17,23 @@ import { RowItem } from './tableStore';
 import { Checkrow, Icon, Popover, ResizeHandle, Tab, TabPanel } from './widgets';
 import { decodeFileUri } from '../shared';
 import { Chart } from './chart';
-
+import { FormDialog } from './dialog';
 export { React };
 export * as ReactDOM from 'react-dom';
 export { IndexStore as Store } from './indexStore';
 export { DetailsLayouts } from './details.layouts';
 
+// TODO as user to give path through vscode API
+// import annotation file
+// import data from './annotations.json';
+
 @observer export class Index extends Component<{ store: IndexStore }> {
     private showFilterPopup = observable.box(false)
+    private openLoadAnnotation = observable.box(false)
+    private annotationsFilePath = observable.box('')
     private detailsPaneHeight = observable.box(300)
-    private chartsMode = observable.box(false);
+    private chartsMode = observable.box(false)
+    // public annotations = observable.box(data || []);
 
     render() {
         const {store} = this.props;
@@ -38,8 +45,9 @@ export { DetailsLayouts } from './details.layouts';
             </div>;
         }
 
-        const {logs, keywords} = store;
-        const {showFilterPopup, detailsPaneHeight, chartsMode} = this;
+        const {logs, keywords, annotations} = store;
+        console.log(annotations);
+        const {showFilterPopup, detailsPaneHeight, chartsMode, openLoadAnnotation, annotationsFilePath} = this;
         const activeTableStore = store.selectedTab.get().store;
         const allCollapsed = activeTableStore?.groupsFilteredSorted.every(group => !group.expanded) ?? false;
         const selectedRow = store.selection.get();
@@ -64,6 +72,15 @@ export { DetailsLayouts } from './details.layouts';
                             visible={!activeTableStore}
                             onClick={() => vscode.postMessage({ command: 'closeAllLogs' })} />
                         <Icon name="folder-opened" title="Open Log" onClick={() => vscode.postMessage({ command: 'open' })} />
+                        <Icon name='cloud-upload'
+                            title='Upload annotations'
+                            visible={annotations.get().length===0}
+                            onClick={() => {vscode.postMessage({ command: 'readAnnotations' });}} />
+                        <Icon name='cloud-download'
+                            title='Download annotations'
+                            visible={annotations.get().length>0}
+                            onClick={() =>
+                                vscode.postMessage({ command: 'writeAnnotations', data: JSON.stringify(annotations.get()) })} />
                         <label className="switch">
                             <div>
                                 <input type="checkbox"
@@ -145,7 +162,7 @@ export { DetailsLayouts } from './details.layouts';
             <div className="svResizer">
                 <ResizeHandle size={detailsPaneHeight} />
             </div>
-            <Details result={selected} height={detailsPaneHeight} />
+            <Details result={selected} height={detailsPaneHeight} annotations={annotations} />
             <Popover show={showFilterPopup} style={{ top: 35, right: 8 + 35 + 35 + 8 }}>
                 {Object.entries(store.filtersRow).map(([name, state]) => <Fragment key={name}>
                     <div className="svPopoverTitle">{name}</div>
