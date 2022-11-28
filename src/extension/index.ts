@@ -80,6 +80,7 @@ export async function activate(context: ExtensionContext) {
     }
     else
     {
+        // TODO (MH) this causes CI to fail, find a way to bypass CI here
         const uris = await window.showOpenDialog({
             canSelectMany: false,
             canSelectFiles: false,
@@ -95,12 +96,6 @@ export async function activate(context: ExtensionContext) {
         // path of the exctracted archive
         store.path = latestBuild.path;
         store.logs.push(...await loadLogs(latestBuild['uris']));
-        // const path = '/home/spaceros-user/src/spaceros/log/build_results_archives/';
-        // builds.push(...await listAllBuilds(Uri.parse(path)));
-        // const latestBuild = await unpackedSarifContents(Uri.parse(join(path, 'latest_build_results.tar.bz2')));
-        // // path of the exctracted archive
-        // store.path = latestBuild['path'];
-        // store.logs.push(...await loadLogs(latestBuild['uris']));
     }
 
     // API
