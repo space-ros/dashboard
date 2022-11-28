@@ -2,9 +2,10 @@
 // Licensed under the MIT License.
 
 import * as fs from 'fs';
+import { readFileSync } from 'fs';
 import jsonMap from 'json-source-map';
 import { autorun, IArraySplice, observable, observe } from 'mobx';
-import { Log, Region, Result } from 'sarif';
+import { Log, Region, Result, Annotation } from 'sarif';
 import { commands, ExtensionContext, TextEditorRevealType, Uri, ViewColumn, WebviewPanel, window, workspace } from 'vscode';
 import { CommandPanelToExtension, filtersColumn, filtersRow, JsonMap, ResultId } from '../shared';
 import { loadLogs } from './loadLogs';
@@ -19,7 +20,7 @@ export class Panel {
     constructor(
         readonly context: Pick<ExtensionContext, 'extensionPath' | 'subscriptions'>,
         readonly basing: UriRebaser,
-        readonly store: Pick<Store, 'logs' | 'results'>) {
+        readonly store: Pick<Store, 'logs' | 'results'| 'annotations'>) {
         observe(store.logs, change => {
             const {type, removed, added} = change as unknown as IArraySplice<Log>;
             if (type !== 'splice') throw new Error('Only splice allowed on store.logs.');
@@ -64,8 +65,8 @@ export class Panel {
                     default-src 'none';
                     connect-src vscode-resource:;
                     font-src    vscode-resource:;
-                    script-src  vscode-resource: 'unsafe-inline';
-                    style-src   vscode-resource: 'unsafe-inline';
+                    script-src  vscode-resource: 'unsafe-eval' 'unsafe-inline';
+                    style-src   vscode-resource: 'unsafe-eval' 'unsafe-inline';
                     ">
                 <style>
                     code { font-family: ${workspace.getConfiguration('editor').get('fontFamily')} }
@@ -143,6 +144,30 @@ export class Panel {
                     const oldState = Store.globalState.get('view', defaultState);
                     const {state} = message;
                     await Store.globalState.update('view', Object.assign(oldState, JSON.parse(state)));
+                    break;
+                }
+                case 'writeAnnotations': {
+                    const {data} = message;
+                    const uri = await window.showSaveDialog({
+                        defaultUri: workspace.workspaceFolders?.[0]?.uri,
+                        saveLabel: 'save',
+                        filters: { 'Annotiation file': ['json'] },
+                    });
+                    if(uri){
+                        fs.writeFileSync(uri.path, data);
+                    }
+                    break;
+                }
+                case 'readAnnotations': {
+                    const uris = await window.showOpenDialog({
+                        canSelectMany: false,
+                        defaultUri: workspace.workspaceFolders?.[0]?.uri,
+                        filters: { 'Annotiation file': ['json'] },
+                    });
+                    if (!uris) return;
+                    const file = readFileSync(uris[0].fsPath, 'utf8').replace(/^\uFEFF/, ''); // Trim BOM.
+                    const annotations = JSON.parse(file) as Annotation;
+                    this.panel?.webview.postMessage({command: 'annotations', annotation: annotations});
                     break;
                 }
                 default:
