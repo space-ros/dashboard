@@ -17,7 +17,7 @@ import { RowItem } from './tableStore';
 import { Checkrow, Icon, Popover, ResizeHandle, Tab, TabPanel } from './widgets';
 import { decodeFileUri } from '../shared';
 import { Chart } from './chart';
-
+import { FormDialog } from './dialog';
 export { React };
 export * as ReactDOM from 'react-dom';
 export { IndexStore as Store } from './indexStore';
@@ -27,7 +27,7 @@ import { DropMenu } from './dropdown';
 @observer export class Index extends Component<{ store: IndexStore, builds: Array<string> }> {
     private showFilterPopup = observable.box(false)
     private detailsPaneHeight = observable.box(300)
-    private chartsMode = observable.box(false);
+    private chartsMode = observable.box(false)
 
     render() {
         const {store, builds} = this.props;
@@ -43,7 +43,7 @@ import { DropMenu } from './dropdown';
             </div>;
         }
 
-        const {logs, keywords} = store;
+        const {logs, keywords, annotations} = store;
         const {showFilterPopup, detailsPaneHeight, chartsMode} = this;
         const activeTableStore = store.selectedTab.get().store;
         const allCollapsed = activeTableStore?.groupsFilteredSorted.every(group => !group.expanded) ?? false;
@@ -69,6 +69,15 @@ import { DropMenu } from './dropdown';
                             visible={!activeTableStore}
                             onClick={() => vscode.postMessage({ command: 'closeAllLogs' })} />
                         <Icon name="folder-opened" title="Open Log" onClick={() => vscode.postMessage({ command: 'open' })} />
+                        <Icon name='cloud-upload'
+                            title='Upload annotations'
+                            visible={annotations.get().length===0}
+                            onClick={() => {vscode.postMessage({ command: 'readAnnotations' });}} />
+                        <Icon name='cloud-download'
+                            title='Download annotations'
+                            visible={annotations.get().length>0}
+                            onClick={() =>
+                                vscode.postMessage({ command: 'writeAnnotations', data: JSON.stringify(annotations.get()) })} />
                         <label className="switch">
                             <div>
                                 <input type="checkbox"
@@ -153,7 +162,7 @@ import { DropMenu } from './dropdown';
             <div className="svResizer">
                 <ResizeHandle size={detailsPaneHeight} />
             </div>
-            <Details result={selected} height={detailsPaneHeight} />
+            <Details result={selected} height={detailsPaneHeight} annotations={annotations} />
             <Popover show={showFilterPopup} style={{ top: 35, right: 8 + 35 + 35 + 8 }}>
                 {Object.entries(store.filtersRow).map(([name, state]) => <Fragment key={name}>
                     <div className="svPopoverTitle">{name}</div>

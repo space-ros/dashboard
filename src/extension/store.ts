@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 import { computed, IArrayWillSplice, intercept, observable } from 'mobx';
-import { Log, Result } from 'sarif';
+import { Log, Result, Annotation } from 'sarif';
 import { Memento } from 'vscode';
 import { mapDistinct } from '../shared';
 import '../shared/extension';
@@ -10,6 +10,7 @@ import '../shared/extension';
 export class Store {
     static globalState: Memento
     path = '' as string
+    @observable.deep annotations = [] as Annotation[]
     @observable.shallow logs = [] as Log[]
     @computed get results() {
         const runs = this.logs.map(log => log.runs).flat();

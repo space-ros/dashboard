@@ -3,22 +3,113 @@
 
 /* eslint-disable indent */ // Allowing for some custom intent under svDetailsGrid 2D layout.
 
-import { autorun, computed, IObservableValue, observable } from 'mobx';
+import { autorun, computed, IObservableValue, observable, action } from 'mobx';
 import { observer } from 'mobx-react';
 import * as React from 'react';
 import { Component, Fragment } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { Location, Result, StackFrame } from 'sarif';
+import { Location, Result, StackFrame, Annotation } from 'sarif';
 import { parseArtifactLocation, parseLocation, decodeFileUri } from '../shared';
 import './details.scss';
 import './index.scss';
 import { postSelectArtifact, postSelectLog } from './indexStore';
 import { List, Tab, TabPanel, renderMessageTextWithEmbeddedLinks } from './widgets';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 type TabName = 'Info' | 'Analysis Steps';
 
-interface DetailsProps { result: Result, height: IObservableValue<number> }
+// Returns annotation link if the issue was annotated by searching the annotations file
+function getLink(result:Result, annotations : Annotation[]) : string {
+    // console.log(JSON.stringify(decodeFileUri(result._log._uri)));
+    if (!annotations.length){
+        return '' as string;
+    }
+    for (const annotation of annotations){
+        if(result._message === annotation.message && result._uri === annotation.location && result.ruleId === annotation.rule && result._region?.startLine?.toString() === annotation.line && decodeFileUri(result._log._uri) === annotation.tool){
+            return annotation.link;
+        }
+    }
+    return '' as string;
+    // const a = JSON.parse(JSON.stringify(annotations));
+    // const dataHasLink = jsonPath({path: `$.[?(@.rule === ${JSON.stringify(result.ruleId)} && @.tool === ${JSON.stringify(decodeFileUri(result._log._uri))} && @.line === ${JSON.stringify(result._region?.startLine)})]`, json: a });
+    // // console.log(dataHasLink);
+    // if (dataHasLink.length > 0)
+    //     return dataHasLink[0]['link'];
+    // return '' as string;
+}
+
+// Deprecated
+// Used to write annotation file when in browser mode
+// Breaks Ext mode
+// async function WriteAnnotationDataBrowser(){
+//     const textFile = new Blob([JSON.stringify(data)], {type: 'text/plain'}); //pass data from localStorage API to blob
+//     const a = URL.createObjectURL(textFile);
+//     const anchor = window.document.createElement('a');
+//     anchor.href = window.URL.createObjectURL(textFile);
+//     anchor.download = 'annotations';
+//     document.body.appendChild(anchor);
+//     anchor.click();
+//     document.body.removeChild(anchor);
+//     window.URL.revokeObjectURL(anchor.href);
+// }
+
+interface FormDialogProps {
+    open : IObservableValue<boolean>; result: Result; annotations : IObservableValue<Annotation[]>;}
+
+@observer export class LinkFormDialog extends Component<FormDialogProps> {
+    private link = observable.box('http://');
+    constructor(props: FormDialogProps) {
+        super(props);
+    }
+    @action private append(result : Result, link : string) {
+        // TODO: don't hard code append file://
+        // Remove file:/ as json path breaks with special charcters
+        const annotation = {'rule': result.ruleId || '', 'tool': result._log._uri.split('file://')[1] || '', 'link': link || '', location: result._uri || '', line: result._region?.startLine?.toString() || '', message: result._message||''} as Annotation;
+        this.props.annotations.set(this.props.annotations.get().concat(annotation));
+    }
+    handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      this.link.set(event.target.value);
+    }
+    render() {
+        return(
+            <div>
+            <Dialog open={this.props.open.get()} onClose={()=> this.props.open.set(false)}>
+                <DialogTitle>Annotation</DialogTitle>
+                <DialogContent>
+                <DialogContentText>
+                    Add a link to the issue
+                </DialogContentText>
+                <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="Link"
+                    type="url"
+                    fullWidth
+                    variant="standard"
+                    onChange={this.handleChange}
+                    value={this.link.get()}
+                />
+                </DialogContent>
+                <DialogActions>
+                <Button onClick={ () => this.props.open.set(false)}>Cancel</Button>
+                <Button onClick={()=> {this.props.open.set(false);this.append(this.props.result, this.link.get());}}>Annotate</Button>
+                </DialogActions>
+            </Dialog>
+            </div>
+        );
+    }
+}
+
+interface DetailsProps { result: Result, height: IObservableValue<number>, annotations : IObservableValue<Annotation[]> }
 @observer export class Details extends Component<DetailsProps> {
+    private formDialogOpen = observable.box(false)
     private selectedTab = observable.box<TabName>('Info')
     @computed private get threadFlowLocations() {
 		return this.props.result?.codeFlows?.[0]?.threadFlows?.[0].locations
@@ -44,7 +135,8 @@ interface DetailsProps { result: Result, height: IObservableValue<number> }
                 : renderMessageTextWithEmbeddedLinks(desc.text, result, vscode.postMessage);
         };
 
-        const {result, height} = this.props;
+        const {formDialogOpen} = this;
+        const {result, height, annotations} = this.props;
         const helpUri = result?._rule?.helpUri;
         const renderLocation = (location: Location) => {
             const { message, uri, region } = parseLocation(result, location);
@@ -74,6 +166,12 @@ interface DetailsProps { result: Result, height: IObservableValue<number> }
                                 ? <ReactMarkdown className="svMarkDown" source={result._markdown} escapeHtml={false} />
                                 : renderMessageTextWithEmbeddedLinks(result._message, result, vscode.postMessage)}</div>
                         <div className="svDetailsGrid">
+                            <span>Issue link</span>         { getLink(result, annotations.get()).length > 0
+                                    ? <a href={getLink(result, annotations.get())} target="_blank" rel="noopener noreferrer">{getLink(result, annotations.get())}</a>
+                                    : <>
+                                    <Button onClick={()=> formDialogOpen.set(true)}>Add link</Button>
+                                    <LinkFormDialog open={formDialogOpen} result={result} annotations={annotations}></LinkFormDialog></>
+                                }
                             <span>Rule Id</span>			{helpUri ? <a href={helpUri} target="_blank" rel="noopener noreferrer">{result.ruleId}</a> : <span>{result.ruleId}</span>}
                             <span>Rule Name</span>			<span>{result._rule?.name ?? '—'}</span>
                             <span>Rule Description</span>	<span>{renderRuleDesc(result)}</span>
