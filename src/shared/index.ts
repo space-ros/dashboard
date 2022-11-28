@@ -245,5 +245,5 @@ export const filtersColumn: Record<string, Record<string, Visibility>> = {
     },
 };
 
-export type CommandPanelToExtension = 'open' | 'closeLog' | 'closeAllLogs' | 'select' | 'selectLog' | 'setState' | 'writeAnnotations' | 'readAnnotations';
+export type CommandPanelToExtension = 'open' | 'closeLog' | 'closeAllLogs' | 'select' | 'selectLog' | 'setState' | 'writeAnnotations' | 'readAnnotations' | 'compare';
 export type CommandExtensionToPanel = 'select' | 'spliceLogs' | 'annotations' | 'compareResults' | 'added' | 'removed' | 'results' | 'rawresults';

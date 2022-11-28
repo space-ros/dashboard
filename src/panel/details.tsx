@@ -26,16 +26,15 @@ type TabName = 'Info' | 'Analysis Steps';
 
 // Returns annotation link if the issue was annotated by searching the annotations file
 function getLink(result:Result, annotations : Annotation[]) : string {
-    // console.log(JSON.stringify(decodeFileUri(result._log._uri)));
-    if (!annotations.length){
-        return '' as string;
-    }
     for (const annotation of annotations){
-        if(result._message === annotation.message && result._uri === annotation.location && result.ruleId === annotation.rule && result._region?.startLine?.toString() === annotation.line && decodeFileUri(result._log._uri) === annotation.tool){
+        const resultUri = decodeFileUri(result._log._uri).split('/processed')[1];
+        if(result._message === annotation.message && result._uri === annotation.location && result.ruleId === annotation.rule && result._region?.startLine?.toString() === annotation.line && resultUri === annotation.tool.split('/processed')[1]){
             return annotation.link;
         }
     }
     return '' as string;
+    // Deprecated
+    // JSON path filtering, complicated syntax and annotation file not big enought to need it
     // const a = JSON.parse(JSON.stringify(annotations));
     // const dataHasLink = jsonPath({path: `$.[?(@.rule === ${JSON.stringify(result.ruleId)} && @.tool === ${JSON.stringify(decodeFileUri(result._log._uri))} && @.line === ${JSON.stringify(result._region?.startLine)})]`, json: a });
     // // console.log(dataHasLink);
@@ -70,7 +69,7 @@ interface FormDialogProps {
     @action private append(result : Result, link : string) {
         // TODO: don't hard code append file://
         // Remove file:/ as json path breaks with special charcters
-        const annotation = {'rule': result.ruleId || '', 'tool': result._log._uri.split('file://')[1] || '', 'link': link || '', location: result._uri || '', line: result._region?.startLine?.toString() || '', message: result._message||''} as Annotation;
+        const annotation = {'rule': result.ruleId || '', 'tool': result._log._uri || '', 'link': link || '', location: result._uri || '', line: result._region?.startLine?.toString() || '', message: result._message||''} as Annotation;
         this.props.annotations.set(this.props.annotations.get().concat(annotation));
     }
     handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

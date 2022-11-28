@@ -22,8 +22,8 @@ export class Panel {
     constructor(
         readonly context: Pick<ExtensionContext, 'extensionPath' | 'subscriptions'>,
         readonly basing: UriRebaser,
-        readonly store: Pick<Store, 'logs' | 'results'| 'annotations' | 'path'>),
-        readonly builds: Array<string>
+        readonly store: Pick<Store, 'logs' | 'results'| 'annotations' | 'path'>,
+        readonly builds: Array<string>,
     ) {
         observe(store.logs, change => {
             const {type, removed, added} = change as unknown as IArraySplice<Log>;
@@ -109,17 +109,6 @@ export class Panel {
                     store.logs.push(...await loadLogs(uris));
                     break;
 
-                }
-                case 'openArchive': {
-                    const archive = await window.showOpenDialog({
-                        canSelectMany: false,
-                        defaultUri: undefined,
-                        filters: { 'Archives': ['tar.bz2', 'tar'] },
-                    });
-                    if (!archive) return;
-                    const contents = await unpackedSarifContents(archive[0]);
-                    store.logs.push(...await loadLogs(contents['uris']));
-                    break;
                 }
                 case 'closeLog': {
                     store.logs.removeFirst(log => log._uri === message.uri);

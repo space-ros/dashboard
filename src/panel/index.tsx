@@ -178,10 +178,10 @@ import { DropMenu } from './dropdown';
     }
 
     componentDidMount() {
-        // addEventListener('message', this.props.store.onMessage);
+        addEventListener('message', this.props.store.onMessage);
     }
 
     componentWillUnmount() {
-        // removeEventListener('message', this.props.store.onMessage);
+        removeEventListener('message', this.props.store.onMessage);
     }
 }
