@@ -8,13 +8,12 @@ import { observer } from 'mobx-react';
 import * as React from 'react';
 import { Component, Fragment } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { Location, Result, StackFrame } from 'sarif';
+import { Location, Result, StackFrame, Annotation } from 'sarif';
 import { parseArtifactLocation, parseLocation, decodeFileUri } from '../shared';
 import './details.scss';
 import './index.scss';
 import { postSelectArtifact, postSelectLog } from './indexStore';
 import { List, Tab, TabPanel, renderMessageTextWithEmbeddedLinks } from './widgets';
-import { JSONPath as jsonPath } from 'jsonpath-plus';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -26,18 +25,23 @@ import DialogTitle from '@mui/material/DialogTitle';
 type TabName = 'Info' | 'Analysis Steps';
 
 // Returns annotation link if the issue was annotated by searching the annotations file
-function getLink(result:Result, annotations : { rule: string, location: string, line: string, tool: string, message: string, link: string }[]) : string {
+function getLink(result:Result, annotations : Annotation[]) : string {
     // console.log(JSON.stringify(decodeFileUri(result._log._uri)));
     if (!annotations.length){
         return '' as string;
     }
-    const a = JSON.parse(JSON.stringify(annotations));
-    // console.log(a);
-    const dataHasLink = jsonPath({path: `$.[?(@.rule === ${JSON.stringify(result.ruleId)} && @.tool === ${JSON.stringify(decodeFileUri(result._log._uri))})]`, json: a });
-    // console.log(dataHasLink);
-    if (dataHasLink.length > 0)
-        return dataHasLink[0]['link'];
+    for (const annotation of annotations){
+        if(result._message === annotation.message && result._uri === annotation.location && result.ruleId === annotation.rule && result._region?.startLine?.toString() === annotation.line && decodeFileUri(result._log._uri) === annotation.tool){
+            return annotation.link;
+        }
+    }
     return '' as string;
+    // const a = JSON.parse(JSON.stringify(annotations));
+    // const dataHasLink = jsonPath({path: `$.[?(@.rule === ${JSON.stringify(result.ruleId)} && @.tool === ${JSON.stringify(decodeFileUri(result._log._uri))} && @.line === ${JSON.stringify(result._region?.startLine)})]`, json: a });
+    // // console.log(dataHasLink);
+    // if (dataHasLink.length > 0)
+    //     return dataHasLink[0]['link'];
+    // return '' as string;
 }
 
 // Deprecated
@@ -56,7 +60,7 @@ function getLink(result:Result, annotations : { rule: string, location: string, 
 // }
 
 interface FormDialogProps {
-    open : IObservableValue<boolean>; result: Result; annotations : IObservableValue<{ rule: string, location: string, line: string, tool: string, message: string, link: string }[]>;}
+    open : IObservableValue<boolean>; result: Result; annotations : IObservableValue<Annotation[]>;}
 
 @observer export class LinkFormDialog extends Component<FormDialogProps> {
     private link = observable.box('http://');
@@ -66,7 +70,7 @@ interface FormDialogProps {
     @action private append(result : Result, link : string) {
         // TODO: don't hard code append file://
         // Remove file:/ as json path breaks with special charcters
-        const annotation = {'rule': result.ruleId || '', 'tool': result._log._uri.split('file://')[1] || '', 'link': link || '', location: '', line: '', message: ''};
+        const annotation = {'rule': result.ruleId || '', 'tool': result._log._uri.split('file://')[1] || '', 'link': link || '', location: result._uri || '', line: result._region?.startLine?.toString() || '', message: result._message||''} as Annotation;
         this.props.annotations.set(this.props.annotations.get().concat(annotation));
     }
     handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -103,7 +107,7 @@ interface FormDialogProps {
     }
 }
 
-interface DetailsProps { result: Result, height: IObservableValue<number>, annotations : IObservableValue<{ rule: string, location: string, line: string, tool: string, message: string, link: string }[]> }
+interface DetailsProps { result: Result, height: IObservableValue<number>, annotations : IObservableValue<Annotation[]> }
 @observer export class Details extends Component<DetailsProps> {
     private formDialogOpen = observable.box(false)
     private selectedTab = observable.box<TabName>('Info')
