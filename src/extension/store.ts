@@ -10,7 +10,7 @@ import '../shared/extension';
 export class Store {
     static globalState: Memento
 
-    @observable.shallow annotations = [] as Annotation[]
+    @observable.deep annotations = [] as Annotation[]
     @observable.shallow logs = [] as Log[]
     @computed get results() {
         const runs = this.logs.map(log => log.runs).flat();

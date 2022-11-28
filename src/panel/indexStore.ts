@@ -58,7 +58,7 @@ export class IndexStore {
 
     // Results
     @observable.shallow public logs = [] as Log[]
-    // @observable.shallow public annotations = [] as Annotation[]
+    // @observable.deep public annotations = [] as Annotation[]
     annotations = observable.box<Annotation[]>([])
     @computed private get runs() {
         return this.logs.map(log => log.runs).flat();
@@ -134,11 +134,11 @@ export class IndexStore {
         }
 
         if (command === 'annotations') {
+            const annotations = [] as Annotation[];
             for (const annotation of event.data.annotation) {
-                console.log(event.data.annotation);
-                this.annotations.push(annotation);
-                console.log(this.annotations);
+                annotations.push(annotation);
             }
+            this.annotations.set(annotations);
         }
     }
 }
