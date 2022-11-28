@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 import { action, autorun, computed, intercept, observable, observe, toJS, when } from 'mobx';
-import { Log, PhysicalLocation, ReportingDescriptor, Result } from 'sarif';
+import { Log, PhysicalLocation, ReportingDescriptor, Result, Annotation } from 'sarif';
 import { augmentLog, CommandExtensionToPanel, filtersColumn, filtersRow, parseArtifactLocation, Visibility } from '../shared';
 import '../shared/extension';
 import { isActive } from './isActive';
@@ -58,6 +58,8 @@ export class IndexStore {
 
     // Results
     @observable.shallow public logs = [] as Log[]
+    // @observable.deep public annotations = [] as Annotation[]
+    annotations = observable.box<Annotation[]>([])
     @computed private get runs() {
         return this.logs.map(log => log.runs).flat();
     }
@@ -129,6 +131,14 @@ export class IndexStore {
                 log._uriUpgraded = uriUpgraded;
                 this.logs.push(log);
             }
+        }
+
+        if (command === 'annotations') {
+            const annotations = [] as Annotation[];
+            for (const annotation of event.data.annotation) {
+                annotations.push(annotation);
+            }
+            this.annotations.set(annotations);
         }
     }
 }
