@@ -106,7 +106,7 @@ interface FormDialogProps {
     }
 }
 
-interface DetailsProps { result: Result, height: IObservableValue<number>, annotations : IObservableValue<Annotation[]> }
+interface DetailsProps { result: Result, height: IObservableValue<number>, annotations? : IObservableValue<Annotation[]> }
 @observer export class Details extends Component<DetailsProps> {
     private formDialogOpen = observable.box(false)
     private selectedTab = observable.box<TabName>('Info')
@@ -165,12 +165,12 @@ interface DetailsProps { result: Result, height: IObservableValue<number>, annot
                                 ? <ReactMarkdown className="svMarkDown" source={result._markdown} escapeHtml={false} />
                                 : renderMessageTextWithEmbeddedLinks(result._message, result, vscode.postMessage)}</div>
                         <div className="svDetailsGrid">
-                            <span>Issue link</span>         { getLink(result, annotations.get()).length > 0
+                            <span>Issue link</span>         { annotations ? getLink(result, annotations.get()).length > 0
                                     ? <a href={getLink(result, annotations.get())} target="_blank" rel="noopener noreferrer">{getLink(result, annotations.get())}</a>
                                     : <>
-                                    <Button onClick={()=> formDialogOpen.set(true)}>Add link</Button>
+                                    <div onClick={()=> formDialogOpen.set(true)}>Add link</div>
                                     <LinkFormDialog open={formDialogOpen} result={result} annotations={annotations}></LinkFormDialog></>
-                                }
+                                :null}
                             <span>Rule Id</span>			{helpUri ? <a href={helpUri} target="_blank" rel="noopener noreferrer">{result.ruleId}</a> : <span>{result.ruleId}</span>}
                             <span>Rule Name</span>			<span>{result._rule?.name ?? '—'}</span>
                             <span>Rule Description</span>	<span>{renderRuleDesc(result)}</span>
@@ -189,6 +189,7 @@ interface DetailsProps { result: Result, height: IObservableValue<number>, annot
                                                                         {uri?.file ?? '-'}
                                                                     </a>;
                                                                 }) ?? <span>—</span>}
+                                                                {}
                                                             </span>
                             <span>Log</span>				<a href="#" title={decodeFileUri(result._log._uri)}
                                                                 onClick={e => {

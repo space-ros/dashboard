@@ -292,7 +292,14 @@ export class Panel {
                 ruleId: result.ruleId,
                 rule: result.rule,
                 region: result._region,
-                _log: {_uri: result._log._uri}
+                _log: {_uri: result._log._uri},
+                _run: {artifacts: result._run.artifacts, _index: result._run._index},
+                locations: result.locations
+                // artifacts: result._run.artifacts,
+                // originalUriBaseIds: result._run.originalUriBaseIds,
+                // _runIndex: result._run._index,
+                // locations: result.locations,
+                // compareResult: true
             })),
             right: right.map(result => ({
                 _uri: result._uri,
@@ -301,7 +308,9 @@ export class Panel {
                 ruleId: result.ruleId,
                 rule: result.rule,
                 region: result._region,
-                _log: {_uri: result._log._uri}
+                _log: {_uri: result._log._uri},
+                _run: {artifacts: result._run.artifacts, _index: result._run._index},
+                locations: result.locations
             })),
         };
     }
