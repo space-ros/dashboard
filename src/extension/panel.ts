@@ -155,7 +155,6 @@ export class Panel {
                     });
                     if(uri){
                         fs.writeFileSync(uri.path, data);
-                        console.log('annotatin file saved successfully');
                     }
                     break;
                 }
@@ -167,11 +166,8 @@ export class Panel {
                     });
                     if (!uris) return;
                     const file = readFileSync(uris[0].fsPath, 'utf8').replace(/^\uFEFF/, ''); // Trim BOM.
-                    console.log(file);
                     const annotations = JSON.parse(file) as Annotation;
-                    console.log(annotations);
                     this.panel?.webview.postMessage({command: 'annotations', annotation: annotations});
-                    store.annotations.push(annotations);
                     break;
                 }
                 default:

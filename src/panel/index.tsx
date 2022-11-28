@@ -23,17 +23,10 @@ export * as ReactDOM from 'react-dom';
 export { IndexStore as Store } from './indexStore';
 export { DetailsLayouts } from './details.layouts';
 
-// TODO as user to give path through vscode API
-// import annotation file
-// import data from './annotations.json';
-
 @observer export class Index extends Component<{ store: IndexStore }> {
     private showFilterPopup = observable.box(false)
-    private openLoadAnnotation = observable.box(false)
-    private annotationsFilePath = observable.box('')
     private detailsPaneHeight = observable.box(300)
     private chartsMode = observable.box(false)
-    // public annotations = observable.box(data || []);
 
     render() {
         const {store} = this.props;
@@ -46,8 +39,7 @@ export { DetailsLayouts } from './details.layouts';
         }
 
         const {logs, keywords, annotations} = store;
-        console.log(annotations);
-        const {showFilterPopup, detailsPaneHeight, chartsMode, openLoadAnnotation, annotationsFilePath} = this;
+        const {showFilterPopup, detailsPaneHeight, chartsMode} = this;
         const activeTableStore = store.selectedTab.get().store;
         const allCollapsed = activeTableStore?.groupsFilteredSorted.every(group => !group.expanded) ?? false;
         const selectedRow = store.selection.get();
