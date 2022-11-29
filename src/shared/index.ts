@@ -211,6 +211,33 @@ export function parseArtifactLocation(result: Result, anyArtLoc: ArtifactLocatio
     return [uri, uriContents];
 }
 
+// Improve: `result` purely used for `_run.artifacts`.
+export function parseArtifactLocationMinimized(result: Result, anyArtLoc: ArtifactLocation | undefined) {
+    if (!anyArtLoc) return [undefined, undefined];
+    const runArt = result._run.artifacts?.[anyArtLoc.index ?? -1];
+    const runArtLoc = runArt?.location;
+    const runArtCon = runArt?.contents;
+
+    // Currently not supported: recursive resolution of uriBaseId.
+    const uriBaseId = anyArtLoc.uriBaseId ?? runArtLoc?.uriBaseId;
+    const uriBase = result._run.originalUriBaseIds?.[uriBaseId ?? '']?.uri ?? '';
+    const relativeUri = anyArtLoc.uri ?? runArtLoc?.uri; // If index (§3.4.5) is absent, uri SHALL be present.
+
+    // Convert possible relative URIs to absolute. Also serves to normalize leading slashes.
+    // skipEncoding=true because otherwise 'file:///c:' incorrectly round-trips as 'file:///c%3A'.
+    const normalizeUri = (uri: string) => URI.parse(uri, false /* allow relative URI */).toString(true /* skipEncoding */);
+    const uri = relativeUri && normalizeUri(urlJoin(uriBase, relativeUri));
+
+    // A shorter more transparent URI format would be:
+    // `sarif://${encodeURIComponent(result._log._uri)}/${result._run._index}/${anyArtLoc.index}/${uri?.file ?? 'Untitled'}`
+    // However between workspace.openTextDocument() and registerTextDocumentContentProvider/provideTextDocumentContent()
+    // VS Code fails to maintain the authority value (possibly due to an encoding bug).
+    const uriContents = runArtCon?.text || runArtCon?.binary
+        ? encodeURI(`sarif:${encodeURIComponent(result._log._uri)}/${result._run._index}/${anyArtLoc.index}/${uri?.file ?? 'Untitled'}`)
+        : undefined;
+    return [uri, uriContents];
+}
+
 export function decodeFileUri(uriString: string) {
     const uri = URI.parse(uriString, false);
     return uri.scheme === 'file' ? uri.fsPath : uriString;
@@ -245,5 +272,5 @@ export const filtersColumn: Record<string, Record<string, Visibility>> = {
     },
 };
 
-export type CommandPanelToExtension = 'open' | 'closeLog' | 'closeAllLogs' | 'burndown' | 'select' | 'selectLog' | 'setState' | 'writeAnnotations' | 'readAnnotations';
-export type CommandExtensionToPanel = 'select' | 'spliceLogs' | 'annotations';
+export type CommandPanelToExtension = 'open' | 'closeLog' | 'closeAllLogs' | 'select' | 'selectLog' | 'setState' | 'writeAnnotations' | 'readAnnotations' | 'compare' | 'burndown';
+export type CommandExtensionToPanel = 'select' | 'spliceLogs' | 'annotations' | 'compareResults' | 'added' | 'removed' | 'results' | 'rawresults';

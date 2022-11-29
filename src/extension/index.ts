@@ -15,6 +15,8 @@ import { Store } from './store';
 import * as Telemetry from './telemetry';
 import { update, updateChannelConfigSection } from './update';
 import { UriRebaser } from './uriRebaser';
+import { env } from 'process';
+import { unpackedSarifContents, listAllBuilds } from './loadLogsUtils';
 
 export async function activate(context: ExtensionContext) {
     // Borrowed from: https://github.com/Microsoft/vscode-languageserver-node/blob/db0f0f8c06b89923f96a8a5aebc8a4b5bb3018ad/client/src/main.ts#L217
@@ -32,6 +34,8 @@ export async function activate(context: ExtensionContext) {
     }));
     const store = new Store();
 
+    const builds: Array<string> = new Array<string>();
+
     // Basing
     //
     // `findFiles` performance assuming '**':
@@ -48,7 +52,7 @@ export async function activate(context: ExtensionContext) {
     const baser = new UriRebaser(mapDistinct(fileAndUris), store);
 
     // Panel
-    const panel = new Panel(context, baser, store);
+    const panel = new Panel(context, baser, store, builds);
     disposables.push(commands.registerCommand('sarif.showPanel', () => panel.show()));
 
     // General Activation
@@ -66,6 +70,32 @@ export async function activate(context: ExtensionContext) {
         }));
         update();
     }
+
+    if (env.SPACEROS_LOG_DIR)
+    {
+        const contents = await unpackedSarifContents(Uri.parse(env.SPACEROS_LOG_DIR));
+        store.logs.push(...await loadLogs(contents['uris']));
+        builds.push(...await listAllBuilds(Uri.parse(env.SPACEROS_LOG_DIR)));
+    }
+    // else
+    // {
+    //     // TODO (MH) this causes CI to fail, find a way to bypass CI here
+    //     const uris = await window.showOpenDialog({
+    //         canSelectMany: false,
+    //         canSelectFiles: false,
+    //         canSelectFolders: true,
+    //         defaultUri: workspace.workspaceFolders?.[0]?.uri,
+    //         openLabel: 'Select build achives dir'
+    //     });
+
+    //     if (!uris) return;
+    //     builds.push(...await listAllBuilds(uris[0]));
+    //     const latestBuildUri = Uri.parse(join(uris[0].path, 'latest_build_results.tar.bz2'));
+    //     const latestBuild = await unpackedSarifContents(latestBuildUri);
+    //     // path of the exctracted archive
+    //     store.path = latestBuild.path;
+    //     store.logs.push(...await loadLogs(latestBuild['uris']));
+    // }
 
     // API
     return {
@@ -89,6 +119,7 @@ export async function activate(context: ExtensionContext) {
             baser.uriBases = values.map(uri => uri.toString());
         },
     };
+
 }
 
 function activateDiagnostics(disposables: Disposable[], store: Store, baser: UriRebaser) {

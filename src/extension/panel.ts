@@ -9,10 +9,12 @@ import { Log, Region, Result, Annotation } from 'sarif';
 import { commands, ExtensionContext, TextEditorRevealType, Uri, ViewColumn, WebviewPanel, window, workspace } from 'vscode';
 import { CommandPanelToExtension, filtersColumn, filtersRow, JsonMap, ResultId } from '../shared';
 import { loadLogs } from './loadLogs';
+import { compareArchives, compareResults } from './loadLogsUtils';
 import { regionToSelection } from './regionToSelection';
 import { Store } from './store';
 import { UriRebaser } from './uriRebaser';
 import { unpackAllBuilds } from './loadLogsUtils';
+import * as path from 'path';
 
 export class Panel {
     private title = 'SARIF Result'
@@ -21,7 +23,9 @@ export class Panel {
     constructor(
         readonly context: Pick<ExtensionContext, 'extensionPath' | 'subscriptions'>,
         readonly basing: UriRebaser,
-        readonly store: Pick<Store, 'logs' | 'results'| 'annotations'>) {
+        readonly store: Pick<Store, 'logs' | 'results'| 'annotations' | 'path'>,
+        readonly builds: Array<string>,
+    ) {
         observe(store.logs, change => {
             const {type, removed, added} = change as unknown as IArraySplice<Log>;
             if (type !== 'splice') throw new Error('Only splice allowed on store.logs.');
@@ -40,7 +44,7 @@ export class Panel {
             return;
         }
 
-        const {context, basing, store} = this;
+        const {context, basing, store, builds} = this;
         const {webview} = this.panel = window.createWebviewPanel(
             'Index', `${this.title}s`, { preserveFocus: true, viewColumn: ViewColumn.Two }, // ViewColumn.Besides steals focus regardless of preserveFocus.
             {
@@ -58,6 +62,7 @@ export class Panel {
             filtersColumn,
         };
         const state = Store.globalState.get('view', defaultState);
+
         webview.html = `<!DOCTYPE html>
             <html lang="en">
             <head>
@@ -80,9 +85,11 @@ export class Panel {
                     vscode = acquireVsCodeApi();
                     (async () => {
                         const store = new Store(${JSON.stringify(state)})
+                        const builds =  ${JSON.stringify(builds)}
                         await store.onMessage({ data: ${JSON.stringify(this.createSpliceLogsMessage([], store.logs))} })
+
                         ReactDOM.render(
-                            React.createElement(Index, { store }),
+                            React.createElement(Index, { store, builds }),
                             document.getElementById('root'),
                         )
                     })();
@@ -102,9 +109,75 @@ export class Panel {
                     if (!uris) return;
                     store.logs.push(...await loadLogs(uris));
                     break;
+
                 }
                 case 'closeLog': {
                     store.logs.removeFirst(log => log._uri === message.uri);
+                    break;
+                }
+                case 'compare': {
+                    // contains uris of sarif files in left build, not in right
+                    const left : Uri[] = [];
+                    // contains uris of sarif files in right build, not in left
+                    const right : Uri[] = [];
+                    const distinctLeft : Uri[] = [];
+                    const distinctRight : Uri[] = [];
+                    const leftLogs : Log[] = [];
+                    const rightLogs : Log[] = [];
+
+                    const archivesDiff = await compareArchives(Uri.parse(store.path), Uri.parse(message.build));
+                    const diffSet = archivesDiff.diffSet;
+
+                    if (diffSet){
+                        diffSet.forEach(diff => {
+                            if(diff.state === 'left' && diff.path1 && diff.name1 && diff.name1.endsWith('.sarif')){
+                                left.push(Uri.parse(path.join(diff.path1, diff.name1)));
+                            }
+                            if(diff.state === 'right' && diff.path2 && diff.name2 && diff.name2.endsWith('.sarif')){
+                                right.push(Uri.parse(path.join(diff.path2, diff.name2)));
+                            }
+                            if(diff.state === 'distinct' && diff.path1 && diff.path2 && diff.name1 && diff.name2){
+                                distinctLeft.push(Uri.parse(path.join(diff.path1, diff.name1)));
+                                distinctRight.push(Uri.parse(path.join(diff.path2, diff.name2)));
+                            }
+                        });
+                    }
+                    leftLogs.push(...await loadLogs(left));
+                    rightLogs.push(...await loadLogs(right));
+
+                    // Compare results of common files
+                    const distinctLeftLogs = await loadLogs(distinctLeft);
+                    const distinctRightLogs = await loadLogs(distinctRight);
+                    const xvcxc : Result[] = [];
+                    for (const log of distinctLeftLogs){
+                        for (const run of log.runs){
+                            const r = run.results;
+                            if (r){
+                                xvcxc.push(...r);
+                            }
+                        }
+                    }
+                    const xvcxcxc : Result[]= [];
+                    for (const log of distinctRightLogs){
+                        for (const run of log.runs){
+                            const r = run.results;
+                            if (r){
+                                xvcxcxc.push(...r);
+                            }
+                        }
+                    }
+                    const results = compareResults(xvcxc, xvcxcxc);
+
+                    // Send Logs only in left build
+                    this.panel?.webview.postMessage(this.createSpliceLogsMessageWithCommand('removed' , [], leftLogs));
+                    // Send Logs only in left build
+                    this.panel?.webview.postMessage(this.createSpliceLogsMessageWithCommand('added' , [], rightLogs));
+                    // Send results
+                    // this.panel?.webview.postMessage(this.sendResults('results' , xvcxc, xvcxcxc, results.l, results.r));
+                    this.panel?.webview.postMessage(this.sendRawResults('rawresults' , results.l, results.r));
+                    // this.panel?.webview.postMessage(this.sendResultsAll('resultsAll' , results));
+                    // this.panel?.webview.postMessage(this.sendResultsLog('resultsLogs', leftLogs, rightLogs));
+                    // send back results
                     break;
                 }
                 case 'closeAllLogs': {
@@ -205,6 +278,52 @@ export class Panel {
     private createSpliceLogsMessage(removed: Log[], added: Log[]) {
         return {
             command: 'spliceLogs',
+            removed: removed.map(log => log._uri),
+            added: added.map(log => ({
+                uri: log._uri,
+                uriUpgraded: log._uriUpgraded,
+                webviewUri: this.panel?.webview.asWebviewUri(Uri.parse(log._uriUpgraded ?? log._uri, true)).toString(),
+            })),
+        };
+    }
+
+    private sendRawResults(command: string, left: Result[], right: Result[]) {
+        return {
+            command: command,
+            left: left.map(result => ({
+                _uri: result._uri,
+                uriUpgraded: result._log._uriUpgraded,
+                webviewUri: this.panel?.webview.asWebviewUri(Uri.parse(result._log._uriUpgraded ?? result._log._uri, true)).toString(),
+                ruleId: result.ruleId,
+                rule: result.rule,
+                region: result._region,
+                _log: {_uri: result._log._uri},
+                _run: {artifacts: result._run.artifacts, _index: result._run._index},
+                locations: result.locations
+                // artifacts: result._run.artifacts,
+                // originalUriBaseIds: result._run.originalUriBaseIds,
+                // _runIndex: result._run._index,
+                // locations: result.locations,
+                // compareResult: true
+            })),
+            right: right.map(result => ({
+                _uri: result._uri,
+                uriUpgraded: result._log._uriUpgraded,
+                webviewUri: this.panel?.webview.asWebviewUri(Uri.parse(result._log._uriUpgraded ?? result._log._uri, true)).toString(),
+                ruleId: result.ruleId,
+                rule: result.rule,
+                region: result._region,
+                _log: {_uri: result._log._uri},
+                _run: {artifacts: result._run.artifacts, _index: result._run._index},
+                locations: result.locations
+            })),
+        };
+    }
+
+
+    private createSpliceLogsMessageWithCommand(command: string, removed: Log[], added: Log[]) {
+        return {
+            command: command,
             removed: removed.map(log => log._uri),
             added: added.map(log => ({
                 uri: log._uri,

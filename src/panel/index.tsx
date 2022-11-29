@@ -23,18 +23,23 @@ export { React };
 export * as ReactDOM from 'react-dom';
 export { IndexStore as Store } from './indexStore';
 export { DetailsLayouts } from './details.layouts';
+import { DropMenu } from './dropdown';
 
-@observer export class Index extends Component<{ store: IndexStore }> {
+@observer export class Index extends Component<{ store: IndexStore, builds: Array<string> }> {
     private showFilterPopup = observable.box(false)
     private detailsPaneHeight = observable.box(300)
     private chartsMode = observable.box(false)
 
     render() {
-        const {store} = this.props;
+        const {store, builds} = this.props;
+
         if (!store.logs.length) {
             return <div className="svZeroData">
                 <div onClick={() => vscode.postMessage({ command: 'open' })}>
                     Open SARIF log
+                </div>
+                <div onClick={() => vscode.postMessage({ command: 'openArchive' })}>
+                    Open SARIF logs archive
                 </div>
             </div>;
         }
@@ -152,6 +157,8 @@ export { DetailsLayouts } from './details.layouts';
                     </Tab>
                     <Tab name='burn dowm chart'>
                         <BurndownChart store={store.resultTableStoreByRule}></BurndownChart>
+                    <Tab name='compare'>
+                        <DropMenu builds={builds}></DropMenu>
                     </Tab>
                 </TabPanel>
             </div>
