@@ -1,14 +1,14 @@
 {
-    "name": "sarif-viewer",
-    "displayName": "Sarif Viewer",
+    "name": "spaceros-dashboard",
+    "displayName": "SpaceRos Dashboard",
     "description": "Adds support for viewing SARIF logs",
-    "author": "Microsoft Corporation",
+    "author": "Open Robotics",
     "license": "MIT",
-    "version": "3.1.2",
-    "publisher": "MS-SarifVSCode",
+    "version": "3.2.20",
+    "publisher": "openrobotics",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Microsoft/sarif-vscode-extension.git"
+        "url": "https://github.com/space-ros/dashboard"
     },
     "bugs": {
         "url": "https://github.com/Microsoft/sarif-vscode-extension/issues"
@@ -132,6 +132,14 @@
         "webpack-dev-server": "^4.2.1"
     },
     "dependencies": {
+        "@emotion/react": "^11.10.4",
+        "@emotion/styled": "^11.10.4",
+        "@mui/icons-material": "^5.10.3",
+        "@mui/material": "^5.10.3",
+        "@nodelib/fs.walk": "^1.2.8",
+        "@types/diff": "^5.0.2",
+        "diff": "^5.1.0",
+        "dir-compare": "^4.0.0",
         "@types/d3": "^7.4.0",
         "d3": "^7.6.1",
         "@emotion/react": "^11.10.4",
@@ -143,7 +151,7 @@
         "mobx": "5.15.4",
         "mobx-react": "6.1.8",
         "node-fetch": "2.6.7",
-        "react": "17.0.0",
+        "react": "^17.0.0",
         "react-dom": "17.0.0",
         "react-markdown": "^5.0.3",
         "semver": "7.3.2",

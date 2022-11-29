@@ -1,5 +1,19 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
+/*
+ * Copyright (C) 2022 Open Source Robotics Foundation
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
 import { mkdtempSync } from 'fs';
 import { execSync } from 'child_process';
 import { walkSync } from '@nodelib/fs.walk';
@@ -12,7 +26,9 @@ import { compareSync, Options, Result } from 'dir-compare';
 
 export async function unpackArchive(uri: Uri) {
     const path = uri.path;
-
+    if (path.indexOf('tar')===-1){
+        return '' as string;
+    }
     const buildName = uri.path.substring(uri.path.lastIndexOf('/'));
     const tmpdir = mkdtempSync(`${os.tmpdir()}/${buildName}`);
     execSync(`tar -C ${tmpdir} -xf ${path}`);
