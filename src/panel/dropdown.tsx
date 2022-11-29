@@ -196,7 +196,7 @@ interface DropMenuProps {
                     <div className="svListPane" >
                         <div>
                             <Typography variant="inherit" sx={{marginBottom: 5}} color={'green'} noWrap>
-                                Solved issues
+                                Solved issues {this.lResults.length}
                             </Typography>
                         </div>
                         <MenuList
@@ -222,7 +222,7 @@ interface DropMenuProps {
                     <div className="svListPane">
                         <div>
                             <Typography variant="inherit" sx={{marginBottom: 5}} color={'red'} noWrap>
-                                New issues
+                                New issues {this.rResults.length}
                             </Typography>
                         </div>
                         <MenuList
