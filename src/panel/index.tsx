@@ -18,6 +18,7 @@ import { Checkrow, Icon, Popover, ResizeHandle, Tab, TabPanel } from './widgets'
 import { decodeFileUri } from '../shared';
 import { Chart } from './chart';
 import { FormDialog } from './dialog';
+import { BurndownChart } from './burndownChart';
 export { React };
 export * as ReactDOM from 'react-dom';
 export { IndexStore as Store } from './indexStore';
@@ -148,6 +149,9 @@ export { DetailsLayouts } from './details.layouts';
                                     <span className="ellipsis svSecondary">{kind ?? '—'}</span>
                                 </>;
                             }} />
+                    </Tab>
+                    <Tab name='burn dowm chart'>
+                        <BurndownChart store={store.resultTableStoreByRule}></BurndownChart>
                     </Tab>
                 </TabPanel>
             </div>
