@@ -3,6 +3,8 @@ import * as React from 'react';
 import { PureComponent } from 'react';
 import { ResultTableStore } from './resultTableStore';
 import * as d3 from 'd3';
+import { BuildSummary } from 'sarif';
+import { observable } from 'mobx';
 
 interface BurndownChartProps<G> {
     store: ResultTableStore<G>;
@@ -11,14 +13,19 @@ interface BurndownChartProps<G> {
     private ref!: SVGSVGElement;
     private pointsPerFrotnight  = 20;
     private pointsPerIssue  = 2;
+    @observable buildSummaries = [] as BuildSummary[];
+
     private onMessage = async (event: MessageEvent) => {
         if (!event.data) return; // Ignore mysterious empty message
-        if (event.data.command === 'burndown'){
-            for (const r of event.data.left) {
-                break;
-            }
+        if (event.data.command === 'buildSummary'){
+            this.buildSummaries.push(event.data.buildSummery);
         }
+        d3.selectAll('g').remove();
+        d3.selectAll('path').remove();
+        d3.selectAll('text').remove();
+        this.lineChart();
     }
+
     private lineChart = () => {
         const { store } = this.props;
         const {rows} = store;
@@ -47,16 +54,20 @@ interface BurndownChartProps<G> {
 
 
         // Timeline
-        const X: number[] = [1, 15, 30, 45, 60, 75, 90];
+        // const X: number[] = [1, 15, 30, 45, 60, 75, 90];
+
+        const X = this.buildSummaries.map(build => build.date).flat();
+        const issuesPerBuild = this.buildSummaries.map(build => build.issues).flat();
+        // const issuesPerBuild : number[] = [90, 80, 59, 55, 42, 23, 8];
 
         // Issues per build
-        const issuesPerBuild : number[] = [90, 80, 59, 55, 42, 23, 8];
         const pointsPerBuild : number[] = issuesPerBuild.map(a => a*this.pointsPerIssue);
         const idealY : number[] = issuesPerBuild.map(a => a-this.pointsPerFrotnight);
         const Y = pointsPerBuild;
         // let Y: number[] = d3.map(rows, d => d.items.length);
         // Y is Sum of Tasks Estimates
         // X is Timeline
+
 
 
         const I = d3.range(X.length);
@@ -154,7 +165,6 @@ interface BurndownChartProps<G> {
 
     render() {
         return (<div className="svg">
-            {this.lineChart()}
             <svg className="container" ref={(ref: SVGSVGElement) => this.ref = ref}></svg>
         </div>);
     }

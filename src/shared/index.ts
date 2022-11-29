@@ -46,6 +46,10 @@ declare module 'sarif' {
     interface Annotation {
         rule: string; location: string; line: string; tool: string; message: string; link: string;
     }
+
+    interface BuildSummary {
+        name: string; date: number; issues: number;
+    }
 }
 
 // console.log(format(`'{0}' was not evaluated for check '{2}' as the analysis is not relevant based on observed metadata: {1}.`, ['x', 'y', 'z']))
@@ -273,4 +277,4 @@ export const filtersColumn: Record<string, Record<string, Visibility>> = {
 };
 
 export type CommandPanelToExtension = 'open' | 'closeLog' | 'closeAllLogs' | 'select' | 'selectLog' | 'setState' | 'writeAnnotations' | 'readAnnotations' | 'compare' | 'burndown';
-export type CommandExtensionToPanel = 'select' | 'spliceLogs' | 'annotations' | 'compareResults' | 'added' | 'removed' | 'results' | 'rawresults';
+export type CommandExtensionToPanel = 'select' | 'spliceLogs' | 'annotations' | 'compareResults' | 'added' | 'removed' | 'results' | 'rawresults' | 'buildSummary';

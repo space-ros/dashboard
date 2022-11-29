@@ -5,7 +5,7 @@ import * as fs from 'fs';
 import { readFileSync } from 'fs';
 import jsonMap from 'json-source-map';
 import { autorun, IArraySplice, observable, observe } from 'mobx';
-import { Log, Region, Result, Annotation } from 'sarif';
+import { Log, Region, Result, Annotation, BuildSummary } from 'sarif';
 import { commands, ExtensionContext, TextEditorRevealType, Uri, ViewColumn, WebviewPanel, window, workspace } from 'vscode';
 import { CommandPanelToExtension, filtersColumn, filtersRow, JsonMap, ResultId } from '../shared';
 import { loadLogs } from './loadLogs';
@@ -13,17 +13,18 @@ import { compareArchives, compareResults } from './loadLogsUtils';
 import { regionToSelection } from './regionToSelection';
 import { Store } from './store';
 import { UriRebaser } from './uriRebaser';
-// import { unpackAllBuilds } from './loadLogsUtils';
+import { unpackAllBuilds } from './loadLogsUtils';
 import * as path from 'path';
 
 export class Panel {
     private title = 'SARIF Result'
     @observable private panel: WebviewPanel | null = null
+    @observable private buildsSummaries = [] as BuildSummary[]
 
     constructor(
         readonly context: Pick<ExtensionContext, 'extensionPath' | 'subscriptions'>,
         readonly basing: UriRebaser,
-        readonly store: Pick<Store, 'logs' | 'results'| 'annotations' | 'path'>,
+        readonly store: Pick<Store, 'logs' | 'results'| 'annotations' | 'path'| 'baseUri'>,
         readonly builds: Array<string>,
     ) {
         observe(store.logs, change => {
@@ -191,10 +192,29 @@ export class Panel {
                     await this.selectLocal(logUri, validatedUri, region);
                     break;
                 }
-                // case 'burndown': {
-                //     const allBuilds = unpackAllBuilds();
-                //     break;
-                // }
+                case 'burndown': {
+                    if (this.buildsSummaries.length===0){
+                        const allBuilds = await unpackAllBuilds(Uri.parse(store.baseUri));
+                        let counter = 1;
+                        (await allBuilds).forEach(async (v, k) => {
+                            const logs = await loadLogs(v);
+                            const runs = await logs.map(log => log.runs).flat();
+                            const issuesCount :number = await runs.map(run => run.results || []).flat().length;
+                            // const date = new Date();
+                            // const dateString = k.split('_');
+                            // date.setFullYear();
+                            this.buildsSummaries.push({name: k, date: counter, issues: issuesCount} as BuildSummary);
+                            counter += 1;
+                            this.panel?.webview.postMessage(this.buildSummary('buildSummary', {name: k, date: counter, issues: issuesCount} as BuildSummary));
+                        });
+                    }
+                    else{
+                        for (let index = 0; index < this.buildsSummaries.length; index++) {
+                            this.panel?.webview.postMessage(this.buildSummary('buildSummary', this.buildsSummaries[index]));
+                        }
+                    }
+                    break;
+                }
                 case 'selectLog': {
                     const [logUri, runIndex, resultIndex] = message.id as ResultId;
                     const log = store.logs.find(log => log._uri === logUri);
@@ -275,6 +295,8 @@ export class Panel {
         this.panel?.webview.postMessage({ command: 'select', id: result?._id });
     }
 
+    // private prepareBuildSummeries()
+
     private createSpliceLogsMessage(removed: Log[], added: Log[]) {
         return {
             command: 'spliceLogs',
@@ -320,6 +342,12 @@ export class Panel {
         };
     }
 
+    private buildSummary(command: string, buildsSummeries: BuildSummary) {
+        return {
+            command: command,
+            buildSummery: buildsSummeries
+        };
+    }
 
     private createSpliceLogsMessageWithCommand(command: string, removed: Log[], added: Log[]) {
         return {
