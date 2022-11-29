@@ -140,6 +140,16 @@ interface BurndownChartProps<G> {
             .attr('stroke', 'green')
             .attr('d', line2(I));
 
+        // svg.selectAll('myCircles')
+        //     .data([X, Y])
+        //     .enter()
+        //     .append('circle')
+        //     .attr('fill', 'red')
+        //     .attr('stroke', 'none')
+        //     .attr('cx', function(d) {return xScale(d[0]);})
+        //     .attr('cy', function(d) {return yScale(d[1]);})
+        //     .attr('r', 3);
+
         // Handmade legend
         svg.append('circle').attr('cx', 630).attr('cy',130).attr('r', 6).style('fill', 'green');
         svg.append('circle').attr('cx', 630).attr('cy',160).attr('r', 6).style('fill', 'red');
