@@ -157,6 +157,7 @@ interface DetailsProps { result: Result, height: IObservableValue<number>, annot
             </>;
         };
         return <div className="svDetailsPane" style={{ height: height.get() }}>
+            {annotations ? <LinkFormDialog open={formDialogOpen} result={result} annotations={annotations}></LinkFormDialog>:null}
             {result && <TabPanel selection={this.selectedTab}>
                 <Tab name="Info">
                     <div className="svDetailsBody svDetailsInfo">
@@ -167,10 +168,8 @@ interface DetailsProps { result: Result, height: IObservableValue<number>, annot
                         <div className="svDetailsGrid">
                             <span>Issue link</span>         { annotations ? getLink(result, annotations.get()).length > 0
                                     ? <a href={getLink(result, annotations.get())} target="_blank" rel="noopener noreferrer">{getLink(result, annotations.get())}</a>
-                                    : <>
-                                    <div onClick={()=> formDialogOpen.set(true)}>Add link</div>
-                                    <LinkFormDialog open={formDialogOpen} result={result} annotations={annotations}></LinkFormDialog></>
-                                :null}
+                                    : <a href="#" className="ellipsis" onClick={()=> formDialogOpen.set(true)} title='Add link'>Add link</a>
+                                :<span>—</span>}
                             <span>Rule Id</span>			{helpUri ? <a href={helpUri} target="_blank" rel="noopener noreferrer">{result.ruleId}</a> : <span>{result.ruleId}</span>}
                             <span>Rule Name</span>			<span>{result._rule?.name ?? '—'}</span>
                             <span>Rule Description</span>	<span>{renderRuleDesc(result)}</span>
