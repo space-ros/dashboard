@@ -19,6 +19,7 @@ interface BurndownChartProps<G> {
         if (!event.data) return; // Ignore mysterious empty message
         if (event.data.command === 'buildSummary'){
             this.buildSummaries.push(event.data.buildSummery);
+            console.log('recived a new build summary', event.data.buildSummery);
         }
         d3.selectAll('g').remove();
         d3.selectAll('path').remove();
