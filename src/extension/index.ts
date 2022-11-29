@@ -17,7 +17,6 @@ import { update, updateChannelConfigSection } from './update';
 import { UriRebaser } from './uriRebaser';
 import { env } from 'process';
 import { unpackedSarifContents, listAllBuilds } from './loadLogsUtils';
-import { join } from 'path';
 
 export async function activate(context: ExtensionContext) {
     // Borrowed from: https://github.com/Microsoft/vscode-languageserver-node/blob/db0f0f8c06b89923f96a8a5aebc8a4b5bb3018ad/client/src/main.ts#L217

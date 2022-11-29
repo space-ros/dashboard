@@ -9,7 +9,7 @@ import { Log, Region, Result, Annotation } from 'sarif';
 import { commands, ExtensionContext, TextEditorRevealType, Uri, ViewColumn, WebviewPanel, window, workspace } from 'vscode';
 import { CommandPanelToExtension, filtersColumn, filtersRow, JsonMap, ResultId } from '../shared';
 import { loadLogs } from './loadLogs';
-import { unpackedSarifContents, compareArchives, compareResults } from './loadLogsUtils';
+import { compareArchives, compareResults } from './loadLogsUtils';
 import { regionToSelection } from './regionToSelection';
 import { Store } from './store';
 import { UriRebaser } from './uriRebaser';
