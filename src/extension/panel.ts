@@ -12,6 +12,7 @@ import { loadLogs } from './loadLogs';
 import { regionToSelection } from './regionToSelection';
 import { Store } from './store';
 import { UriRebaser } from './uriRebaser';
+import { unpackAllBuilds } from './loadLogsUtils';
 
 export class Panel {
     private title = 'SARIF Result'
@@ -115,6 +116,10 @@ export class Panel {
                     const validatedUri = await basing.translateArtifactToLocal(uri);
                     if (!validatedUri) return;
                     await this.selectLocal(logUri, validatedUri, region);
+                    break;
+                }
+                case 'burndown': {
+                    const allBuilds = unpackAllBuilds();
                     break;
                 }
                 case 'selectLog': {
