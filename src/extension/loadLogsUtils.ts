@@ -27,7 +27,6 @@ import { compareSync, Options, Result } from 'dir-compare';
 export async function unpackArchive(uri: Uri) {
     const path = uri.path;
     if (path.indexOf('tar')===-1){
-        console.log('Not a supported archive format');
         return '' as string;
     }
     const buildName = uri.path.substring(uri.path.lastIndexOf('/'));
