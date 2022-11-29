@@ -13,7 +13,7 @@ import { compareArchives, compareResults } from './loadLogsUtils';
 import { regionToSelection } from './regionToSelection';
 import { Store } from './store';
 import { UriRebaser } from './uriRebaser';
-import { unpackAllBuilds } from './loadLogsUtils';
+// import { unpackAllBuilds } from './loadLogsUtils';
 import * as path from 'path';
 
 export class Panel {
@@ -191,10 +191,10 @@ export class Panel {
                     await this.selectLocal(logUri, validatedUri, region);
                     break;
                 }
-                case 'burndown': {
-                    const allBuilds = unpackAllBuilds();
-                    break;
-                }
+                // case 'burndown': {
+                //     const allBuilds = unpackAllBuilds();
+                //     break;
+                // }
                 case 'selectLog': {
                     const [logUri, runIndex, resultIndex] = message.id as ResultId;
                     const log = store.logs.find(log => log._uri === logUri);

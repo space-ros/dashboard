@@ -15,15 +15,13 @@ interface BurndownChartProps<G> {
         if (!event.data) return; // Ignore mysterious empty message
         if (event.data.command === 'burndown'){
             for (const r of event.data.left) {
+                break;
             }
         }
     }
     private lineChart = () => {
         const { store } = this.props;
         const {rows} = store;
-        console.log(store);
-        console.log(rows);
-
         const title  = 'Three Months Burn Down'; // given d in data, returns the title text
         const curve = d3.curveLinear; // method of interpolation between points
         // const defined, // for gaps in data
