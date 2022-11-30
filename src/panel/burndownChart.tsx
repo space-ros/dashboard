@@ -37,7 +37,7 @@ interface BurndownChartProps<G> {
         const marginRight = 30; // right margin, in pixels
         const marginBottom = 30; // bottom margin, in pixels
         const marginLeft = 40; // left margin, in pixels
-        const width = 700; // outer width, in pixels
+        const width = 1284; // outer width, in pixels
         const height = 500; // outer height, in pixels
         const xType = d3.scaleUtc; // type of x-scale
         const xRange = [marginLeft, width - marginRight]; // [left, right]
@@ -57,6 +57,7 @@ interface BurndownChartProps<G> {
         // Timeline
         // const X: number[] = [1, 15, 30, 45, 60, 75, 90];
 
+        // sort this.buildSummaries by date here
         const X = this.buildSummaries.map(build => build.date).flat();
         const issuesPerBuild = this.buildSummaries.map(build => build.issues).flat();
         // const issuesPerBuild : number[] = [90, 80, 59, 55, 42, 23, 8];
