@@ -122,7 +122,9 @@ export async function listAllBuilds(uri: Uri) {
     // List all archive names in uri
     const builds: string[] = [];
     walkSync(uri.path).forEach(async (archive) => {
-        builds.push(archive.path);
+        if(archive.path.indexOf('latest_build')===-1){
+            builds.push(archive.path);
+        }
     });
     return builds;
 }
