@@ -156,9 +156,11 @@ import { DropMenu } from './dropdown';
                             }} />
                     </Tab>
                     <Tab name='burn dowm chart'>
+                        {store.selection.set(undefined)}
                         <BurndownChart></BurndownChart>
                     </Tab>
                     <Tab name='compare'>
+                        {store.selection.set(undefined)}
                         <DropMenu builds={builds}></DropMenu>
                     </Tab>
                 </TabPanel>
