@@ -17,6 +17,7 @@ import { update, updateChannelConfigSection } from './update';
 import { UriRebaser } from './uriRebaser';
 import { env } from 'process';
 import { unpackedSarifContents, listAllBuilds } from './loadLogsUtils';
+// import { join } from 'path';
 
 export async function activate(context: ExtensionContext) {
     // Borrowed from: https://github.com/Microsoft/vscode-languageserver-node/blob/db0f0f8c06b89923f96a8a5aebc8a4b5bb3018ad/client/src/main.ts#L217
@@ -77,6 +78,8 @@ export async function activate(context: ExtensionContext) {
         store.logs.push(...await loadLogs(contents['uris']));
         builds.push(...await listAllBuilds(Uri.parse(env.SPACEROS_LOG_DIR)));
     }
+    // istanbul ignore doesn't work
+    /* istanbul ignore next */
     // else
     // {
     //     // TODO (MH) this causes CI to fail, find a way to bypass CI here
@@ -94,6 +97,7 @@ export async function activate(context: ExtensionContext) {
     //     const latestBuild = await unpackedSarifContents(latestBuildUri);
     //     // path of the exctracted archive
     //     store.path = latestBuild.path;
+    //     store.baseUri = uris[0].path;
     //     store.logs.push(...await loadLogs(latestBuild['uris']));
     // }
 

@@ -9,6 +9,7 @@ import '../shared/extension';
 
 export class Store {
     static globalState: Memento
+    baseUri = '' as string
     path = '' as string
     @observable.deep annotations = [] as Annotation[]
     @observable.shallow logs = [] as Log[]

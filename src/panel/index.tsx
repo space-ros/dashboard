@@ -18,6 +18,7 @@ import { Checkrow, Icon, Popover, ResizeHandle, Tab, TabPanel } from './widgets'
 import { decodeFileUri } from '../shared';
 import { Chart } from './chart';
 import { FormDialog } from './dialog';
+import { BurndownChart } from './burndownChart';
 export { React };
 export * as ReactDOM from 'react-dom';
 export { IndexStore as Store } from './indexStore';
@@ -153,6 +154,9 @@ import { DropMenu } from './dropdown';
                                     <span className="ellipsis svSecondary">{kind ?? '—'}</span>
                                 </>;
                             }} />
+                    </Tab>
+                    <Tab name='burn dowm chart'>
+                        <BurndownChart></BurndownChart>
                     </Tab>
                     <Tab name='compare'>
                         <DropMenu builds={builds}></DropMenu>
