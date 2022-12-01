@@ -1,37 +1,31 @@
 import { observer } from 'mobx-react';
 import * as React from 'react';
 import { PureComponent } from 'react';
-import { ResultTableStore } from './resultTableStore';
 import * as d3 from 'd3';
 import { BuildSummary } from 'sarif';
 import { observable } from 'mobx';
+import { TextField } from '@mui/material';
 
-interface BurndownChartProps<G> {
-    store: ResultTableStore<G>;
-}
-@observer export class BurndownChart<G> extends PureComponent<BurndownChartProps<G>> {
+@observer export class BurndownChart extends PureComponent {
     private ref!: SVGSVGElement;
-    private pointsPerFrotnight  = 20;
-    private pointsPerIssue  = 2;
+    @observable issuesPerDay = 2;
+    @observable pointsPerIssue_ = {step : 2};
     @observable buildSummaries = [] as BuildSummary[];
 
     private onMessage = async (event: MessageEvent) => {
         if (!event.data) return; // Ignore mysterious empty message
         if (event.data.command === 'buildSummary'){
             this.buildSummaries.push(event.data.buildSummery);
-            console.log('recived a new build summary', event.data.buildSummery);
         }
         d3.selectAll('g').remove();
         d3.selectAll('path').remove();
         d3.selectAll('text').remove();
-        this.lineChart();
+        d3.selectAll('points').remove();
+        d3.selectAll('circle').remove();
+        this.lineChart(this.issuesPerDay);
     }
 
-    private lineChart = () => {
-        const { store } = this.props;
-        const {rows} = store;
-        const title  = 'Three Months Burn Down'; // given d in data, returns the title text
-        const curve = d3.curveLinear; // method of interpolation between points
+    private lineChart = (issuesPerDay: number) => {
         // const defined, // for gaps in data
         const marginTop = 40; // top margin, in pixels
         const marginRight = 30; // right margin, in pixels
@@ -44,37 +38,22 @@ interface BurndownChartProps<G> {
         const yType = d3.scaleLinear; // type of y-scale
         const yRange = [height - marginBottom, marginTop]; // [bottom, top]
         // const yFormat, // a format specifier string for the y-axis
-        const yLabel = 'Sum of Tasks Estimates (days)'; // a label for the y-axis
+        const yLabel = 'Issues'; // a label for the y-axis
         // zDomain, // array of z-values
-        const strokeLinecap= 'round'; // stroke line cap of line
-        const strokeLinejoin = 'round'; // stroke line join of line
-        const strokeWidth = 1.5; // stroke width of line
-        const strokeOpacity = 1; // stroke opacity of line
-        const mixBlendMode = 'multiply'; // blend mode of lines
-        const voronoi = false; // show a Voronoi overlay? (for debugging)
-
-
-        // Timeline
-        // const X: number[] = [1, 15, 30, 45, 60, 75, 90];
 
         // sort this.buildSummaries by date here
         const X = this.buildSummaries.map(build => build.date).flat();
         const issuesPerBuild = this.buildSummaries.map(build => build.issues).flat();
-        // const issuesPerBuild : number[] = [90, 80, 59, 55, 42, 23, 8];
+        const Y = issuesPerBuild;
 
         // Issues per build
-        const pointsPerBuild : number[] = issuesPerBuild.map(a => a*this.pointsPerIssue);
-        const idealY : number[] = issuesPerBuild.map(a => a-this.pointsPerFrotnight);
-        const Y = pointsPerBuild;
-        // let Y: number[] = d3.map(rows, d => d.items.length);
-        // Y is Sum of Tasks Estimates
-        // X is Timeline
+        const idealY : number[] = issuesPerBuild.map((a, index) => a-issuesPerDay*index);
 
-
-
-        const I = d3.range(X.length);
-        const defined = (d, i) => !isNaN(X[i]) && !isNaN(Y[i]);
-        const D = d3.map(rows, defined);
+        for (let index = 0; index < issuesPerBuild.length; index++) {
+            const daysDiff = Math.ceil(Math.abs(X[0] - X[index])/(1000 * 60 * 60 * 24));
+            const expectedValue = issuesPerBuild[index] - (daysDiff*issuesPerDay);
+            idealY[index] = expectedValue;
+        }
 
         // Compute default domains.
         const xDomain = d3.extent(X);
@@ -83,21 +62,23 @@ interface BurndownChartProps<G> {
         // Construct scales and axes.
         const xScale = xType(xDomain, xRange);
         const yScale = yType(yDomain, yRange);
-        const xAxis = d3.axisBottom(xScale).ticks(width / 40).tickSizeOuter(0);
-        const yAxis = d3.axisLeft(yScale).ticks(height / 40);
+        const xAxis = d3.axisBottom(xScale).ticks(15);
+        const yAxis = d3.axisLeft(yScale).ticks(10);
 
-        // Construct a line generator.
-        const line = d3.line()
-            .defined(i => D[i])
-            .curve(curve)
-            .x(i => xScale(X[i]))
-            .y(i => yScale(Y[i]));
-
-        const line2 = d3.line()
-            .defined(i => D[i])
-            .curve(curve)
-            .x(i => xScale(X[i]))
-            .y(i => yScale(idealY[i]));
+        const dataset = [] as Array<[number, number]>;
+        for (let index = 0; index < X.length; index++) {
+            dataset.push([X[index], Y[index]]);
+        }
+        const idealDataset = [] as Array<[number, number]>;
+        for (let index = 0; index < X.length; index++) {
+            idealDataset.push([X[index], idealY[index]]);
+        }
+        dataset.sort(function(a, b){
+            return a[0] - b[0];
+        });
+        idealDataset.sort(function(a, b){
+            return a[0] - b[0];
+        });
 
         const svg = d3.select(this.ref)
             .attr('width', width)
@@ -124,38 +105,70 @@ interface BurndownChartProps<G> {
                 .text(yLabel));
 
         svg.append('path')
+            .datum(dataset)
             .attr('fill', 'none')
-            .attr('stroke', 'red')
-            .attr('stroke-width', strokeWidth)
-            .attr('stroke-linecap', strokeLinecap)
-            .attr('stroke-linejoin', strokeLinejoin)
-            .attr('stroke-opacity', strokeOpacity)
-            .attr('d', line(I));
+            .attr('stroke', 'steelblue')
+            .attr('stroke-width', 2.5)
+            .attr('d', d3.line()
+                .x(d => xScale(d[0]))
+                .y(d => yScale(d[1]))
+            );
 
         svg.append('path')
+            .datum(idealDataset)
             .attr('fill', 'none')
-            .attr('stroke-width', strokeWidth)
-            .attr('stroke-linecap', strokeLinecap)
-            .attr('stroke-linejoin', strokeLinejoin)
-            .attr('stroke-opacity', strokeOpacity)
-            .attr('stroke', 'green')
-            .attr('d', line2(I));
+            .attr('stroke', 'steelblue')
+            .attr('stroke-width', 2.5)
+            .attr('d', d3.line()
+                .x(d => xScale(d[0]))
+                .y(d => yScale(d[1]))
+            );
 
-        // svg.selectAll('myCircles')
-        //     .data([X, Y])
-        //     .enter()
-        //     .append('circle')
-        //     .attr('fill', 'red')
-        //     .attr('stroke', 'none')
-        //     .attr('cx', function(d) {return xScale(d[0]);})
-        //     .attr('cy', function(d) {return yScale(d[1]);})
-        //     .attr('r', 3);
+        svg.selectAll('names')
+            .data(dataset)
+            .enter()
+            .append('text')
+            .attr('text-anchor', 'end')
+            .attr('font-weight', 500)
+            .attr('x', function(d) {return xScale(d[0]);})
+            .attr('y', function(d) {return yScale(d[1]);})
+            .text(function(d) {return 'build #'+ dataset.indexOf(d);});
+
+        svg.selectAll('names')
+            .data(idealDataset)
+            .enter()
+            .append('text')
+            .attr('text-anchor', 'end')
+            .attr('font-weight', 500)
+            .attr('x', function(d) {return xScale(d[0]);})
+            .attr('y', function(d) {return yScale(d[1]);})
+            .text(function(d) {return 'build #'+ idealDataset.indexOf(d);});
+
+        svg.selectAll('points')
+            .data(dataset)
+            .enter()
+            .append('circle')
+            .attr('fill', 'red')
+            .attr('stroke', 'none')
+            .attr('cx', function(d) {return xScale(d[0]);})
+            .attr('cy', function(d) {return yScale(d[1]);})
+            .attr('r', 3);
+
+        svg.selectAll('points')
+            .data(idealDataset)
+            .enter()
+            .append('circle')
+            .attr('fill', 'green')
+            .attr('stroke', 'none')
+            .attr('cx', function(d) {return xScale(d[0]);})
+            .attr('cy', function(d) {return yScale(d[1]);})
+            .attr('r', 3);
 
         // Handmade legend
-        svg.append('circle').attr('cx', 630).attr('cy',130).attr('r', 6).style('fill', 'green');
-        svg.append('circle').attr('cx', 630).attr('cy',160).attr('r', 6).style('fill', 'red');
-        svg.append('text').attr('x', 620).attr('y', 130).text('Ideal Issues remaining').style('font-size', '15px').attr('alignment-baseline','middle');
-        svg.append('text').attr('x', 620).attr('y', 160).text('Actual Issues remaining').style('font-size', '15px').attr('alignment-baseline','middle');
+        svg.append('circle').attr('cx', width-140).attr('cy',50).attr('r', 5).style('fill', 'green');
+        svg.append('circle').attr('cx', width-140).attr('cy',30).attr('r', 5).style('fill', 'red');
+        svg.append('text').attr('x', width-120).attr('y', 50).text('Ideal Issues').style('font-size', '14px').attr('font-weight', 500).attr('alignment-baseline','middle');
+        svg.append('text').attr('x', width-120).attr('y', 30).text('Actual Issues').style('font-size', '14px').attr('font-weight', 500).attr('alignment-baseline','middle');
 
         svg.append('text')
             .attr('class', 'x label')
@@ -164,20 +177,24 @@ interface BurndownChartProps<G> {
             .attr('y', height - 6)
             .text('Time (days)');
 
-        svg.append('text')
-            .attr('class', 'y label')
-            .attr('text-anchor', 'end')
-            .attr('y', 6)
-            .attr('dy', '.75em')
-            .attr('transform', 'rotate(-90)')
-            .text('Issues');
-
         return Object.assign(svg.node(), {value: null});
     }
 
     render() {
         return (<div className="svg">
             <svg className="container" ref={(ref: SVGSVGElement) => this.ref = ref}></svg>
+            <TextField
+                label='Excpected burndown per day'
+                value={this.issuesPerDay}
+                onChange={(e) => {
+                    d3.selectAll('g').remove();
+                    d3.selectAll('path').remove();
+                    d3.selectAll('text').remove();
+                    d3.selectAll('points').remove();
+                    d3.selectAll('circle').remove();
+                    this.issuesPerDay = Number(e.target.value);
+                    this.lineChart(Number(e.target.value));
+                }}></TextField>
         </div>);
     }
 

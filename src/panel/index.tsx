@@ -156,7 +156,7 @@ import { DropMenu } from './dropdown';
                             }} />
                     </Tab>
                     <Tab name='burn dowm chart'>
-                        <BurndownChart store={store.resultTableStoreByRule}></BurndownChart>
+                        <BurndownChart></BurndownChart>
                     </Tab>
                     <Tab name='compare'>
                         <DropMenu builds={builds}></DropMenu>

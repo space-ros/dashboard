@@ -193,19 +193,20 @@ export class Panel {
                     break;
                 }
                 case 'burndown': {
-                    if (this.buildsSummaries.length===0){
+                    if (this.buildsSummaries.length === 0){
                         const allBuilds = await unpackAllBuilds(Uri.parse(store.baseUri));
-                        let counter = 1;
                         (await allBuilds).forEach(async (v, k) => {
                             const logs = await loadLogs(v);
                             const runs = await logs.map(log => log.runs).flat();
                             const issuesCount :number = await runs.map(run => run.results || []).flat().length;
-                            // const date = new Date();
-                            // const dateString = k.split('_');
-                            // date.setFullYear();
-                            this.buildsSummaries.push({name: k, date: counter, issues: issuesCount} as BuildSummary);
-                            counter += 1;
-                            this.panel?.webview.postMessage(this.buildSummary('buildSummary', {name: k, date: counter, issues: issuesCount} as BuildSummary));
+                            const name = k.split('/').pop() || '';
+
+                            if (name.indexOf('latest_build_results') === -1){
+                                const dateString = name.split('_').pop() || '';
+                                const datevalue = Date.UTC(Number(dateString.substring(0, 4)), Number(dateString.substring(4, 6)), Number(dateString.substring(6, 8)), Number(dateString.substring(9, 11)), Number(dateString.substring(11, 13)), Number(dateString.substring(13, 15)));
+                                this.buildsSummaries.push({name: name.split('.')[0], date: datevalue, issues: issuesCount} as BuildSummary);
+                                this.panel?.webview.postMessage(this.buildSummary('buildSummary', {name: name.split('.')[0], date: datevalue, issues: issuesCount} as BuildSummary));
+                            }
                         });
                     }
                     else{
