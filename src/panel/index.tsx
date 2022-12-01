@@ -17,7 +17,6 @@ import { RowItem } from './tableStore';
 import { Checkrow, Icon, Popover, ResizeHandle, Tab, TabPanel } from './widgets';
 import { decodeFileUri } from '../shared';
 import { Chart } from './chart';
-import { FormDialog } from './dialog';
 import { BurndownChart } from './burndownChart';
 export { React };
 export * as ReactDOM from 'react-dom';
@@ -27,7 +26,7 @@ import { DropMenu } from './dropdown';
 
 @observer export class Index extends Component<{ store: IndexStore, builds: Array<string> }> {
     private showFilterPopup = observable.box(false)
-    private detailsPaneHeight = observable.box(300)
+    private detailsPaneHeight = observable.box(200)
     private chartsMode = observable.box(false)
 
     render() {
@@ -129,13 +128,17 @@ import { DropMenu } from './dropdown';
                         </div>
                     </Tab>
                     <Tab name={store.tabs[3]} count={store.resultTableStoreByTool.groupsFilteredSorted.length}>
-                        <ResultTable store={store.resultTableStoreByTool} onClearFilters={() => store.clearFilters()}
-                            renderGroup={(tool: string | undefined) => {
-                                return <>
-                                    <span>{tool ?? '—'}</span>
-                                    <span className="ellipsis svSecondary">{tool ?? '—'}</span>
-                                </>;
-                            }} />
+                        {chartsMode.get() && !selected ?
+                            <Chart store={store.resultTableStoreByTool} />
+                            :
+                            <ResultTable store={store.resultTableStoreByTool} onClearFilters={() => store.clearFilters()}
+                                renderGroup={(tool: string | undefined) => {
+                                    return <>
+                                        <span>{tool ?? '—'}</span>
+                                        <span className="ellipsis svSecondary">{tool ?? '—'}</span>
+                                    </>;
+                                }} />
+                        }
                     </Tab>
                     <Tab name={store.tabs[4]} count={store.resultTableStoreByLevel.groupsFilteredSorted.length}>
                         <ResultTable store={store.resultTableStoreByLevel} onClearFilters={() => store.clearFilters()}
