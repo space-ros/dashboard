@@ -155,13 +155,11 @@ import { DropMenu } from './dropdown';
                                 </>;
                             }} />
                     </Tab>
-                    <Tab name='burn dowm chart'>
-                        {store.selection.set(undefined)}
-                        <BurndownChart></BurndownChart>
-                    </Tab>
-                    <Tab name='compare'>
-                        {store.selection.set(undefined)}
+                    <Tab name={store.tabs[6]}>
                         <DropMenu builds={builds}></DropMenu>
+                    </Tab>
+                    <Tab name={store.tabs[7]}>
+                        <BurndownChart></BurndownChart>
                     </Tab>
                 </TabPanel>
             </div>

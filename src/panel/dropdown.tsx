@@ -152,7 +152,7 @@ interface DropMenuProps {
                         '& > :not(style)': {
                             m: 1,
                             width: '100%',
-                            maxHeight: 60,
+                            maxHeight: 100,
                         },
                         marginBottom: 5,
                     }}

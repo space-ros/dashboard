@@ -94,6 +94,8 @@ export class IndexStore {
         { toString: () => 'Tool', store: this.resultTableStoreByTool },
         { toString: () => 'Level', store: this.resultTableStoreByLevel },
         { toString: () => 'Kind', store: this.resultTableStoreByKind },
+        { toString: () => 'compare', store: undefined },
+        { toString: () => 'burndown', store: undefined },
     ] as { store: ResultTableStore<string | ReportingDescriptor> | undefined }[]
     selectedTab = observable.box(this.tabs[0], { deep: false })
 
