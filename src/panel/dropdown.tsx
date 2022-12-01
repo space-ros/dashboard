@@ -205,10 +205,10 @@ interface DropMenuProps {
                             sx={{overflow: 'auto',
                                 maxHeight: 300}}
                         >
-                            {this.lResults.map((result) => (
+                            {this.lResults.map((result, index) => (
                                 <MenuItem data-my-value={result} onClick={() => this.selectedLeftResult.set(result)}>
                                     <Typography variant="caption">
-                                        {result.ruleId}
+                                        issue # {index}
                                     </Typography>
                                 </MenuItem>
                             ))}
@@ -231,10 +231,10 @@ interface DropMenuProps {
                             sx={{overflow: 'auto',
                                 maxHeight: 300}}
                         >
-                            {this.rResults.map((result) => (
+                            {this.rResults.map((result, index) => (
                                 <MenuItem data-my-vue={result} onClick={() => this.selectedRightResult.set(result)}>
                                     <Typography variant="caption">
-                                        {result.ruleId}
+                                        issue # {index}
                                     </Typography>
                                 </MenuItem>
                             ))}

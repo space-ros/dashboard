@@ -194,7 +194,8 @@ interface DetailsProps { result: Result, height: IObservableValue<number>, annot
                                                                 onClick={e => {
                                                                     e.preventDefault(); // Cancel # nav.
                                                                     postSelectLog(result);
-                                                                }}>
+                                                                }}
+                                                                >
                                                                 {result._log._uri.file}{result._log._uriUpgraded && ' (upgraded)'}
                                                             </a>
                             {(() => {
