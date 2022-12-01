@@ -318,11 +318,14 @@ export class Panel {
                 uriUpgraded: result._log._uriUpgraded,
                 webviewUri: this.panel?.webview.asWebviewUri(Uri.parse(result._log._uriUpgraded ?? result._log._uri, true)).toString(),
                 ruleId: result.ruleId,
-                rule: result.rule,
+                _rule: result._rule ,
                 region: result._region,
                 _log: {_uri: result._log._uri},
                 _run: {artifacts: result._run.artifacts, _index: result._run._index},
-                locations: result.locations
+                locations: result.locations,
+                _id: result._id,
+                level: result.level,
+                kind: result.kind
                 // artifacts: result._run.artifacts,
                 // originalUriBaseIds: result._run.originalUriBaseIds,
                 // _runIndex: result._run._index,
@@ -334,11 +337,14 @@ export class Panel {
                 uriUpgraded: result._log._uriUpgraded,
                 webviewUri: this.panel?.webview.asWebviewUri(Uri.parse(result._log._uriUpgraded ?? result._log._uri, true)).toString(),
                 ruleId: result.ruleId,
-                rule: result.rule,
+                _rule: result._rule ,
                 region: result._region,
                 _log: {_uri: result._log._uri},
                 _run: {artifacts: result._run.artifacts, _index: result._run._index},
-                locations: result.locations
+                locations: result.locations,
+                _id: result._id,
+                level: result.level,
+                kind: result.kind
             })),
         };
     }
